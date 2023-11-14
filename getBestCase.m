@@ -1,4 +1,4 @@
-function [mix_case,mix_info,mix_price] = getBestCase(coalInfo, unitConstraint, containerConstraint, feederCapacity, mixRatio, mutexCoal, standCoalQty, maxMixCoal)
+function [mixCases,mixInfos,mixPrices] = getBestCase(coalInfo, unitConstraint, containerConstraint, feederCapacity, mixRatio, mutexCoal, standardCoalQty, maxMixCoal, optFlag, topK)
     %%
     % 功能：由给定备选上仓煤种，在满足机组约束、煤仓约束和比例约束条件下，生成若干最优配仓方案（原煤均价最低）;
     % 输入：以给定备选 n 种煤，配煤比例 k 种，机组共 m 个仓，生成top s 个最优解为例：
@@ -32,7 +32,7 @@ function [mix_case,mix_info,mix_price] = getBestCase(coalInfo, unitConstraint, c
     %       api。
     %       （4）在编译为dll时，请确保mcr版本、cplex版本、c++编译器版本及编译平台位数一致，否则无法被调用。
     %% ------------------------
-    save("mock10.mat","coalInfo", "unitConstraint", "containerConstraint", "feederCapacity", "mixRatio", "mutexCoal", "standCoalQty", "maxMixCoal");
+    save("mock10.mat","coalInfo", "unitConstraint", "containerConstraint", "feederCapacity", "mixRatio", "mutexCoal", "standardCoalQty", "maxMixCoal");
 %     display(coalInfo);
 %     display(unitConstraint);
 %     display(containerConstraint);
@@ -41,6 +41,8 @@ function [mix_case,mix_info,mix_price] = getBestCase(coalInfo, unitConstraint, c
 %     display(mutexCoal);
 %     display(standCoalQty);
 %     display(maxMixCoal);
+
+    epsilon = 1e-3;
     mixRatio = mixRatio./(gcd(mixRatio(:,1),mixRatio(:,2))*ones(1,2));
     sum_mixRatio = sum(mixRatio, 2);
     slcm = 1;
@@ -87,6 +89,7 @@ function [mix_case,mix_info,mix_price] = getBestCase(coalInfo, unitConstraint, c
     constraint8 = sum(x(r,:),2)==0;
 %     constraint8 = [];
     % 约束9：煤仓固定比例约束
+    result = [];
     constraint9 = [];
     container_coal = containerConstraint(:,3:6);
     [r,~] = find(sum(container_coal,2)~=0);
@@ -95,65 +98,74 @@ function [mix_case,mix_info,mix_price] = getBestCase(coalInfo, unitConstraint, c
          ttt = slcm ./ sum(container_coal(r(i),[3,4]));
          constraint9 = [constraint9, x(r(i),container_coal(r(i),[1,2])) == container_coal(r(i),[3,4])*ttt];
     end
-%     constraint9 = x(container_coal(r,[1,2]))==container_coal(r,[3,4])*slcm;
     % 约束10：互斥性约束，在所有煤种中有a不能有b
     constraint10=[];
-%     for i=1:length(mutexCoal)
-%         size_len = length(mutexCoal{i});
-%         for j = 1:m
-%             constraint10 =[constraint10, sum(repmat(x(j,:),size_len,1)-repmat(mutexCoal{i}',1,n),'all')<=1];
-%         end
-%     end
     for i=1:length(mutexCoal)
         for j = 1:m
             constraint10 =[constraint10, nnz(x(j,mutexCoal{i}))<=1];
         end
     end
-
     % 约束11：热值守恒
     constraint11=[];
 %     constraint11 = abs((sum(x,1)*coalInfo(:,3)/total_quality)'*feederCapacity-200000)<=standCoalQty*7000;
 %     constraint11 = standCoalQty*7000 == (sum(x,1)*coalInfo(:,3)/total_quality)'*feederCapacity;
-    % 约束12：最大煤种约束
+    % 约束12：最大煤种约束  
     constraint12 = nnz(sum(x,1)) <= maxMixCoal; 
     %目标函数(1XN)x(1XN)
-    obj = sum(x,1)*coalInfo(:,end);
-    Constraints = [constraint0, constraint1, constraint2, constraint3, constraint4, constraint5, constraint6, constraint7, constraint8, constraint9, constraint10, constraint11,constraint12];
-    % 创建优化模型
-    ops = sdpsettings('solver','mosek', 'verbose', 1,'savesolveroutput', 2, 'savesolverinput', 1,'allownonconvex', 1); % 选择整数规划求解器
-    ops.cutsdp.SolCount = 3;
-    res= optimize(Constraints, obj, ops);
-    display(res);
-    display(res.info);
-    if(res.problem==0)
-        % 获取解
-        solution = uint8(value(x));
-        disp(solution);
-        gcd_matrix = ones(1,m,'uint8');
-        for i =1 :m
-            tmp = solution(i,solution(i,:)~=0);
-            if length(tmp)==2
-                gcd_i = gcd(tmp(1),tmp(2));
-            elseif length(tmp)==1
-                gcd_i = gcd(tmp(1),0);
-            elseif isempty(tmp)
-                gcd_i = gcd(0,0);
-            else
-                error('每个原煤仓最多支持两种煤上仓');
-            end
-            gcd_matrix(1,i) = gcd_i;
-        end  
-        % 混煤比例
-        mix_case = solution./gcd_matrix';
-        disp(mix_case);
-        % 混煤媒质
-        mix_info = sum(solution,1)*coalInfo(:,3:end-1)/total_quality;
-        disp(mix_info);
-        % 最少煤价
-        mix_price = sum(solution,1)*coalInfo(:,end)/total_quality;
-        disp(mix_price);
-    else
-        disp("求解失败！")
+    % 价格最低
+    constraint_dynamic = [];
+    if(optFlag==1)
+        obj = sum(x,1)*coalInfo(:,end);
+    % 最环保（硫分上上限）
+    elseif(optFlag ==2)
+        % 机组约束第二行第二列为硫分上限，煤仓约束第10列为硫分上限
+        lower_s = min([unitConstraint(2,2);containerConstraint(:,10)]);
+        % 第四列为硫分
+        obj = lower_s*total_quality-sum(x,1) * coalInfo(:,4);
+        constraint_dynamic = sum(x,1)*coalInfo(:,4)-lower_s*total_quality <= epsilon;
+    % 出力最小（热值走上限）
+    elseif(optFlag ==3)
+        lower_q = min([unitConstraint(1,2);containerConstraint(:,8)]);
+        obj = lower_q*total_quality - sum(x,1) * coalInfo(:,3); 
+%         constraint_dynamic = sum(x,1)*coalInfo(:,3)-lower_q*total_quality <= epsilon;
     end
-    % 混煤媒质
+    Constraints = [constraint0, constraint1, constraint2, constraint3, constraint4, constraint5, constraint6, constraint7, constraint8, constraint9, constraint10, constraint11,constraint12,constraint_dynamic];
+    mix_cases = [];
+    mix_infos = [];
+    mix_prices = [];
+    for i=1:topK
+        % 创建优化模型
+        ops = sdpsettings('solver','mosek', 'verbose', 1,'savesolveroutput', 2, 'savesolverinput', 1,'allownonconvex', 1); % 选择整数规划求解器
+        ops.cutsdp.SolCount = 3;
+        res= optimize(Constraints, obj, ops);
+        display(res);
+        display(res.info);
+        if(res.problem==0)
+            % 获取解
+            solution = value(x);
+            save('solution.mat',"solution");
+            solution_int8 = uint8(solution);
+            disp(solution_int8);
+            % 混煤媒质
+            mix_info = sum(solution_int8,1)*coalInfo(:,3:end-1)/total_quality;
+            disp(mix_info);
+            % 混煤煤质
+            mixInfos=[mix_infos;mix_info];
+            Q = mix_info(1);
+            % 根据标煤量折燃煤量
+            coal_mass = standardCoalQty*7000/Q;
+            mix_case = coal_mass/total_quality.*solution_int8;
+            % 混煤方案
+            mixCases = [mix_cases;mix_case];
+            disp(mix_cases);
+            result = [result;solution_int8];
+            % 混煤煤价
+            mix_price = sum(solution_int8,1)*coalInfo(:,end)/total_quality;
+            mixPrices = [mix_prices; mix_price];
+            disp(mix_price);
+        else
+            disp("求解失败！")
+        end
+        Constraints = [Constraints, x ~= value(x)];
+    end
 end
