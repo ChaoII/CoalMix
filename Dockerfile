@@ -7,9 +7,10 @@ RUN pip install -r ./requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simpl
 FROM ubuntu:22.04
 RUN apt update && apt-get install python3 -y && apt install libopenblas-dev -y
 COPY --from=build /usr/local/lib/python3.10/dist-packages /usr/local/lib/python3.10/dist-packages
+EXPOSE 5051
 COPY . /app
 COPY ./mosek/ /root/mosek
 VOLUME ["/opt/app","/app"]
 WORKDIR /app
 ENV PYTHONPATH=/usr/local/lib/python3.10/dist-packages
-CMD ["/bin/bash"]
+CMD ["python3 -m gunicorn -c gunicorn_config.py main:app"]
