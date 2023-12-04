@@ -32,19 +32,25 @@ def coal_mixed_integer_optimization(coal_info, unit_constraint, container_constr
     # -----------------------------开始建模-------------------------------------------------
     # 待约束变量(整数)
     x = cp.Variable((m, n), integer=True)
+    # 二元{0，1}辅助变量(x > 0  时z=1，x==0 时 z=0)
+    z0 = cp.Variable((m, n), boolean=True)
+    z1 = cp.Variable((m * n, ele_s.shape[0]), boolean=True)
+    z2 = cp.Variable(n, boolean=True)
+    # 连续变量，X-A >= y && A-X >= y && y > 0 abs(x-A) > 0 的线性变换写法
+    y = cp.Variable((m, n))
     # 约束0：正整数约束，煤仓存煤量非负
     constraint0 = [x >= 0]
     # 约束01：给煤机出力一致性约束
     constraint1 = [cp.abs(cp.sum(x, axis=1) - max_ele) <= epsilon]
     # 约束2：单仓上煤总数约束(构造二元辅助变量，计算二元辅助变量的值间接计算非零整数)
     constraint2 = []
-    z0 = cp.Variable((m, n), boolean=True)
+
     for i in range(m):
         constraint2.append(x[i, :] <= max_ele * z0[i, :])
+        constraint2.append(x[i, :] >= -max_ele * (1 - z0[i, :]))
         constraint2.append(cp.sum(z0[i, :]) <= 2)
 
-    # 约束3：煤仓上煤比例约束
-    z1 = cp.Variable((m * n, ele_s.shape[0]), boolean=True)
+    # 约束3：煤仓上煤比例约束在固定集合{ele_s} 中
     constraint3 = [cp.sum(z1, 1) == 1, z1 @ ele_s == x.flatten()]
 
     # 约束4：煤量约束，所有仓的煤量的总数小于存煤量
@@ -87,10 +93,10 @@ def coal_mixed_integer_optimization(coal_info, unit_constraint, container_constr
     # 约束11：热值守恒约束(属于脱裤子放屁约束)
     constraint11 = []  # Implement as needed
     # 约束12：最大煤种约束
-    constraint12 = []
-    z2 = cp.Variable(n, boolean=True)
-    constraint12.append(cp.sum(x, axis=0) <= max_ele * m * z2)
-    constraint12.append(cp.sum(z2) <= max_mix_coal)
+    # 需要构造二元辅助变量，将非零的变量的数量小于某个值的问题
+    constraint12 = [cp.sum(x, axis=0) <= max_ele * m * z2,
+                    cp.sum(x, axis=0) >= -1 * max_ele * m * (1 - z2),
+                    cp.sum(z2) <= max_mix_coal]
 
     # 目标函数
     # 煤价最低
@@ -142,11 +148,11 @@ def coal_mixed_integer_optimization(coal_info, unit_constraint, container_constr
             print(result)
             mix_price = np.sum(result, axis=0) @ coal_info[:, -1] / total_quality
             mix_prices.append(mix_price.tolist())
-            print(mix_prices)
+            print(mix_price)
         else:
             print("Optimization failed!")
-        # Add additional constraint to exclude the current solution
-        # constraints.extend([cp.abs(x - x.value) >= epsilon])
+        # 等效于abs(x-x.value)>=0但是abs()>=0是一个非凸的问题,需要构造连续辅助变量进行调整
+        constraints.extend([x - x.value <= y, x.value - x <= y, y >= 0])
     return mix_cases, mix_infos, mix_prices
 
 
