@@ -2,7 +2,7 @@ FROM ubuntu:22.04 AS build
 WORKDIR /app
 COPY ./requirements.txt /app
 RUN apt update -y && apt install python3 -y && apt install libopenblas-dev -y && apt install cmake -y && apt install python3-pip -y && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --upgrade pip
-RUN pip install -r ./requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+RUN pip install --no-cache-dir -r ./requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 FROM ubuntu:22.04
 RUN apt update && apt-get install python3 -y && apt install libopenblas-dev -y

@@ -134,7 +134,7 @@ def coal_mixed_integer_optimization(coal_info, unit_constraint, container_constr
     mix_prices = []
     for i in range(top_k):
         problem = cp.Problem(cp.Minimize(obj), constraints)
-        problem.solve(solver=cp.G)
+        problem.solve(solver=cp.MOSEK)
         if problem.status == cp.OPTIMAL:
             solution = x.value
             # Mix info
