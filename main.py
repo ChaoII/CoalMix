@@ -34,8 +34,8 @@ def get_best_case():
                                                                            feeder_capacity, np.array(mix_ratio),
                                                                            mutex_coal, standard_coal_qty,
                                                                            max_mix_coal, opt_flag, top_k)
-    return jsonify({"mixCases": mix_cases, "mix_infos": mix_infos, "mix_prices": mix_prices})
+    return jsonify({"mixCases": mix_cases.tolist(), "mixInfos": mix_infos.tolist(), "mixPrices": mix_prices})
 
 
 if __name__ == '__main__':
-    app.run("0.0.0.0", 5001)
+    app.run("0.0.0.0", 5051)

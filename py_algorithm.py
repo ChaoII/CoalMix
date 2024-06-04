@@ -129,31 +129,34 @@ def coal_mixed_integer_optimization(coal_info, unit_constraint, container_constr
     constraints.extend(constraint12)
 
     # 求解目标
-    mix_cases = []
-    mix_infos = []
-    mix_prices = []
-    for i in range(top_k):
-        problem = cp.Problem(cp.Minimize(obj), constraints)
-        problem.solve(solver=cp.MOSEK)
-        if problem.status == cp.OPTIMAL:
-            solution = x.value
-            # Mix info
-            mix_info = np.sum(solution, axis=0) @ coal_info[:, 2:-1] / total_quality
-            mix_infos.append(mix_info.tolist())
-            q = mix_info[0]
-            coal_mass = standard_coal_qty * 7000 / q
-            mix_case = coal_mass / total_quality * solution
-            mix_cases.append(mix_case.tolist())
-            result = solution.astype(int)
-            print(result)
-            mix_price = np.sum(result, axis=0) @ coal_info[:, -1] / total_quality
-            mix_prices.append(mix_price.tolist())
-            print(mix_price)
-        else:
-            print("Optimization failed!")
+    # mix_cases = []
+    # mix_infos = []
+    # mix_prices = []
+    # for i in range(top_k):
+    mix_case = []
+    mix_info = []
+    mix_price = []
+    problem = cp.Problem(cp.Minimize(obj), constraints)
+    problem.solve(solver=cp.MOSEK)
+    if problem.status == cp.OPTIMAL:
+        solution = x.value
+        # Mix info
+        mix_info = np.sum(solution, axis=0) @ coal_info[:, 2:-1] / total_quality
+        # mix_infos.append(mix_info.tolist())
+        q = mix_info[0]
+        coal_mass = standard_coal_qty * 7000 / q
+        mix_case = coal_mass / total_quality * solution
+        # mix_cases.append(mix_case.tolist())
+        result = solution.astype(int)
+        print(result)
+        mix_price = np.sum(result, axis=0) @ coal_info[:, -1] / total_quality
+        # mix_prices.append(mix_price.tolist())
+        print(mix_price)
+    else:
+        print("Optimization failed!")
         # 等效于abs(x-x.value)>=0但是abs()>=0是一个非凸的问题,需要构造连续辅助变量进行调整
-        constraints.extend([x - x.value <= y, x.value - x <= y, y >= 0])
-    return mix_cases, mix_infos, mix_prices
+    # constraints.extend([x - x.value <= y, x.value - x <= y, y >= 0])
+    return mix_case, mix_info, mix_price
 
 
 if __name__ == '__main__':
