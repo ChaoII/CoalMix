@@ -54,7 +54,8 @@ def coal_mixed_integer_optimization(coal_info, unit_constraint, container_constr
     constraint3 = [cp.sum(z1, 1) == 1, z1 @ ele_s == x.flatten()]
 
     # 约束4：煤量约束，所有仓的煤量的总数小于存煤量
-    constraint4 = [cp.sum(x, axis=0) / total_quality <= (coal_info[:, 1] / feeder_capacity)]
+    constraint4 = []
+    # constraint4 = [cp.sum(x, axis=0) / total_quality <= (coal_info[:, 1] / feeder_capacity)]
 
     # 约束5：机组煤质约束
     constraint5 = [(unit_constraint[:, 0] <= cp.sum(x, axis=0) @ coal_info[:, 2:-1] / total_quality),
@@ -63,11 +64,11 @@ def coal_mixed_integer_optimization(coal_info, unit_constraint, container_constr
     lb_index = np.arange(6, 18, 2)
     ub_index = lb_index + 1
     temp = x @ coal_info[:, 2: - 1] / max_ele
-    constraint6 = [(container_constraint[:, lb_index] * container_constraint[:, 0] <= temp), (
-            temp <= container_constraint[:, ub_index] * container_constraint[:, 0])]
+    constraint6 = [(container_constraint[:, lb_index] * container_constraint[:, 0].reshape((-1, 1)) <= temp), (
+            temp <= container_constraint[:, ub_index] * container_constraint[:, 0].reshape((-1, 1)))]
 
     # 约束7：指定挥发分约束(暂无)
-    constraint7 = []  # Implement as needed
+    constraint7 = [x >= -1]  # Implement as needed
 
     # 约束8：煤仓启用约束(基本没用)
     r, _ = np.where(container_constraint[:, 0].reshape(-1, 1) == 0)
@@ -128,6 +129,8 @@ def coal_mixed_integer_optimization(coal_info, unit_constraint, container_constr
     constraints.extend(constraint11)
     constraints.extend(constraint12)
 
+    problem = cp.Problem(cp.Minimize(obj), constraints)
+    problem.solve(solver=cp.MOSEK)
     # 求解目标
     # mix_cases = []
     # mix_infos = []
@@ -136,8 +139,6 @@ def coal_mixed_integer_optimization(coal_info, unit_constraint, container_constr
     mix_case = []
     mix_info = []
     mix_price = []
-    problem = cp.Problem(cp.Minimize(obj), constraints)
-    problem.solve(solver=cp.MOSEK)
     if problem.status == cp.OPTIMAL:
         solution = x.value
         # Mix info
@@ -147,13 +148,22 @@ def coal_mixed_integer_optimization(coal_info, unit_constraint, container_constr
         coal_mass = standard_coal_qty * 7000 / q
         mix_case = coal_mass / total_quality * solution
         # mix_cases.append(mix_case.tolist())
-        result = solution.astype(int)
-        print(result)
+        result = np.around(solution).astype(int)
         mix_price = np.sum(result, axis=0) @ coal_info[:, -1] / total_quality
         # mix_prices.append(mix_price.tolist())
-        print(mix_price)
+
+        with np.printoptions(precision=2, formatter={'float_kind': '{:0.2f}'.format}):
+            print("*************optimize result is:*************")
+            print("\n- mix_integer:")
+            print(result)
+            print("\n- mix_case:")
+            print(mix_case)
+            print("\n- mix_info:")
+            print(mix_info)
+            print("\n- mix_price:")
+            print(f"{mix_price:.2f}")
     else:
-        print("Optimization failed!")
+        raise Exception("Optimization failed!")
         # 等效于abs(x-x.value)>=0但是abs()>=0是一个非凸的问题,需要构造连续辅助变量进行调整
     # constraints.extend([x - x.value <= y, x.value - x <= y, y >= 0])
     return mix_case, mix_info, mix_price
