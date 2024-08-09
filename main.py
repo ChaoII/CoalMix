@@ -1,7 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import numpy as np
-import json
 from py_algorithm import coal_mixed_integer_optimization
 
 # flask格式
