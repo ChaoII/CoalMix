@@ -130,7 +130,7 @@ def coal_mixed_integer_optimization(coal_info, unit_constraint, container_constr
     constraints.extend(constraint12)
 
     problem = cp.Problem(cp.Minimize(obj), constraints)
-    problem.solve(solver=cp.MOSEK)
+    problem.solve(solver=cp.CPLEX)
     # 求解目标
     # mix_cases = []
     # mix_infos = []
@@ -170,7 +170,7 @@ def coal_mixed_integer_optimization(coal_info, unit_constraint, container_constr
 
 
 if __name__ == '__main__':
-    mat_data = scio.loadmat("new.mat")
+    mat_data = scio.loadmat("test_data/mix_coal/new.mat")
     # 使用示例
     coalInfo = mat_data["coalInfo"]  # 替换为实际的数据
     unitConstraint = mat_data["unitConstraint"]

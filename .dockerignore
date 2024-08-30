@@ -1,10 +1,10 @@
 .gitignore
 .idea
-input.json
+test_data/mix_coal/input.json
 LICENSE
-mock.mat
-mock10.mat
-new.mat
+test_data/mix_coal/mock.mat
+test_data/mix_coal/mock10.mat
+test_data/mix_coal/new.mat
 README.md
 寻优方案输入输出.xlsx
 __pycache__

@@ -4,3 +4,5 @@ getBestCase.asv
 .idea
 __pycache__
 *.tar
+2.py
+.gitignore
