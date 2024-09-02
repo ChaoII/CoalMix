@@ -1,6 +1,6 @@
 import json
 from typing import List, Optional
-from coal_mix_opt import coal_mixed_integer_optimization
+from src.coal_mix_opt import coal_mixed_integer_optimization
 import numpy as np
 from fastapi import FastAPI, applications
 from fastapi.middleware.cors import CORSMiddleware
@@ -8,8 +8,8 @@ from pydantic import BaseModel
 from starlette.staticfiles import StaticFiles
 
 from log.log import logger
-from purchase_opt import purchase_opt_impl
-from utils import register_offline_docs
+from src.purchase_opt import purchase_opt_impl
+from src.utils import register_offline_docs
 
 register_offline_docs(applications)
 # 实例化app
@@ -46,6 +46,7 @@ class PurchaseOptInput(BaseModel):
     burning_constraint: list[float]
     total_purchase: float
     replace_rate: float
+    max_purchase_kinds: int = 4
 
 
 @app.post("/api/coal_mix_opt")
@@ -72,13 +73,17 @@ def coal_mix_opt(coal_mix_input: CoalMixInput):
 @app.post("/api/purchase_opt")
 def purchase_opt(purchase_opt_input: PurchaseOptInput):
     try:
-        result = purchase_opt_impl(np.array(purchase_opt_input.market_coal),
-                                   np.array(purchase_opt_input.stock_coal),
-                                   np.array(purchase_opt_input.ending_inventory),
-                                   np.array(purchase_opt_input.burning_constraint),
-                                   purchase_opt_input.total_purchase,
-                                   purchase_opt_input.replace_rate)
-        return {"code": 0, "data": {"purchase_opt_result": result.tolist()}, "err_msg": ""}
+        purchase_mount, stocking_mount = purchase_opt_impl(np.array(purchase_opt_input.market_coal),
+                                                           np.array(purchase_opt_input.stock_coal),
+                                                           np.array(purchase_opt_input.ending_inventory),
+                                                           np.array(purchase_opt_input.burning_constraint),
+                                                           purchase_opt_input.total_purchase,
+                                                           purchase_opt_input.replace_rate,
+                                                           purchase_opt_input.max_purchase_kinds)
+        return {"code": 0,
+                "data": {"purchase_mount": purchase_mount.tolist(), "stocking_mount": stocking_mount.tolist()},
+                "err_msg": ""}
+
     except Exception as e:
         logger.error(f"{e}")
         return {"code": -1, "data": {}, "err_msg": f"求解失败, {e}"}
@@ -87,4 +92,4 @@ def purchase_opt(purchase_opt_input: PurchaseOptInput):
 if __name__ == '__main__':
     import uvicorn
 
-    uvicorn.run(app)
+    uvicorn.run(app="main:app", host="0.0.0.0", port=8000)

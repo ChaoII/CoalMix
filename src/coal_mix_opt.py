@@ -170,7 +170,7 @@ def coal_mixed_integer_optimization(coal_info, unit_constraint, container_constr
 
 
 if __name__ == '__main__':
-    mat_data = scio.loadmat("test_data/mix_coal/new.mat")
+    mat_data = scio.loadmat("../test_data/mix_coal/new.mat")
     # 使用示例
     coalInfo = mat_data["coalInfo"]  # 替换为实际的数据
     unitConstraint = mat_data["unitConstraint"]

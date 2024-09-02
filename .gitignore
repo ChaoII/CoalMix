@@ -6,3 +6,5 @@ __pycache__
 *.tar
 2.py
 .gitignore
+dist-packages_arm
+site-packages_arm

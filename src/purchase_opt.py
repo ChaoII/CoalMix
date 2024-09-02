@@ -24,7 +24,7 @@ def get_stock(coal_info, mount):
 
 
 def purchase_opt_impl(market_coal: np.ndarray, stock_coal: np.ndarray, ending_inventory: np.ndarray,
-                      burning_constraint: np.ndarray, total_purchase: float, replace_rate: float):
+                      burning_constraint: np.ndarray, total_purchase: float, replace_rate: float, max_purchase_kind=4):
     """
     :param market_coal: 市场存煤信息
     :param stock_coal: 煤场信息
@@ -54,7 +54,13 @@ def purchase_opt_impl(market_coal: np.ndarray, stock_coal: np.ndarray, ending_in
     stocking_h = ending_inventory[3]
 
     x = cp.Variable(m)
+    z = cp.Variable(m, boolean=True)
 
+    # 煤种选取约束
+    constraint0 = [
+        x <= total_purchase * z,  # 如果x[i] > 0, 则z[i] 必须为1
+        cp.sum(z) <= max_purchase_kind  # 最多有4个x[i]可以大于0
+    ]
     # 煤量和约束
     constraint1 = [cp.sum(x) == total_purchase]
     # 市场存煤限值约束
@@ -62,7 +68,6 @@ def purchase_opt_impl(market_coal: np.ndarray, stock_coal: np.ndarray, ending_in
     # 固定煤量约束
     nonzero_indices = np.nonzero(market_coal[:, 5])[0]
     nonzero_values = market_coal[:, 5][nonzero_indices]
-    # 为每个非零元素添加约束
     constraint3 = [x[i] == value for i, value in zip(nonzero_indices, nonzero_values)]
     # 采购的煤一部分直接燃烧，一部分与煤场的旧煤进行置换
     # 烧煤场库存煤的量
@@ -78,6 +83,7 @@ def purchase_opt_impl(market_coal: np.ndarray, stock_coal: np.ndarray, ending_in
     replacing_rate = market_replacing_mount / total_purchase
     # 获取煤场烧旧煤的煤种结构，以及剩下的存煤结构
     old_coal_info, rem_coal_info = get_stock(stock_coal, stocking_burning_mount)
+    stocking_burning = old_coal_info[:, [0, 5]]
 
     # ------------------ 入炉煤煤质约束-------------------------
     # 热值约束
@@ -110,6 +116,7 @@ def purchase_opt_impl(market_coal: np.ndarray, stock_coal: np.ndarray, ending_in
     obj = x @ market_coal[:, 1]
 
     constraints = []
+    constraints.extend(constraint0)
     constraints.extend(constraint1)
     constraints.extend(constraint2)
     constraints.extend(constraint3)
@@ -124,7 +131,7 @@ def purchase_opt_impl(market_coal: np.ndarray, stock_coal: np.ndarray, ending_in
     problem.solve(solver=cp.SCIPY)
     if problem.status == cp.OPTIMAL:
         solution = x.value
-        return solution
+        return solution, stocking_burning
     else:
         raise Exception("Optimization failed!")
 
@@ -137,4 +144,5 @@ if __name__ == '__main__':
     total_purchase = 12.0
     replace_rate = 0.5
 
-    purchase_opt_impl(market_coal, stock_coal, ending_inventory, burning_constraint, total_purchase, replace_rate)
+    purchase_opt_impl(market_coal, stock_coal, ending_inventory, burning_constraint, total_purchase, replace_rate,
+                      max_purchase_kind=10)
