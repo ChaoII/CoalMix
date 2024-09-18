@@ -97,7 +97,7 @@ def purchase_opt_impl(market_coal: np.ndarray, stock_coal: np.ndarray, ending_in
     # 挥发会约束
     market_h = cp.sum(cp.multiply(burning_rate * x, market_coal[:, 4]))
     stock_h = np.sum(old_coal_info[:, 5] * old_coal_info[:, 4])
-    constraint6 = [(market_h + stock_h) / burning_mount <= burning_h]
+    constraint6 = [(market_h + stock_h) / burning_mount >= burning_h]
 
     # ---------------- 入场煤质约束-------------------------
     # 热值约束
@@ -111,7 +111,7 @@ def purchase_opt_impl(market_coal: np.ndarray, stock_coal: np.ndarray, ending_in
     # 挥发会约束
     market_h_1 = cp.sum(cp.multiply(replacing_rate * x, market_coal[:, 4]))
     stock_h_1 = np.sum(rem_coal_info[:, 5] * rem_coal_info[:, 4])
-    constraint9 = [(market_h_1 + stock_h_1) / stocking_mount <= stocking_h]
+    constraint9 = [(market_h_1 + stock_h_1) / stocking_mount >= stocking_h]
 
     obj = x @ market_coal[:, 1]
 

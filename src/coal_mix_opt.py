@@ -81,7 +81,7 @@ def coal_mixed_integer_optimization(coal_info, unit_constraint, container_constr
     r_len = r.shape[0]
     for i in range(r_len):
         ttt = max_ele / sum(container_coal[r[i], [2, 3]])
-        constraint9.append(x[r(i), container_coal[r[i], [0, 1]]] == container_coal[r[i], [2, 3]] * ttt)
+        constraint9.append(x[r[i], container_coal[r[i], [0, 1]]] == container_coal[r[i], [2, 3]] * ttt)
 
     # 约束10：煤种互斥约束
     constraint10 = []

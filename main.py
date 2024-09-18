@@ -8,6 +8,7 @@ from pydantic import BaseModel
 from starlette.staticfiles import StaticFiles
 
 from log.log import logger
+from src.coal_mix_opt_v2 import coal_mixed_integer_optimization_v2
 from src.purchase_opt import purchase_opt_impl
 from src.utils import register_offline_docs
 
@@ -39,6 +40,15 @@ class CoalMixInput(BaseModel):
     top_k: int
 
 
+class CoalMixInputV2(BaseModel):
+    coal_info: list[list[float]]
+    unit_constraint: list[list[list[float]]]
+    container_constraint: list[list[float]]
+    mix_ratio: List[List[int]]
+    coal_quality: List[float]
+    mix_coal_num: int
+
+
 class PurchaseOptInput(BaseModel):
     market_coal: list[list[float]]
     stock_coal: list[list[float]]
@@ -64,6 +74,26 @@ def coal_mix_opt(coal_mix_input: CoalMixInput):
                                                                         coal_mix_input.top_k)
         return {"code": 0,
                 "data": {"mix_case": mix_case.tolist(), "mix_info": mix_info.tolist(), "mix_price": mix_price},
+                "err_msg": ""}
+    except Exception as e:
+        logger.error(f"{e}")
+        return {"code": -1, "data": {}, "err_msg": f"求解失败, {e}"}
+
+
+@app.post("/api/coal_mix_opt_v2")
+def coal_mix_opt_v2(coal_mix_input_v2: CoalMixInputV2):
+    try:
+        mix_cases, mix_infos, mix_prices = coal_mixed_integer_optimization_v2(np.array(coal_mix_input_v2.coal_info),
+                                                                              np.array(
+                                                                                  coal_mix_input_v2.unit_constraint),
+                                                                              np.array(
+                                                                                  coal_mix_input_v2.container_constraint),
+                                                                              np.array(coal_mix_input_v2.mix_ratio,
+                                                                                       int),
+                                                                              coal_mix_input_v2.coal_quality,
+                                                                              coal_mix_input_v2.mix_coal_num)
+        return {"code": 0,
+                "data": {"mix_cases": mix_cases, "mix_infos": mix_infos, "mix_prices": mix_prices},
                 "err_msg": ""}
     except Exception as e:
         logger.error(f"{e}")
