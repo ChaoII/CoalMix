@@ -1,6 +1,5 @@
-import json
-from typing import List, Optional
-from src.coal_mix_opt import coal_mixed_integer_optimization
+from typing import List
+
 import numpy as np
 from fastapi import FastAPI, applications
 from fastapi.middleware.cors import CORSMiddleware
@@ -8,6 +7,7 @@ from pydantic import BaseModel
 from starlette.staticfiles import StaticFiles
 
 from log.log import logger
+from src.coal_mix_opt import coal_mixed_integer_optimization
 from src.coal_mix_opt_v2 import coal_mixed_integer_optimization_v2
 from src.purchase_opt import purchase_opt_impl
 from src.utils import register_offline_docs

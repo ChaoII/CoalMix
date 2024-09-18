@@ -127,7 +127,7 @@ def coal_mixed_integer_optimization_v2(coal_info, unit_constraint, container_con
     constraints.extend(constraint9)
 
     problem = cp.Problem(cp.Minimize(obj), constraints)
-    problem.solve(solver=cp.CPLEX)
+    problem.solve(solver=cp.SCIPY)
     # 求解目标
     if problem.status == cp.OPTIMAL:
         solution = x.value
