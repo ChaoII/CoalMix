@@ -82,35 +82,53 @@ def purchase_opt_impl(market_coal: np.ndarray, stock_coal: np.ndarray, ending_in
     # 市场采购部分置换的百分比
     replacing_rate = market_replacing_mount / total_purchase
     # 获取煤场烧旧煤的煤种结构，以及剩下的存煤结构
-    old_coal_info, rem_coal_info = get_stock(stock_coal, stocking_burning_mount)
-    stocking_burning = old_coal_info[:, [0, 5]]
+    if stocking_burning_mount > 0 and stock_coal.size > 0:
+        old_coal_info, rem_coal_info = get_stock(stock_coal, stocking_burning_mount)
+        stocking_burning = old_coal_info[:, [0, 5]]
+        stock_q = np.sum(old_coal_info[:, 5] * old_coal_info[:, 2])
+        stock_s = np.sum(old_coal_info[:, 5] * old_coal_info[:, 3])
+        stock_h = np.sum(old_coal_info[:, 5] * old_coal_info[:, 4])
+        stock_q_1 = np.sum(rem_coal_info[:, 5] * rem_coal_info[:, 2])
+        stock_s_1 = np.sum(rem_coal_info[:, 5] * rem_coal_info[:, 3])
+        stock_h_1 = np.sum(rem_coal_info[:, 5] * rem_coal_info[:, 4])
+    elif stocking_burning_mount > 0 >= stock_coal.size:
+        raise Exception("置换量错误，无库存，无法置换")
+    elif stocking_burning_mount <= 0 < stock_coal.size:
+        stock_q = 0
+        stock_s = 0
+        stock_h = 0
+        stock_q_1 = np.sum(stock_coal[:, 5] * stock_coal[:, 2])
+        stock_s_1 = np.sum(stock_coal[:, 5] * stock_coal[:, 3])
+        stock_h_1 = np.sum(stock_coal[:, 5] * stock_coal[:, 4])
+        stocking_burning = np.array([])
+    else:
+        stock_q = 0
+        stock_s = 0
+        stock_h = 0
+        stock_q_1 = 0
+        stock_s_1 = 0
+        stock_h_1 = 0
+        stocking_burning = np.array([])
 
     # ------------------ 入炉煤煤质约束-------------------------
     # 热值约束
     market_q = cp.sum(cp.multiply(burning_rate * x, market_coal[:, 2]))
-    stock_q = np.sum(old_coal_info[:, 5] * old_coal_info[:, 2])
     constraint4 = [(market_q + stock_q) / burning_mount >= burning_q]
     # 硫分约束
     market_s = cp.sum(cp.multiply(burning_rate * x, market_coal[:, 3]))
-    stock_s = np.sum(old_coal_info[:, 5] * old_coal_info[:, 3])
     constraint5 = [(market_s + stock_s) / burning_mount <= burning_s]
     # 挥发会约束
     market_h = cp.sum(cp.multiply(burning_rate * x, market_coal[:, 4]))
-    stock_h = np.sum(old_coal_info[:, 5] * old_coal_info[:, 4])
     constraint6 = [(market_h + stock_h) / burning_mount >= burning_h]
-
     # ---------------- 入场煤质约束-------------------------
     # 热值约束
     market_q_1 = cp.sum(cp.multiply(replacing_rate * x, market_coal[:, 2]))
-    stock_q_1 = np.sum(rem_coal_info[:, 5] * rem_coal_info[:, 2])
     constraint7 = [(market_q_1 + stock_q_1) / stocking_mount >= stocking_q]
     # 硫分约束
     market_s_1 = cp.sum(cp.multiply(replacing_rate * x, market_coal[:, 3]))
-    stock_s_1 = np.sum(rem_coal_info[:, 5] * rem_coal_info[:, 3])
     constraint8 = [(market_s_1 + stock_s_1) / stocking_mount <= stocking_s]
     # 挥发会约束
     market_h_1 = cp.sum(cp.multiply(replacing_rate * x, market_coal[:, 4]))
-    stock_h_1 = np.sum(rem_coal_info[:, 5] * rem_coal_info[:, 4])
     constraint9 = [(market_h_1 + stock_h_1) / stocking_mount >= stocking_h]
 
     obj = x @ market_coal[:, 1]

@@ -7,4 +7,4 @@ __pycache__
 2.py
 .gitignore
 dist-packages_arm
-site-packages_arm
+dist-packages

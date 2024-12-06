@@ -50,7 +50,8 @@ def coal_mixed_integer_optimization_v2(coal_info, unit_constraint, container_con
     # 约束0：正整数约束，煤仓存煤量非负
     constraint0 = [x >= 0]
     # 约束01：给煤机出力一致性约束
-    constraint1 = [cp.abs(cp.sum(x, axis=1) - max_ele) <= epsilon]
+    constraint1 = [cp.abs(cp.sum(x[container_low_index, :], axis=1) - max_ele) <= epsilon,
+                   cp.abs(cp.sum(x[container_high_index, :], axis=1) - max_ele) <= epsilon]
     # 约束2：单仓上煤总数约束(构造二元辅助变量，计算二元辅助变量的值间接计算非零整数)
     constraint2 = []
     for i in range(m):
@@ -82,13 +83,15 @@ def coal_mixed_integer_optimization_v2(coal_info, unit_constraint, container_con
     # 约束6：指定挥发分约束(暂无)
     constraint6 = [x >= -1]  # Implement as needed
 
-    # 约束8：煤仓启用约束(基本没用)
-    r, _ = np.where(container_constraint[:, 1].reshape(-1, 1) == 0)
-    constraint7 = [cp.sum(x[r, :]) == 0]
+    # 约束7：煤仓启用约束(基本没用)
+    r = np.any([container_constraint[:, 0].reshape(-1, 1), container_constraint[:, 1].reshape(-1, 1)], axis=0)
+    r1, _ = np.where(r == 0)
+    # r2, _ = np.where(container_constraint[:, 1].reshape(-1, 1) == 0)
+    constraint7 = [cp.sum(x[r1, :]) == 0]
 
-    # 约束9：煤仓固定比例约束
+    # 约束8：煤仓固定比例约束
     constraint8 = []  # Implement as needed
-    container_coal = container_constraint[:, 5: 7].astype(int)
+    container_coal = container_constraint[:, 5: 7]
     r, _ = np.where(np.sum(container_coal, 1).reshape(-1, 1) != 0)
     for i in r:
         coal_kind = container_coal[i, 0]
@@ -103,7 +106,7 @@ def coal_mixed_integer_optimization_v2(coal_info, unit_constraint, container_con
         for kind, rate in zip(coal_kind, coal_rate):
             constraint8.append(x[i, kind] == rate * ttt)
 
-    # 约束12：最大煤种约束
+    # 约束9：最大煤种约束
     # 需要构造二元辅助变量，将非零的变量的数量小于某个值的问题
     constraint9 = [cp.sum(x, axis=0) <= max_ele * m * z2,
                    cp.sum(x, axis=0) >= -1 * max_ele * m * (1 - z2),
@@ -147,7 +150,8 @@ def coal_mixed_integer_optimization_v2(coal_info, unit_constraint, container_con
     else:
         raise Exception("Optimization failed!")
         # 等效于abs(x-x.value)>=0但是abs()>=0是一个非凸的问题,需要构造连续辅助变量进行调整
-    return [mix_case_low.tolist(), mix_case_high.tolist()], [mix_info_low.tolist(), mix_info_high.tolist()], [
+    return result.tolist(), [mix_case_low.tolist(), mix_case_high.tolist()], \
+        [mix_info_low.tolist(), mix_info_high.tolist()], [
         mix_price_low.tolist(), mix_price_high.tolist()]
 
 

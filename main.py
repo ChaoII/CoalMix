@@ -1,3 +1,4 @@
+import json
 from typing import List
 
 import numpy as np
@@ -28,22 +29,22 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 
 class CoalMixInput(BaseModel):
-    coal_info: list[list[float]]
-    unit_constraint: list[list[float]]
-    container_constraint: list[list[float]]
-    feeder_capacity: float
-    mix_ratio: List[List[int]]
-    mutex_coal: List[List[int]]
-    standard_coalQty: float
-    max_mix_coal: int
-    opt_flag: int
-    top_k: int
+    CoalInfo: list[list[float]]
+    UnitConstraint: list[list[float]]
+    ContainerConstraint: list[list[float]]
+    FeederCapacity: float
+    MixRatio: List[List[int]]
+    MutexCoal: List[List[int]]
+    StandardCoalQty: float
+    MaxMixCoal: int
+    OptFlag: int
+    TopK: int
 
 
 class CoalMixInputV2(BaseModel):
     coal_info: list[list[float]]
     unit_constraint: list[list[list[float]]]
-    container_constraint: list[list[float]]
+    container_constraint: list
     mix_ratio: List[List[int]]
     coal_quality: List[float]
     mix_coal_num: int
@@ -62,16 +63,16 @@ class PurchaseOptInput(BaseModel):
 @app.post("/api/coal_mix_opt")
 def coal_mix_opt(coal_mix_input: CoalMixInput):
     try:
-        mix_case, mix_info, mix_price = coal_mixed_integer_optimization(np.array(coal_mix_input.coal_info),
-                                                                        np.array(coal_mix_input.unit_constraint),
-                                                                        np.array(coal_mix_input.container_constraint),
-                                                                        coal_mix_input.feeder_capacity,
-                                                                        np.array(coal_mix_input.mix_ratio, int),
-                                                                        coal_mix_input.mutex_coal,
-                                                                        coal_mix_input.standard_coalQty,
-                                                                        coal_mix_input.max_mix_coal,
-                                                                        coal_mix_input.opt_flag,
-                                                                        coal_mix_input.top_k)
+        mix_case, mix_info, mix_price = coal_mixed_integer_optimization(np.array(coal_mix_input.CoalInfo),
+                                                                        np.array(coal_mix_input.UnitConstraint),
+                                                                        np.array(coal_mix_input.ContainerConstraint),
+                                                                        coal_mix_input.FeederCapacity,
+                                                                        np.array(coal_mix_input.MixRatio, int),
+                                                                        coal_mix_input.MutexCoal,
+                                                                        coal_mix_input.StandardCoalQty,
+                                                                        coal_mix_input.MaxMixCoal,
+                                                                        coal_mix_input.OptFlag,
+                                                                        coal_mix_input.TopK)
         return {"code": 0,
                 "data": {"mix_case": mix_case.tolist(), "mix_info": mix_info.tolist(), "mix_price": mix_price},
                 "err_msg": ""}
@@ -82,19 +83,21 @@ def coal_mix_opt(coal_mix_input: CoalMixInput):
 
 @app.post("/api/coal_mix_opt_v2")
 def coal_mix_opt_v2(coal_mix_input_v2: CoalMixInputV2):
+    s = coal_mix_input_v2.model_dump()
+    json.dump(s, open("./coal_mix_input_v2.json", "w"))
     try:
-        mix_cases, mix_infos, mix_prices = coal_mixed_integer_optimization_v2(np.array(coal_mix_input_v2.coal_info),
-                                                                              np.array(
-                                                                                  coal_mix_input_v2.unit_constraint),
-                                                                              np.array(
-                                                                                  coal_mix_input_v2.container_constraint),
-                                                                              np.array(coal_mix_input_v2.mix_ratio,
-                                                                                       int),
-                                                                              coal_mix_input_v2.coal_quality,
-                                                                              coal_mix_input_v2.mix_coal_num)
+        mix_rates, mix_cases, mix_infos, mix_prices = coal_mixed_integer_optimization_v2(
+            np.array(coal_mix_input_v2.coal_info),
+            np.array(coal_mix_input_v2.unit_constraint),
+            np.array(coal_mix_input_v2.container_constraint, dtype=object),
+            np.array(coal_mix_input_v2.mix_ratio, int),
+            coal_mix_input_v2.coal_quality,
+            coal_mix_input_v2.mix_coal_num)
         return {"code": 0,
-                "data": {"mix_cases": mix_cases, "mix_infos": mix_infos, "mix_prices": mix_prices},
+                "data": {"mix_rates": mix_rates, "mix_cases": mix_cases, "mix_infos": mix_infos,
+                         "mix_prices": mix_prices},
                 "err_msg": ""}
+
     except Exception as e:
         logger.error(f"{e}")
         return {"code": -1, "data": {}, "err_msg": f"求解失败, {e}"}
@@ -102,6 +105,8 @@ def coal_mix_opt_v2(coal_mix_input_v2: CoalMixInputV2):
 
 @app.post("/api/purchase_opt")
 def purchase_opt(purchase_opt_input: PurchaseOptInput):
+    s = purchase_opt_input.model_dump()
+    json.dump(s, open("./purchase_opt_input.json", "w"))
     try:
         purchase_mount, stocking_mount = purchase_opt_impl(np.array(purchase_opt_input.market_coal),
                                                            np.array(purchase_opt_input.stock_coal),

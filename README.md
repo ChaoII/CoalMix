@@ -9,5 +9,7 @@ Files listed in the call and checkfor fields have to be added
 
 ```bash
 docker run -itd --name coal_mix_x64_test --restart always -w /app -v /etc/localtime:/etc/localtime -v /etc/timezone:/etc/timezone -p 5053:8000 cvxpy-x64:v2.0 uvicorn main:app --host 0.0.0.0 --port 8000
+centos
+docker run -itd --name coal_mix_x64_test --restart always -w /app -v /etc/localtime:/etc/localtime -v /etc/timezone/timezone:/etc/timezone/timezone -p 5053:8000 cvxpy-x64:v2.0 uvicorn main:app --host 0.0.0.0 --port 8000
 
 ```

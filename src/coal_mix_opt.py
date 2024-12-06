@@ -130,7 +130,7 @@ def coal_mixed_integer_optimization(coal_info, unit_constraint, container_constr
     constraints.extend(constraint12)
 
     problem = cp.Problem(cp.Minimize(obj), constraints)
-    problem.solve(solver=cp.CPLEX)
+    problem.solve(solver=cp.SCIPY)
     # 求解目标
     # mix_cases = []
     # mix_infos = []
