@@ -13,3 +13,25 @@ centos
 docker run -itd --name coal_mix_x64_test --restart always -w /app -v /etc/localtime:/etc/localtime -v /etc/timezone/timezone:/etc/timezone/timezone -p 5053:8000 cvxpy-x64:v2.0 uvicorn main:app --host 0.0.0.0 --port 8000
 
 ```
+
+
+#### 添加清华源
+- [ ] 很好
+- [x] 非常好
+- 在用户目录下新建`pip`文件夹
+- 创建`pip.ini`
+- 添加以下内容
+```ini
+[global]
+timeout = 60000
+index-url = https://pypi.tuna.tsinghua.edu.cn/simple
+[install]
+use-mirrors = true
+mirrors = https://pypi.tuna.tsinghua.edu.cn
+```
+
+#### 打包命令
+```bash
+python -m nuitka --standalone --output-dir=output start.py
+pyinstaller -D -F start.py
+```

@@ -8,3 +8,8 @@ __pycache__
 .gitignore
 dist-packages_arm
 dist-packages
+output
+dist
+build
+main.spec
+start.spec
