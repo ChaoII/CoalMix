@@ -124,7 +124,4 @@ def purchase_opt(purchase_opt_input: PurchaseOptInput):
         return {"code": -1, "data": {}, "err_msg": f"求解失败, {e}"}
 
 
-if __name__ == '__main__':
-    import uvicorn
 
-    uvicorn.run(app="main:app", host="0.0.0.0", port=8000)
