@@ -8,3 +8,7 @@ __pycache__
 .gitignore
 dist-packages_arm
 dist-packages
+build
+dist
+output
+

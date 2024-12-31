@@ -20,7 +20,7 @@ def coal_mixed_integer_optimization(coal_info, unit_constraint, container_constr
     # 每一行混煤率的和
     sum_mix_ratio = mix_ratio.sum(axis=1).reshape((-1, 1))
     # 混煤率和的最小公倍数(单仓煤仓煤量)
-    max_ele = reduce(lambda c_, d_: lcm(int(c_), int(d_)), sum_mix_ratio.flatten().tolist())
+    max_ele = reduce(lambda c_, d_: lcm(int(c_), int(d_)), sum_mix_ratio.flatten(order="C").tolist())
     # 混煤比例元素集合
     ele_s = np.unique(mix_ratio / np.tile(sum_mix_ratio, (1, 2)) * max_ele)
     # 煤仓数
@@ -51,7 +51,7 @@ def coal_mixed_integer_optimization(coal_info, unit_constraint, container_constr
         constraint2.append(cp.sum(z0[i, :]) <= 2)
 
     # 约束3：煤仓上煤比例约束在固定集合{ele_s} 中
-    constraint3 = [cp.sum(z1, 1) == 1, z1 @ ele_s == x.flatten()]
+    constraint3 = [cp.sum(z1, 1) == 1, z1 @ ele_s == x.flatten(order="C")]
 
     # 约束4：煤量约束，所有仓的煤量的总数小于存煤量
     constraint4 = []

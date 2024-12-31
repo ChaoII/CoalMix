@@ -7,11 +7,6 @@ pybind11==2.11.1
 qdldl==0.1.7.post0
 scipy==1.11.4
 scs==3.2.4.post1
-mosek==10.1.17
-flask==3.0.0
-flask_cors==4.0.0
-gunicorn==21.2.0
-gevent==23.9.1
 
 loguru~=0.7.0
 uvicorn~=0.29.0
