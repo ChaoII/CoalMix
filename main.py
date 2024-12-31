@@ -29,16 +29,16 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 
 class CoalMixInput(BaseModel):
-    CoalInfo: list[list[float]]
-    UnitConstraint: list[list[float]]
-    ContainerConstraint: list[list[float]]
-    FeederCapacity: float
-    MixRatio: List[List[int]]
-    MutexCoal: List[List[int]]
-    StandardCoalQty: float
-    MaxMixCoal: int
-    OptFlag: int
-    TopK: int
+    coal_info: list[list[float]]
+    unit_constraint: list[list[float]]
+    container_constraint: list[list[float]]
+    feeder_capacity: float
+    mix_ratio: List[List[int]]
+    mutex_coal: List[List[int]]
+    standard_coalQty: float
+    max_mix_coal: int
+    opt_flag: int
+    top_k: int
 
 
 class CoalMixInputV2(BaseModel):
@@ -62,17 +62,19 @@ class PurchaseOptInput(BaseModel):
 
 @app.post("/api/coal_mix_opt")
 def coal_mix_opt(coal_mix_input: CoalMixInput):
+    s = coal_mix_input.model_dump()
+    json.dump(s, open("./coal_mix_input.json", "w"))
     try:
-        mix_case, mix_info, mix_price = coal_mixed_integer_optimization(np.array(coal_mix_input.CoalInfo),
-                                                                        np.array(coal_mix_input.UnitConstraint),
-                                                                        np.array(coal_mix_input.ContainerConstraint),
-                                                                        coal_mix_input.FeederCapacity,
-                                                                        np.array(coal_mix_input.MixRatio, int),
-                                                                        coal_mix_input.MutexCoal,
-                                                                        coal_mix_input.StandardCoalQty,
-                                                                        coal_mix_input.MaxMixCoal,
-                                                                        coal_mix_input.OptFlag,
-                                                                        coal_mix_input.TopK)
+        mix_case, mix_info, mix_price = coal_mixed_integer_optimization(np.array(coal_mix_input.coal_info),
+                                                                        np.array(coal_mix_input.unit_constraint),
+                                                                        np.array(coal_mix_input.container_constraint),
+                                                                        coal_mix_input.feeder_capacity,
+                                                                        np.array(coal_mix_input.mix_ratio, int),
+                                                                        coal_mix_input.mutex_coal,
+                                                                        coal_mix_input.standard_coalQty,
+                                                                        coal_mix_input.max_mix_coal,
+                                                                        coal_mix_input.opt_flag,
+                                                                        coal_mix_input.top_k)
         return {"code": 0,
                 "data": {"mix_case": mix_case.tolist(), "mix_info": mix_info.tolist(), "mix_price": mix_price},
                 "err_msg": ""}

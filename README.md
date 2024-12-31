@@ -37,5 +37,5 @@ mirrors = https://pypi.tuna.tsinghua.edu.cn
 #### 打包命令
 ```bash
 python -m nuitka --standalone --output-dir=output start.py
-pyinstaller -D -F start.py
+pyinstaller -F -n "coal_mix_opt"  start.py
 ```

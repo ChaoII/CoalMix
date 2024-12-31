@@ -11,5 +11,5 @@ dist-packages
 output
 dist
 build
-main.spec
-start.spec
+*.spec
+./*.json
