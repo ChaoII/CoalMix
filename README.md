@@ -8,15 +8,12 @@ from YALMIP has to be added, callsedumi.m. For other solvers, see the file defin
 Files listed in the call and checkfor fields have to be added
 
 ```bash
+# debain 系列
 docker run -itd --name coal_mix_x64_test --restart always -w /app -v /etc/localtime:/etc/localtime -v /etc/timezone:/etc/timezone -p 5053:8000 cvxpy-x64:v2.0 uvicorn main:app --host 0.0.0.0 --port 8000
-centos
+# redhat 系列
 docker run -itd --name coal_mix_x64_test --restart always -w /app -v /etc/localtime:/etc/localtime -v /etc/timezone/timezone:/etc/timezone/timezone -p 5053:8000 cvxpy-x64:v2.0 uvicorn main:app --host 0.0.0.0 --port 8000
 ```
 
-#### nuitka 打包
-```bash
-python -m nuitka --nofollow-imports --standalone --include-module=uvicorn --jobs=4 --include-module=fastapi --include-module=main --output-dir=output --onefile  main
-```
 
 
 #### 添加清华源
@@ -36,6 +33,7 @@ mirrors = https://pypi.tuna.tsinghua.edu.cn
 
 #### 打包命令
 ```bash
+python -m nuitka --nofollow-imports --standalone --include-module=uvicorn --jobs=4 --include-module=fastapi --include-module=main --output-dir=output --onefile  main
 python -m nuitka --standalone --output-dir=output start.py
 pyinstaller -F -n "coal_mix_opt"  start.py
 ```

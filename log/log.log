@@ -8,3 +8,7 @@
 2024-12-31 09:03:28.785 | ERROR    | main:coal_mix_opt_v2:104 - Optimization failed!
 2024-12-31 09:03:32.626 | ERROR    | main:coal_mix_opt_v2:104 - Optimization failed!
 2024-12-31 09:03:48.770 | ERROR    | main:coal_mix_opt_v2:104 - Optimization failed!
+2025-01-03 14:29:02.186 | ERROR    | main:purchase_opt:125 - Optimization failed!
+2025-01-03 14:29:26.547 | ERROR    | main:purchase_opt:125 - Optimization failed!
+2025-01-03 14:29:42.741 | ERROR    | main:purchase_opt:125 - Optimization failed!
+2025-01-03 14:29:53.492 | ERROR    | main:purchase_opt:125 - Optimization failed!
