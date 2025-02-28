@@ -5,7 +5,7 @@ date:2023-11-24
 import json
 from functools import reduce
 from math import lcm
-
+from log.log import logger
 import cvxpy as cp
 import numpy as np
 
@@ -13,7 +13,7 @@ epsilon = 0.009
 
 
 def coal_mixed_integer_optimization_v2(coal_info, unit_constraint, container_constraint, mix_ratio,
-                                       coal_quality, mix_coal_num):
+                                       coal_quality, mix_coal_num, opt_flag):
     # ------------------------------数据初始化-------------------------------------------------
     # 求每一行混煤率的最大公约数
     gcd_s = 1
@@ -45,6 +45,7 @@ def coal_mixed_integer_optimization_v2(coal_info, unit_constraint, container_con
     z0 = cp.Variable((m, n), boolean=True)
     z1 = cp.Variable((m * n, ele_s.shape[0]), boolean=True)
     z2 = cp.Variable(n, boolean=True)
+    z3 = cp.Variable(ele_s.shape[0], boolean=True)
     # 连续变量，X-A >= y && A-X >= y && y > 0 abs(x-A) > 0 的线性变换写法
     y = cp.Variable((m, n))
     # 约束0：正整数约束，煤仓存煤量非负
@@ -102,9 +103,15 @@ def coal_mixed_integer_optimization_v2(coal_info, unit_constraint, container_con
             coal_kind = [coal_kind]
         if len(coal_rate) != len(coal_kind):
             raise ValueError("每种和每种比例元素的长度比必须相等")
-        ttt = max_ele / sum(coal_rate)
+        # 注意当只指定煤种，但是不指定比例时要做额外的操作
+        ttt = 1 if sum(coal_rate) == 0 else max_ele / sum(coal_rate)
         for kind, rate in zip(coal_kind, coal_rate):
-            constraint8.append(x[i, kind] == rate * ttt)
+            if sum(coal_rate) == 0:
+                logger.warning(
+                    f"指定了煤种[{kind}]但是未指定煤种比例即煤种比例给出的是{rate}，这可能导致求解失败")
+                constraint8.extend([cp.sum(z3) == 1, z3 @ ele_s == x[i, kind], x[i, kind] >= 1])
+            else:
+                constraint8.append(x[i, kind] == rate * ttt)
 
     # 约束9：最大煤种约束
     # 需要构造二元辅助变量，将非零的变量的数量小于某个值的问题
@@ -114,7 +121,19 @@ def coal_mixed_integer_optimization_v2(coal_info, unit_constraint, container_con
 
     # 目标函数
     # 煤价最低
-    obj = cp.sum(x, axis=0) @ coal_info[:, -1]
+    obj = None
+    if opt_flag == 1:
+        obj = cp.sum(x, axis=0) @ coal_info[:, -1]
+    # 最环保（硫分最合理）
+    elif opt_flag == 2:
+        lower_s = np.min(
+            [unit_constraint[0, 1, 1], unit_constraint[1, 1, 1], np.min(container_constraint[container_high_index, 9])])
+        obj = lower_s * total_quality_high - cp.sum(x, axis=0) @ coal_info[:, 4]
+    # 给煤机最小出力（热值最合理）
+    elif opt_flag == 3:
+        lower_q = np.min(
+            [unit_constraint[0, 0, 1], unit_constraint[1, 0, 1], np.min(container_constraint[container_high_index, 7])])
+        obj = lower_q * total_quality_high - cp.sum(x, axis=0) @ coal_info[:, 3]
 
     # 构建约束列表
     constraints = []

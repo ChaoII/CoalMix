@@ -34,6 +34,6 @@ mirrors = https://pypi.tuna.tsinghua.edu.cn
 #### 打包命令
 ```bash
 python -m nuitka --nofollow-imports --standalone --include-module=uvicorn --jobs=4 --include-module=fastapi --include-module=main --output-dir=output --onefile  main
-python -m nuitka --standalone --output-dir=output start.py
+python -m nuitka --include-data-dir=./static=./static --standalone --onefile --remove-output --output-dir=output start.py
 pyinstaller -F -n "coal_mix_opt"  start.py
 ```

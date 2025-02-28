@@ -1,5 +1,6 @@
 import json
-from typing import List
+from datetime import datetime
+from typing import List, Optional
 
 import numpy as np
 from fastapi import FastAPI, applications
@@ -48,6 +49,7 @@ class CoalMixInputV2(BaseModel):
     mix_ratio: List[List[int]]
     coal_quality: List[float]
     mix_coal_num: int
+    opt_flag: Optional[int] = 1
 
 
 class PurchaseOptInput(BaseModel):
@@ -94,7 +96,8 @@ def coal_mix_opt_v2(coal_mix_input_v2: CoalMixInputV2):
             np.array(coal_mix_input_v2.container_constraint, dtype=object),
             np.array(coal_mix_input_v2.mix_ratio, int),
             coal_mix_input_v2.coal_quality,
-            coal_mix_input_v2.mix_coal_num)
+            coal_mix_input_v2.mix_coal_num,
+            coal_mix_input_v2.opt_flag)
         return {"code": 0,
                 "data": {"mix_rates": mix_rates, "mix_cases": mix_cases, "mix_infos": mix_infos,
                          "mix_prices": mix_prices},
@@ -126,4 +129,19 @@ def purchase_opt(purchase_opt_input: PurchaseOptInput):
         return {"code": -1, "data": {}, "err_msg": f"求解失败, {e}"}
 
 
+class TestToolInput(BaseModel):
+    start_time: str
+    end_time: str
 
+
+@app.post("/api/test_tool")
+def _(test_input: TestToolInput):
+    print(test_input.start_time)
+    print(test_input.end_time)
+    return {"coal_consume": "今日耗煤量8765t"}
+
+
+@app.get("/api/get_current_time")
+def _():
+    print(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+    return {"current_time": datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
