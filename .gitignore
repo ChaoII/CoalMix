@@ -16,3 +16,4 @@ coal_mix_input.json
 coal_mix_input_v2.json
 purchase_opt_input.json
 *.zip
+log/log.py

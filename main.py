@@ -9,9 +9,11 @@ from pydantic import BaseModel
 from starlette.staticfiles import StaticFiles
 
 from log.log import logger
+from src.coal_mix_simple import coal_mixed_optimization_simple
 from src.coal_mix_opt import coal_mixed_integer_optimization
 from src.coal_mix_opt_v2 import coal_mixed_integer_optimization_v2
 from src.purchase_opt import purchase_opt_impl
+from src.output_opt import output_opt_impl
 from src.utils import register_offline_docs
 
 register_offline_docs(applications)
@@ -27,6 +29,19 @@ app.add_middleware(
 
 # 挂载静态路径将redoc和swagger-ui文件放置在静态路径下
 app.mount("/static", StaticFiles(directory="static"), name="static")
+
+
+class CoalMixSimpleInput(BaseModel):
+    # 煤场信息
+    coal_info: list[list[float]]
+    # 机组约束
+    unit_constraint: list[list[float]]
+
+    total_qty: float
+    # 最大混煤数
+    max_mix_coal: int
+    # 寻优目标
+    opt_flag: int
 
 
 class CoalMixInput(BaseModel):
@@ -60,6 +75,36 @@ class PurchaseOptInput(BaseModel):
     total_purchase: float
     replace_rate: float
     max_purchase_kinds: int = 4
+
+
+class OutputOptInput(BaseModel):
+    # 煤仓存煤信息
+    container_coal_info: list[list[float]]
+    # 出力约束
+    output_constraint: list[list[float]]
+    # 机组约束
+    unit_constraint: list[list[float]]
+    # 煤量
+    total_qty: float
+
+
+@app.post("/api/coal_mix_opt_simple")
+def _(coal_mix_input: CoalMixSimpleInput):
+    s = coal_mix_input.model_dump()
+    json.dump(s, open("./coal_mix_input.json", "w"))
+    try:
+        mix_case, mix_info, mix_price = coal_mixed_optimization_simple(np.array(coal_mix_input.coal_info),
+                                                                       np.array(coal_mix_input.unit_constraint),
+                                                                       coal_mix_input.total_qty,
+                                                                       coal_mix_input.max_mix_coal,
+                                                                       coal_mix_input.opt_flag)
+
+        return {"code": 0,
+                "data": {"mix_case": mix_case.tolist(), "mix_info": mix_info.tolist(), "mix_price": mix_price},
+                "err_msg": ""}
+    except Exception as e:
+        logger.error(f"{e}")
+        return {"code": -1, "data": {}, "err_msg": f"求解失败, {e}"}
 
 
 @app.post("/api/coal_mix_opt")
@@ -129,19 +174,16 @@ def purchase_opt(purchase_opt_input: PurchaseOptInput):
         return {"code": -1, "data": {}, "err_msg": f"求解失败, {e}"}
 
 
-class TestToolInput(BaseModel):
-    start_time: str
-    end_time: str
-
-
-@app.post("/api/test_tool")
-def _(test_input: TestToolInput):
-    print(test_input.start_time)
-    print(test_input.end_time)
-    return {"coal_consume": "今日耗煤量8765t"}
-
-
-@app.get("/api/get_current_time")
-def _():
-    print(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
-    return {"current_time": datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
+@app.post("/api/output_opt")
+def _(output_opt_input: OutputOptInput):
+    s = output_opt_input.model_dump()
+    json.dump(s, open("./output_opt_input.json", "w"))
+    try:
+        output = output_opt_impl(np.array(output_opt_input.container_coal_info),
+                                 np.array(output_opt_input.output_constraint),
+                                 np.array(output_opt_input.unit_constraint),
+                                 np.array(output_opt_input.total_qty))
+        return {"code": 0, "data": {"output": output.tolist()}, "err_msg": ""}
+    except Exception as e:
+        logger.error(f"{e}")
+        return {"code": -1, "data": {}, "err_msg": f"求解失败, {e}"}
