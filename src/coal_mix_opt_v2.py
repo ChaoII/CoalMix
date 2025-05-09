@@ -53,12 +53,12 @@ def coal_mixed_integer_optimization_v2(coal_info, unit_constraint, container_con
     # 约束01：给煤机出力一致性约束
     constraint1 = [cp.abs(cp.sum(x[container_low_index, :], axis=1) - max_ele) <= epsilon,
                    cp.abs(cp.sum(x[container_high_index, :], axis=1) - max_ele) <= epsilon]
-    # 约束2：单仓上煤总数约束(构造二元辅助变量，计算二元辅助变量的值间接计算非零整数)
+    # 约束2：单仓上煤总数约束(构造二元辅助变量，计算二元辅助变量的值间接计算非零整数),如果指定煤种比例，则该仓煤种比例需要小于等于指定比例数量
     constraint2 = []
     for i in range(m):
         constraint2.append(x[i, :] <= max_ele * z0[i, :])
         constraint2.append(x[i, :] >= -max_ele * (1 - z0[i, :]))
-        constraint2.append(cp.sum(z0[i, :]) <= 3)
+        constraint2.append(cp.sum(z0[i, :]) <= np.max(np.sum(mix_ratio > 0, axis=1)))
     # 约束3：煤仓上煤比例约束在固定集合{ele_s} 中
     constraint3 = [cp.sum(z1, 1) == 1, z1 @ ele_s == x.flatten(order="C")]
     # 约束4：机组煤质约束
