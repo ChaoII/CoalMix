@@ -72,8 +72,14 @@ def coal_mixed_integer_optimization_v2(coal_info, unit_constraint, container_con
                          coal_info[:, 2:-1] / total_quality_high),
                         (cp.sum(x[container_high_index, :], axis=0) @ coal_info[:, 2:-1] / total_quality_high <=
                          unit_constraint[1][:, 1])]
-
     constraint4.extend(constraint4_high)
+
+    # 约束5煤量约束
+    constraint5_ = []
+    constraint5_low = [cp.sum(x, axis=0) / total_quality_low <= (coal_info[:, 1] / coal_quality[0])]
+    constraint5_height = [cp.sum(x, axis=0) / total_quality_high <= (coal_info[:, 1] / coal_quality[1])]
+    constraint5_.extend(constraint5_low)
+    constraint5_.extend(constraint5_height)
 
     # 约束5：煤仓煤质约束
     lb_index = np.arange(7, 19, 2)
@@ -142,6 +148,7 @@ def coal_mixed_integer_optimization_v2(coal_info, unit_constraint, container_con
     constraints.extend(constraint2)
     constraints.extend(constraint3)
     constraints.extend(constraint4)
+    constraints.extend(constraint5_)
     constraints.extend(constraint5)
     constraints.extend(constraint6)
     constraints.extend(constraint7)
