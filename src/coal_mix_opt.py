@@ -29,6 +29,9 @@ def coal_mixed_integer_optimization(coal_info, unit_constraint, container_constr
     n = coal_info.shape[0]
     # 总煤量单位
     total_quality = np.sum(container_constraint[:, 0]) * max_ele
+    # 煤仓启用标志
+    container_enable_flag = container_constraint[:, 0] != 0
+
     # -----------------------------开始建模-------------------------------------------------
     # 待约束变量(整数)
     x = cp.Variable((m, n), integer=True)
@@ -41,7 +44,7 @@ def coal_mixed_integer_optimization(coal_info, unit_constraint, container_constr
     # 约束0：正整数约束，煤仓存煤量非负
     constraint0 = [x >= 0]
     # 约束01：给煤机出力一致性约束
-    constraint1 = [cp.abs(cp.sum(x, axis=1) - max_ele) <= epsilon]
+    constraint1 = [cp.abs(cp.sum(x[container_enable_flag, :], axis=1) - max_ele) <= epsilon]
     # 约束2：单仓上煤总数约束(构造二元辅助变量，计算二元辅助变量的值间接计算非零整数)
     constraint2 = []
 

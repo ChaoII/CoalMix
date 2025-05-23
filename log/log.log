@@ -7,3 +7,11 @@
 2025-05-09 15:59:39.738 | WARNING  | src.coal_mix_opt_v2:coal_mixed_integer_optimization_v2:110 - 指定了煤种[1]但是未指定煤种比例即煤种比例给出的是0，这可能导致求解失败
 2025-05-12 09:31:05.091 | WARNING  | src.coal_mix_opt_v2:coal_mixed_integer_optimization_v2:116 - 指定了煤种[3]但是未指定煤种比例即煤种比例给出的是0，这可能导致求解失败
 2025-05-12 09:31:05.102 | WARNING  | src.coal_mix_opt_v2:coal_mixed_integer_optimization_v2:116 - 指定了煤种[1]但是未指定煤种比例即煤种比例给出的是0，这可能导致求解失败
+2025-05-23 11:07:42.629 | ERROR    | main:coal_mix_opt:129 - Optimization failed!
+2025-05-23 11:10:55.353 | ERROR    | main:coal_mix_opt:129 - Optimization failed!
+2025-05-23 11:11:53.700 | ERROR    | main:coal_mix_opt:129 - Optimization failed!
+2025-05-23 11:12:08.547 | ERROR    | main:coal_mix_opt:129 - Optimization failed!
+2025-05-23 11:15:11.579 | ERROR    | main:coal_mix_opt:129 - Optimization failed!
+2025-05-23 11:16:23.085 | ERROR    | main:coal_mix_opt:129 - Optimization failed!
+2025-05-23 11:20:24.657 | ERROR    | main:coal_mix_opt:129 - name 'constraint0' is not defined
+2025-05-23 11:20:48.298 | ERROR    | main:coal_mix_opt:129 - Optimization failed!
