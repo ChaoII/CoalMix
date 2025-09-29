@@ -7,11 +7,11 @@ from fastapi import FastAPI, applications
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from starlette.staticfiles import StaticFiles
-
 from log.log import logger
 from src.coal_mix_simple import coal_mixed_optimization_simple
 from src.coal_mix_opt import coal_mixed_integer_optimization
 from src.coal_mix_opt_v2 import coal_mixed_integer_optimization_v2
+from src.coal_mix_opt_v3 import coal_mixed_integer_optimization_v3
 from src.purchase_opt import purchase_opt_impl
 from src.output_opt import output_opt_impl
 from src.utils import register_offline_docs
@@ -143,6 +143,29 @@ def coal_mix_opt_v2(coal_mix_input_v2: CoalMixInputV2):
             coal_mix_input_v2.coal_quality,
             coal_mix_input_v2.mix_coal_num,
             coal_mix_input_v2.opt_flag)
+        return {"code": 0,
+                "data": {"mix_rates": mix_rates, "mix_cases": mix_cases, "mix_infos": mix_infos,
+                         "mix_prices": mix_prices},
+                "err_msg": ""}
+
+    except Exception as e:
+        logger.error(f"{e}")
+        return {"code": -1, "data": {}, "err_msg": f"求解失败, {e}"}
+
+
+@app.post("/api/coal_mix_opt_v3")
+def coal_mix_opt_v2(coal_mix_input_v3: CoalMixInputV2):
+    s = coal_mix_input_v3.model_dump()
+    json.dump(s, open("./coal_mix_input_v3.json", "w"))
+    try:
+        mix_rates, mix_cases, mix_infos, mix_prices = coal_mixed_integer_optimization_v3(
+            np.array(coal_mix_input_v3.coal_info),
+            np.array(coal_mix_input_v3.unit_constraint),
+            np.array(coal_mix_input_v3.container_constraint, dtype=object),
+            np.array(coal_mix_input_v3.mix_ratio, int),
+            coal_mix_input_v3.coal_quality,
+            coal_mix_input_v3.mix_coal_num,
+            coal_mix_input_v3.opt_flag)
         return {"code": 0,
                 "data": {"mix_rates": mix_rates, "mix_cases": mix_cases, "mix_infos": mix_infos,
                          "mix_prices": mix_prices},

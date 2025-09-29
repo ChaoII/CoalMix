@@ -1,0 +1,1574 @@
+2025-09-29 10:15:23.654 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 10:15:23.657 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 10:15:35.911 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 10:15:35.912 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 10:15:35.912 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 10:15:46.779 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 10:15:46.779 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 10:15:46.780 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 10:16:09.166 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 10:16:09.167 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 10:16:09.167 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 10:16:55.260 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 10:16:55.260 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 10:16:55.260 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 10:16:55.260 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 10:16:55.260 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 10:17:49.911 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 10:17:49.911 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 10:17:49.911 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 10:17:49.911 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 10:17:49.911 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 10:18:07.864 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 10:18:07.864 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 10:18:07.864 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 10:18:07.864 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 10:18:07.865 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 10:28:53.252 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 10:28:53.252 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 10:28:53.253 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 10:28:53.253 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 10:28:53.253 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 10:29:15.361 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 10:29:15.362 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 10:29:15.362 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 10:29:15.362 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 10:29:15.362 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 10:29:34.281 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 10:29:34.282 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 10:29:34.282 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 10:29:34.282 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 10:29:34.282 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 10:30:14.942 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 10:30:14.943 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 10:30:14.943 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 10:30:14.943 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 10:30:14.943 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 10:30:53.870 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 10:30:53.870 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 10:30:53.870 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 10:30:53.870 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 10:30:53.870 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 10:31:02.871 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 10:31:02.871 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 10:31:02.871 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 10:31:02.871 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 10:31:02.871 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 10:31:12.024 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 10:31:12.024 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 10:31:12.024 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 10:31:12.024 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 10:31:12.024 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 10:35:13.442 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 10:35:13.442 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 10:35:13.442 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 10:35:13.442 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 10:35:13.443 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 10:36:03.746 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 10:36:03.746 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 10:36:03.747 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 10:36:03.747 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 10:36:03.747 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 10:36:15.043 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 10:36:15.043 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 10:36:15.043 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 10:36:15.043 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 10:36:15.043 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 10:43:26.666 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 10:43:26.666 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 10:43:26.667 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 10:43:26.667 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 10:43:26.667 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 10:43:35.290 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 10:43:35.290 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 10:43:35.290 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 10:43:35.290 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 10:43:35.291 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 10:43:52.944 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 10:43:52.944 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 10:43:52.944 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 10:43:52.945 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 10:43:52.945 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 10:44:01.988 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 10:44:01.988 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 10:44:01.988 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 10:44:01.988 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 10:44:01.988 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 10:44:06.954 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 10:44:06.954 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 10:44:06.954 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 10:44:06.954 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 10:44:06.954 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 10:44:27.275 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 10:44:27.275 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 10:44:27.275 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 10:44:27.276 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 10:44:40.403 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 10:44:40.403 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 10:44:40.404 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 10:44:40.404 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 10:45:09.264 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[0]未指定煤种和比例，跳过
+2025-09-29 10:45:09.264 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 10:45:09.264 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 10:45:09.264 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 10:45:09.264 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 10:45:09.264 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 10:45:18.851 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[0]未指定煤种和比例，跳过
+2025-09-29 10:45:18.851 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 10:45:18.851 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 10:45:18.852 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 10:45:18.852 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 10:45:18.852 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 10:45:38.685 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 10:45:38.686 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 10:45:38.686 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 10:45:38.686 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 10:45:56.842 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[0]未指定煤种和比例，跳过
+2025-09-29 10:45:56.846 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 10:45:56.846 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 10:45:56.846 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 10:45:56.846 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 10:46:02.794 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[0]未指定煤种和比例，跳过
+2025-09-29 10:46:02.794 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 10:46:02.794 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 10:46:02.794 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 10:46:02.794 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 10:46:02.794 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 10:48:14.978 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[0]未指定煤种和比例，跳过
+2025-09-29 10:48:14.978 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 10:48:14.979 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 10:48:14.979 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 10:48:14.979 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 10:48:14.979 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 10:48:32.539 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 10:48:32.539 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 10:48:32.539 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 10:48:32.539 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 10:48:32.539 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 10:49:30.072 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 10:49:30.072 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 10:49:30.073 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 10:49:30.073 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 10:49:30.073 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 10:51:12.610 | WARNING  | __main__:coal_mixed_integer_optimization_v2:118 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 10:51:12.611 | WARNING  | __main__:coal_mixed_integer_optimization_v2:118 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 10:51:12.611 | WARNING  | __main__:coal_mixed_integer_optimization_v2:118 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 10:51:12.611 | WARNING  | __main__:coal_mixed_integer_optimization_v2:118 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 10:51:12.611 | WARNING  | __main__:coal_mixed_integer_optimization_v2:118 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 10:52:32.044 | WARNING  | __main__:coal_mixed_integer_optimization_v2:118 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 10:52:32.044 | WARNING  | __main__:coal_mixed_integer_optimization_v2:118 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 10:52:32.044 | WARNING  | __main__:coal_mixed_integer_optimization_v2:118 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 10:52:32.044 | WARNING  | __main__:coal_mixed_integer_optimization_v2:118 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 10:52:32.045 | WARNING  | __main__:coal_mixed_integer_optimization_v2:118 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 10:53:22.736 | WARNING  | __main__:coal_mixed_integer_optimization_v2:118 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 10:53:22.736 | WARNING  | __main__:coal_mixed_integer_optimization_v2:118 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 10:53:22.736 | WARNING  | __main__:coal_mixed_integer_optimization_v2:118 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 10:53:22.736 | WARNING  | __main__:coal_mixed_integer_optimization_v2:118 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 10:53:22.736 | WARNING  | __main__:coal_mixed_integer_optimization_v2:118 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 10:54:11.877 | WARNING  | __main__:coal_mixed_integer_optimization_v2:118 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 10:54:11.878 | WARNING  | __main__:coal_mixed_integer_optimization_v2:118 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 10:54:11.878 | WARNING  | __main__:coal_mixed_integer_optimization_v2:118 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 10:54:11.878 | WARNING  | __main__:coal_mixed_integer_optimization_v2:118 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 10:54:11.878 | WARNING  | __main__:coal_mixed_integer_optimization_v2:118 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 10:54:35.205 | WARNING  | __main__:coal_mixed_integer_optimization_v2:118 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 10:54:35.206 | WARNING  | __main__:coal_mixed_integer_optimization_v2:118 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 10:54:35.206 | WARNING  | __main__:coal_mixed_integer_optimization_v2:118 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 10:54:35.206 | WARNING  | __main__:coal_mixed_integer_optimization_v2:118 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 10:54:35.206 | WARNING  | __main__:coal_mixed_integer_optimization_v2:118 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 10:54:46.480 | WARNING  | __main__:coal_mixed_integer_optimization_v2:118 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 10:54:46.481 | WARNING  | __main__:coal_mixed_integer_optimization_v2:118 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 10:54:46.481 | WARNING  | __main__:coal_mixed_integer_optimization_v2:118 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 10:54:46.481 | WARNING  | __main__:coal_mixed_integer_optimization_v2:118 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 10:54:46.481 | WARNING  | __main__:coal_mixed_integer_optimization_v2:118 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 10:56:49.479 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 10:56:49.479 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 10:56:49.479 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 10:56:49.479 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 10:56:49.479 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 10:57:10.844 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 10:57:10.844 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 10:57:10.844 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 10:57:10.844 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 10:57:10.844 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 10:57:28.811 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 10:57:28.811 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 10:57:28.811 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 10:57:28.811 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 10:57:28.811 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 10:57:58.877 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 10:57:58.878 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 10:57:58.878 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 10:57:58.878 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 10:57:58.878 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 10:58:27.433 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 10:58:27.433 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 10:58:27.433 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 10:58:27.433 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 10:58:27.433 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 10:58:34.791 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 10:58:34.791 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 10:58:34.792 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 10:58:34.792 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 10:58:34.792 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 11:00:53.741 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 11:00:53.741 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 11:00:53.741 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 11:00:53.741 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 11:00:53.741 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 11:01:07.584 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 11:01:07.585 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 11:01:07.585 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 11:01:07.585 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 11:01:07.585 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 11:01:22.126 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 11:01:22.127 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 11:01:22.127 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 11:01:22.127 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 11:01:22.127 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 11:02:00.406 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 11:02:00.407 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 11:02:00.407 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 11:02:00.407 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 11:02:00.407 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 11:02:06.371 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 11:02:06.371 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 11:02:06.371 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 11:02:06.371 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 11:02:06.371 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 11:02:19.607 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 11:02:19.607 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 11:02:19.607 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 11:02:19.607 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 11:02:19.607 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 11:03:24.943 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 11:03:24.943 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 11:03:24.943 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 11:03:24.944 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 11:03:24.944 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 11:03:39.984 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 11:03:39.985 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 11:03:39.985 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 11:03:39.985 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 11:03:39.985 | WARNING  | __main__:coal_mixed_integer_optimization_v2:119 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 11:13:08.572 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 11:13:08.573 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 11:13:08.573 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 11:13:08.573 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 11:13:08.573 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 11:15:48.756 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 11:15:48.756 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 11:15:48.756 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 11:15:48.756 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 11:15:48.756 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 11:54:44.254 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 11:54:44.255 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 11:54:44.258 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 11:54:44.258 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 11:54:44.258 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 11:54:44.258 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 11:54:44.258 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 11:54:44.259 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 11:54:44.259 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 11:59:49.002 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 11:59:49.002 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 11:59:49.002 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 11:59:49.002 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 11:59:49.002 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 12:00:10.792 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 12:00:10.792 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 12:00:10.793 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 12:00:10.793 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 12:00:10.793 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 12:00:37.747 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 12:00:37.747 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 12:00:37.754 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 12:00:37.755 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 12:00:37.755 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 12:00:37.755 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 12:00:37.755 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 12:00:37.755 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 12:00:37.755 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 13:32:05.329 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 13:32:05.329 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 13:32:05.332 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 13:32:05.333 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 13:32:05.333 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 13:32:05.333 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 13:32:05.333 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 13:32:05.333 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 13:32:05.333 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 13:33:14.318 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 13:33:14.318 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 13:33:14.322 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 13:33:14.322 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 13:33:14.322 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 13:33:14.322 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 13:33:14.322 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 13:33:14.322 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 13:33:14.322 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 13:33:41.316 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 13:33:41.316 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 13:33:41.317 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 13:33:41.317 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 13:33:41.317 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 13:33:41.317 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 13:33:41.317 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 13:33:41.317 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 13:33:41.317 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 13:33:48.051 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 13:33:48.051 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 13:33:48.052 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 13:33:48.052 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 13:33:48.052 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 13:33:48.052 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 13:33:48.052 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 13:33:48.052 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 13:33:48.052 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 13:34:08.044 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 13:34:08.044 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 13:34:08.045 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 13:34:08.045 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 13:34:08.045 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 13:34:08.045 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 13:34:08.045 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 13:34:08.045 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 13:34:08.045 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 13:34:19.805 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 13:34:19.806 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 13:34:19.806 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 13:34:19.806 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 13:34:19.806 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 13:34:19.806 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 13:34:19.806 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 13:34:19.806 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 13:34:19.806 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 13:34:25.232 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 13:34:25.232 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 13:34:25.232 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 13:34:25.233 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 13:34:25.233 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 13:34:25.233 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 13:34:25.233 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 13:34:25.233 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 13:34:25.233 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 13:35:06.758 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 13:35:06.758 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 13:35:06.759 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 13:35:06.759 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 13:35:06.759 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 13:35:06.759 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 13:35:06.759 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 13:35:06.759 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 13:35:06.759 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 13:35:30.645 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 13:35:30.645 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 13:35:30.645 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 13:35:30.646 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 13:35:30.646 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 13:35:30.646 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 13:35:30.646 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 13:35:30.646 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 13:35:30.646 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 13:38:01.897 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 13:38:01.898 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 13:38:01.899 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 13:38:01.899 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 13:38:01.899 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 13:38:01.899 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 13:38:01.899 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 13:38:01.899 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 13:38:01.899 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 13:40:25.056 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 13:40:25.056 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 13:40:25.057 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 13:40:25.057 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 13:40:25.057 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 13:40:25.057 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 13:40:25.057 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 13:40:25.057 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 13:40:25.057 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 13:40:29.420 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 13:40:29.420 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 13:40:29.421 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 13:40:29.421 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 13:40:29.421 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 13:40:29.421 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 13:40:29.421 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 13:40:29.421 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 13:40:29.421 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 13:40:36.695 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 13:40:36.695 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 13:40:36.696 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 13:40:36.696 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 13:40:36.696 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 13:40:36.696 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 13:40:36.696 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 13:40:36.696 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 13:40:36.696 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 13:42:40.568 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 13:42:40.568 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 13:42:40.569 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 13:42:40.569 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 13:42:40.569 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 13:42:40.569 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 13:42:40.569 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 13:42:40.569 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 13:42:40.569 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 13:43:11.379 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 13:43:11.380 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 13:43:11.380 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 13:43:11.380 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 13:43:11.380 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 13:43:11.380 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 13:43:11.380 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 13:43:11.380 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 13:43:11.380 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 13:43:41.776 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 13:43:41.776 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 13:43:41.777 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 13:43:41.777 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 13:43:41.777 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 13:43:41.777 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 13:43:41.777 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 13:43:41.777 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 13:43:41.777 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 13:44:27.680 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 13:44:27.680 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 13:44:27.680 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 13:44:27.680 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 13:44:27.680 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 13:44:27.681 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 13:44:27.681 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 13:44:27.681 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 13:44:27.681 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 13:45:35.876 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 13:45:35.877 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 13:45:35.880 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 13:45:35.880 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 13:45:35.880 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 13:45:35.880 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 13:45:35.880 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 13:45:35.880 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 13:45:35.880 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 13:46:18.330 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 13:46:18.331 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 13:46:27.723 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 13:46:27.723 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 13:47:17.692 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 13:47:17.692 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 13:47:17.693 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 13:47:17.693 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 13:47:17.693 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 13:47:17.693 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 13:47:17.693 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 13:47:17.693 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 13:47:17.694 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 13:48:43.376 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 13:48:43.376 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 13:48:43.377 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 13:48:43.377 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 13:48:43.377 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 13:48:43.377 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 13:48:43.377 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 13:48:43.377 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 13:48:43.377 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 13:48:49.678 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 13:48:49.679 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 13:48:49.679 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 13:48:49.679 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 13:48:49.679 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 13:48:49.680 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 13:48:49.680 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 13:48:49.680 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 13:48:49.680 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 13:49:14.417 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 13:49:14.417 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 13:49:14.417 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 13:49:14.418 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 13:49:14.418 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 13:49:14.418 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 13:49:14.418 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 13:49:14.418 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 13:49:14.418 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 13:49:31.044 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 13:49:31.044 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 13:49:31.045 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 13:49:31.045 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 13:49:31.045 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 13:49:31.045 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 13:49:31.045 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 13:49:31.045 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 13:49:31.045 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 13:50:00.357 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 13:50:00.357 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 13:50:00.358 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 13:50:00.358 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 13:50:00.358 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 13:50:00.358 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 13:50:00.358 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 13:50:00.358 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 13:50:00.358 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 13:50:22.359 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 13:50:22.359 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 13:50:22.360 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 13:50:22.360 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 13:50:22.360 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 13:50:22.360 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 13:50:22.360 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 13:50:22.360 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 13:50:22.360 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 13:50:32.706 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 13:50:32.706 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 13:50:32.707 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 13:50:32.707 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 13:50:32.707 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 13:50:32.707 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 13:50:32.707 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 13:50:32.707 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 13:50:32.707 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 13:50:37.867 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 13:50:37.867 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 13:50:37.867 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 13:50:37.868 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 13:50:37.868 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 13:50:37.868 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 13:50:37.868 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 13:50:37.868 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 13:50:37.868 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 13:51:52.162 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 13:51:52.163 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 13:51:52.164 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 13:51:52.164 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 13:51:52.164 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 13:51:52.164 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 13:51:52.164 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 13:51:52.164 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 13:51:52.164 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 13:52:41.576 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 13:52:41.577 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 13:54:56.683 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 13:54:56.683 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 13:54:56.685 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 13:54:56.685 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 13:54:56.685 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 13:54:56.685 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 13:54:56.685 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 13:54:56.685 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 13:54:56.685 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 13:57:11.214 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 13:57:11.214 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:03:35.393 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:03:35.393 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:03:35.396 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 14:03:35.396 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:03:35.396 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:03:35.396 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:03:35.396 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:03:35.396 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:03:35.396 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:03:52.987 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:03:52.987 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:03:52.989 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 14:03:52.989 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:03:52.989 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:03:52.989 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:03:52.989 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:03:52.989 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:03:52.989 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:04:06.942 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:04:06.942 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:04:06.944 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 14:04:06.945 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:04:06.945 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:04:06.945 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:04:06.945 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:04:06.945 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:04:06.945 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:04:23.617 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:04:23.617 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:04:23.623 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 14:04:23.624 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:04:23.624 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:04:23.624 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:04:23.624 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:04:23.624 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:04:23.624 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:04:56.228 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:04:56.228 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:04:56.231 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 14:04:56.231 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:04:56.231 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:04:56.231 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:04:56.231 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:04:56.231 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:04:56.232 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:05:22.335 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:05:22.336 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:05:22.339 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 14:05:22.340 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:05:22.340 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:05:22.340 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:05:22.340 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:05:22.340 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:05:22.340 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:05:37.499 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:05:37.499 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:05:37.502 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 14:05:37.503 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:05:37.503 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:05:37.503 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:05:37.503 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:05:37.503 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:05:37.503 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:06:12.232 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:06:12.232 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:06:12.236 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 14:06:12.236 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:06:12.236 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:06:12.236 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:06:12.236 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:06:12.236 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:06:12.236 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:06:21.887 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:06:21.887 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:06:21.890 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 14:06:21.890 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:06:21.890 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:06:21.890 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:06:21.890 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:06:21.890 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:06:21.890 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:06:43.010 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:06:43.011 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:06:43.017 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 14:06:43.017 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:06:43.017 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:06:43.017 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:06:43.018 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:06:43.018 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:06:43.018 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:06:49.248 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:06:49.249 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:06:49.253 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 14:06:49.253 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:06:49.253 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:06:49.253 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:06:49.253 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:06:49.253 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:06:49.253 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:07:23.634 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:07:23.634 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:07:23.638 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 14:07:23.638 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:07:23.638 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:07:23.638 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:07:23.638 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:07:23.638 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:07:23.638 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:07:31.832 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:07:31.832 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:07:31.834 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 14:07:31.834 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:07:31.834 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:07:31.834 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:07:31.834 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:07:31.834 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:07:31.834 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:07:42.766 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:07:42.766 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:07:42.769 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 14:07:42.769 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:07:42.769 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:07:42.769 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:07:42.769 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:07:42.769 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:07:42.769 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:09:25.161 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:09:25.161 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:09:25.165 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 14:09:25.165 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:09:25.165 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:09:25.165 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:09:25.165 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:09:25.165 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:09:25.165 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:09:36.094 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:09:36.094 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:09:36.098 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 14:09:36.098 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:09:36.098 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:09:36.099 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:09:36.099 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:09:36.099 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:09:36.099 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:09:43.469 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:09:43.469 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:09:43.473 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 14:09:43.473 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:09:43.474 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:09:43.474 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:09:43.474 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:09:43.474 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:09:43.474 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:09:58.237 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:09:58.237 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:09:58.238 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 14:09:58.238 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:09:58.238 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:09:58.238 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:09:58.238 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:09:58.238 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:09:58.238 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:11:22.253 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:11:22.254 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:11:22.255 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 14:11:22.255 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:11:22.255 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:11:22.255 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:11:22.255 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:11:22.255 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:11:22.255 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:11:40.580 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:11:40.580 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:11:40.581 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 14:11:40.581 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:11:40.581 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:11:40.581 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:11:40.581 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:11:40.581 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:11:40.581 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:11:49.384 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:11:49.384 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:11:49.385 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 14:11:49.385 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:11:49.385 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:11:49.385 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:11:49.385 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:11:49.385 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:11:49.385 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:12:04.277 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:12:04.277 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:12:04.277 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 14:12:04.278 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:12:04.278 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:12:04.278 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:12:04.278 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:12:04.278 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:12:04.278 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:12:22.734 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:12:22.734 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:12:22.735 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 14:12:22.735 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:12:22.735 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:12:22.735 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:12:22.735 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:12:22.735 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:12:22.735 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:12:35.493 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:12:35.493 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:12:35.493 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[0]未指定煤种和比例，跳过
+2025-09-29 14:12:35.493 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 14:12:35.493 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:12:35.493 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:12:35.493 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:12:35.493 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:12:35.493 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:12:35.493 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:12:42.748 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:12:42.748 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:12:42.749 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[0]未指定煤种和比例，跳过
+2025-09-29 14:12:42.749 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 14:12:42.749 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:12:42.749 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:12:42.749 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:12:42.749 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:12:42.749 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:12:42.749 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:13:13.327 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:13:13.327 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:13:13.328 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 14:13:13.328 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:13:13.328 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:13:13.328 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:13:13.328 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:13:13.328 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:13:13.328 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:13:28.881 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:13:28.881 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:13:28.882 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 14:13:28.882 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:13:28.882 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:13:28.882 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:13:28.882 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:13:28.882 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:13:28.882 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:13:35.766 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:13:35.766 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:13:35.767 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 14:13:35.767 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:13:35.767 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:13:35.767 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:13:35.767 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:13:35.767 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:13:35.767 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:14:13.515 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:14:13.515 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:14:13.515 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 14:14:13.515 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:14:13.516 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:14:13.516 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:14:13.516 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:14:13.516 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:14:13.516 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:14:36.204 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:14:36.205 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:14:36.205 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 14:14:36.205 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:14:36.205 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:14:36.205 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:14:36.205 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:14:36.205 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:14:36.205 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:15:27.383 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:15:27.383 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:15:27.384 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 14:15:27.384 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:15:27.384 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:15:27.384 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:15:27.384 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:15:27.384 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:15:27.384 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:15:55.119 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 14:15:55.119 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:15:55.119 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:15:55.119 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:15:55.119 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:16:23.711 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 14:16:23.711 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:16:23.711 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:16:23.711 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:16:23.711 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:16:51.838 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 14:16:51.838 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:16:51.838 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:16:51.838 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:16:51.838 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:17:02.721 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 14:17:02.721 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:17:02.721 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:17:02.721 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:17:02.721 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:17:08.094 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 14:17:08.094 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:17:08.094 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:17:08.094 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:17:08.094 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:17:18.971 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 14:17:18.971 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:17:18.971 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:17:18.971 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:17:18.971 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:17:32.293 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 14:17:32.294 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:17:32.294 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:17:32.294 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:17:32.294 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:17:47.936 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:17:47.936 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:17:47.938 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 14:17:47.938 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:17:47.938 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:17:47.938 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:17:47.938 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:17:47.938 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:17:47.938 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:18:31.480 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:18:31.480 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:18:31.480 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 14:18:31.481 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:18:31.481 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:18:31.481 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:18:31.481 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:18:31.481 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:18:31.481 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:18:54.499 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:18:54.499 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:18:54.500 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:18:54.500 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:18:54.500 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:18:54.500 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:18:54.500 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:18:54.500 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:19:03.865 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:19:03.865 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:19:03.865 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:19:03.865 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:19:03.865 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:19:03.866 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:19:03.866 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:19:03.866 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:19:15.358 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:19:15.358 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:19:15.362 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:19:15.362 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:19:15.362 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:19:15.362 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:19:15.362 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:19:15.362 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:19:34.282 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:19:34.282 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:19:34.286 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:19:34.286 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:19:34.286 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:19:34.286 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:19:34.286 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:19:34.286 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:19:46.381 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:19:46.381 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:19:46.385 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:19:46.385 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:19:46.385 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:19:46.385 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:19:46.385 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:19:46.385 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:19:59.022 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:19:59.022 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:19:59.026 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:19:59.026 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:19:59.026 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:19:59.026 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:19:59.026 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:19:59.026 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:20:08.480 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:20:08.480 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:20:08.485 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:20:08.485 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:20:08.485 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:20:08.485 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:20:08.485 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:20:08.485 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:20:20.099 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:20:20.100 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:20:20.104 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:20:20.104 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:20:20.104 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:20:20.104 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:20:20.104 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:20:20.104 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:20:36.913 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:20:36.914 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:20:36.918 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:20:36.918 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:20:36.918 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:20:36.918 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:20:36.918 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:20:36.918 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:20:44.657 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:20:44.657 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:20:44.661 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:20:44.661 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:20:44.661 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:20:44.661 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:20:44.661 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:20:44.661 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:20:55.562 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:20:55.562 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:20:55.566 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:20:55.566 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:20:55.567 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:20:55.567 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:20:55.567 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:20:55.567 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:21:03.304 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:21:03.304 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:21:03.308 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:21:03.308 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:21:03.308 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:21:03.308 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:21:03.308 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:21:03.308 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:21:22.437 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:21:22.437 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:21:22.441 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:21:22.441 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:21:22.441 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:21:22.441 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:21:22.442 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:21:22.442 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:21:40.920 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:21:40.920 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:21:40.924 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:21:40.924 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:21:40.924 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:21:40.924 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:21:40.924 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:21:40.925 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:21:53.901 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:21:53.901 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:21:53.905 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:21:53.905 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:21:53.905 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:21:53.905 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:21:53.905 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:21:53.905 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:22:15.447 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:22:15.448 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:22:15.452 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:22:15.452 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:22:15.452 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:22:15.452 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:22:15.452 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:22:15.452 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:22:29.523 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:22:29.524 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:22:29.528 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:22:29.528 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:22:29.528 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:22:29.528 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:22:29.528 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:22:29.528 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:22:45.936 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:22:45.936 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:22:45.937 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:22:45.937 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:22:45.937 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:22:45.937 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:22:45.937 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:22:45.937 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:22:51.640 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:22:51.640 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:22:51.641 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:22:51.641 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:22:51.641 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:22:51.641 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:22:51.641 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:22:51.641 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:23:43.980 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:23:43.980 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:23:43.980 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:23:43.981 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:23:43.981 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:23:43.981 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:23:43.981 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:23:43.981 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:24:16.508 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:24:16.508 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:24:16.509 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:24:16.509 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:24:16.509 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:24:16.509 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:24:16.509 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:24:16.509 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:31:00.852 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:31:02.214 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:32:56.989 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 14:33:01.254 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:33:03.170 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:33:04.556 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:33:06.225 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:33:08.407 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:33:50.356 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:33:50.356 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:33:50.361 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:33:50.361 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:33:50.361 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:33:50.361 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:33:50.361 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:33:59.862 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:33:59.862 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:33:59.866 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:33:59.866 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:33:59.866 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:33:59.866 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:33:59.867 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:34:16.183 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:34:16.183 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:34:16.184 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:34:16.184 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:34:16.184 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:34:16.184 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:34:16.184 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:34:44.864 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:34:44.864 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:34:44.865 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:34:44.865 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:34:44.865 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:34:44.865 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:34:44.865 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:34:53.783 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:34:53.783 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:34:53.787 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:34:53.787 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:34:53.787 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:34:53.787 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:34:53.787 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:41:15.857 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:41:15.858 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:41:15.864 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:41:15.864 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:41:15.866 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:41:15.866 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:41:15.866 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:48:01.300 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:48:01.300 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:48:01.309 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:48:01.309 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:48:01.309 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:48:01.309 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:48:01.309 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:48:37.220 | WARNING  | __main__:coal_mixed_integer_optimization_v2:97 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:48:37.221 | WARNING  | __main__:coal_mixed_integer_optimization_v2:100 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:48:37.228 | WARNING  | __main__:coal_mixed_integer_optimization_v2:129 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:48:37.228 | WARNING  | __main__:coal_mixed_integer_optimization_v2:129 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:48:37.228 | WARNING  | __main__:coal_mixed_integer_optimization_v2:129 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:48:37.228 | WARNING  | __main__:coal_mixed_integer_optimization_v2:129 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:48:37.228 | WARNING  | __main__:coal_mixed_integer_optimization_v2:129 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:54:40.082 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:54:40.082 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:54:40.086 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:54:40.086 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:54:40.086 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:54:40.086 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:54:40.086 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:55:08.815 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:55:08.816 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:55:08.820 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:55:08.820 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:55:08.820 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:55:08.820 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:55:08.820 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:55:13.287 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:55:13.287 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:55:13.291 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:55:13.291 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:55:13.291 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:55:13.291 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:55:13.291 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:55:26.938 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:55:26.939 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:55:26.944 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:55:26.944 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:55:26.944 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:55:26.944 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:55:26.944 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:56:54.627 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:56:54.627 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:56:54.640 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:56:54.640 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:56:54.640 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:56:54.640 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:56:54.640 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 14:59:08.600 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 14:59:08.601 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 14:59:08.608 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 14:59:08.608 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 14:59:08.608 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 14:59:08.608 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 14:59:08.609 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 15:00:03.148 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 15:00:03.149 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 15:00:03.153 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 15:00:03.153 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 15:00:03.153 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 15:00:03.153 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 15:00:03.153 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 15:03:26.921 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 15:03:26.921 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 15:03:26.927 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 15:03:26.927 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 15:03:26.927 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 15:03:26.927 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 15:03:26.927 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 15:03:43.594 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 15:03:43.594 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 15:03:43.598 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 15:03:43.598 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 15:03:43.598 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 15:03:43.598 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 15:03:43.598 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 15:06:34.022 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 15:06:34.022 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 15:06:47.135 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 15:06:47.136 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 15:06:47.136 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 15:06:47.136 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 15:06:47.136 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 15:07:05.057 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 15:07:05.057 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 15:07:05.057 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 15:07:05.057 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 15:07:05.057 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 15:07:26.356 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 15:07:26.356 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 15:07:26.356 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 15:07:26.356 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 15:07:26.356 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 15:07:44.184 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 15:07:44.184 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 15:07:44.184 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 15:07:44.184 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 15:07:44.184 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 15:07:57.202 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 15:07:57.202 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 15:07:57.202 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 15:07:57.202 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 15:07:57.202 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 15:08:19.771 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 15:08:19.771 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 15:08:19.771 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 15:08:19.771 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 15:08:19.771 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 15:08:26.207 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 15:08:26.207 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 15:08:26.207 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 15:08:26.207 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 15:08:26.207 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 15:08:37.233 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 15:08:37.233 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 15:08:37.234 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 15:08:37.234 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 15:08:37.234 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 15:08:42.578 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 15:08:42.579 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 15:08:42.579 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 15:08:42.579 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 15:08:42.579 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 15:08:56.709 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 15:08:56.709 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 15:08:56.709 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 15:08:56.709 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 15:08:56.709 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 15:09:01.058 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 15:09:01.059 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 15:09:01.059 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 15:09:01.059 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 15:09:01.059 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 15:09:12.455 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 15:09:12.456 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 15:09:12.456 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 15:09:12.456 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 15:09:12.456 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 15:09:22.994 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 15:09:22.994 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 15:09:22.994 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 15:09:22.994 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 15:09:22.994 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 15:10:53.201 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 15:10:53.201 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 15:10:53.202 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 15:10:53.202 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 15:10:53.202 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 15:11:17.337 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 15:11:17.337 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 15:11:17.337 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 15:11:17.337 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 15:11:17.338 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 15:11:55.609 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 15:11:55.609 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 15:11:55.609 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 15:11:55.609 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 15:11:55.609 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 15:12:22.760 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 15:12:22.761 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 15:12:22.770 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 15:12:22.770 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 15:12:22.770 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 15:12:22.770 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 15:12:22.770 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 15:12:51.657 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 15:12:51.657 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 15:12:58.208 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 15:12:58.208 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 15:12:58.212 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 15:12:58.212 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 15:12:58.212 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 15:12:58.212 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 15:12:58.212 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 15:14:06.664 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 15:14:06.664 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 15:15:55.426 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 15:15:55.426 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 15:15:55.434 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 15:15:55.434 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 15:15:55.434 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 15:15:55.434 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 15:15:55.434 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 15:16:04.583 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 15:16:04.583 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 15:16:04.590 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 15:16:04.590 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 15:16:04.590 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 15:16:04.590 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 15:16:04.590 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 15:16:21.078 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 15:16:21.078 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 15:16:21.083 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 15:16:21.083 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 15:16:21.083 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 15:16:21.083 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 15:16:21.083 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 15:16:47.008 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 15:16:47.008 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 15:16:47.017 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 15:16:47.018 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 15:16:47.018 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 15:16:47.018 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 15:16:47.018 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 15:16:58.786 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 15:16:58.786 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 15:16:58.790 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 15:16:58.790 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 15:16:58.790 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 15:16:58.790 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 15:16:58.790 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 15:17:10.542 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 15:17:10.542 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 15:17:10.546 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 15:17:10.546 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 15:17:10.546 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 15:17:10.546 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 15:17:10.546 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 15:17:16.975 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 15:17:16.975 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 15:17:16.980 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 15:17:16.980 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 15:17:16.980 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 15:17:16.980 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 15:17:16.980 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 15:17:21.893 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 15:17:21.893 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 15:17:21.898 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 15:17:21.898 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 15:17:21.898 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 15:17:21.898 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 15:17:21.898 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 15:17:38.466 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 15:17:38.466 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 15:17:38.471 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 15:17:38.471 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 15:17:38.471 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 15:17:38.471 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 15:17:38.471 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 15:17:50.134 | WARNING  | __main__:coal_mixed_integer_optimization_v2:95 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 15:17:50.134 | WARNING  | __main__:coal_mixed_integer_optimization_v2:98 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 15:17:50.138 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 15:17:50.138 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 15:17:50.139 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 15:17:50.139 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 15:17:50.139 | WARNING  | __main__:coal_mixed_integer_optimization_v2:127 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 15:21:43.013 | WARNING  | __main__:coal_mixed_integer_optimization_v2:106 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 15:21:43.013 | WARNING  | __main__:coal_mixed_integer_optimization_v2:109 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 15:21:43.023 | WARNING  | __main__:coal_mixed_integer_optimization_v2:138 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 15:21:43.025 | WARNING  | __main__:coal_mixed_integer_optimization_v2:138 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 15:21:43.025 | WARNING  | __main__:coal_mixed_integer_optimization_v2:138 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 15:21:43.025 | WARNING  | __main__:coal_mixed_integer_optimization_v2:138 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 15:21:43.025 | WARNING  | __main__:coal_mixed_integer_optimization_v2:138 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 15:26:40.111 | WARNING  | __main__:coal_mixed_integer_optimization_v2:106 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 15:26:40.111 | WARNING  | __main__:coal_mixed_integer_optimization_v2:109 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 15:26:40.115 | WARNING  | __main__:coal_mixed_integer_optimization_v2:138 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 15:26:40.115 | WARNING  | __main__:coal_mixed_integer_optimization_v2:138 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 15:26:40.115 | WARNING  | __main__:coal_mixed_integer_optimization_v2:138 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 15:26:40.115 | WARNING  | __main__:coal_mixed_integer_optimization_v2:138 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 15:26:40.115 | WARNING  | __main__:coal_mixed_integer_optimization_v2:138 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 15:26:57.511 | WARNING  | __main__:coal_mixed_integer_optimization_v2:138 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 15:26:57.511 | WARNING  | __main__:coal_mixed_integer_optimization_v2:138 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 15:26:57.512 | WARNING  | __main__:coal_mixed_integer_optimization_v2:138 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 15:26:57.512 | WARNING  | __main__:coal_mixed_integer_optimization_v2:138 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 15:26:57.512 | WARNING  | __main__:coal_mixed_integer_optimization_v2:138 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 15:27:10.790 | WARNING  | __main__:coal_mixed_integer_optimization_v2:138 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 15:27:10.790 | WARNING  | __main__:coal_mixed_integer_optimization_v2:138 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 15:27:10.790 | WARNING  | __main__:coal_mixed_integer_optimization_v2:138 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 15:27:10.791 | WARNING  | __main__:coal_mixed_integer_optimization_v2:138 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 15:27:10.791 | WARNING  | __main__:coal_mixed_integer_optimization_v2:138 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 15:41:54.991 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 15:41:54.991 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 15:41:54.991 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 15:41:54.991 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 15:41:54.991 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 15:42:15.642 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 15:42:15.642 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 15:42:15.642 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 15:42:15.643 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 15:42:15.643 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 15:42:47.926 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 15:42:47.926 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 15:42:47.926 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 15:42:47.926 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 15:42:47.926 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 15:55:21.762 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[1]未指定煤种和比例，跳过
+2025-09-29 15:55:21.762 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 15:55:21.762 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 15:55:21.762 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 15:55:21.762 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 15:56:03.686 | WARNING  | __main__:coal_mixed_integer_optimization_v2:99 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 15:56:03.686 | WARNING  | __main__:coal_mixed_integer_optimization_v2:102 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 15:56:03.691 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 15:56:03.691 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 15:56:03.691 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 15:56:03.691 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 15:56:03.692 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 15:56:30.935 | WARNING  | __main__:coal_mixed_integer_optimization_v2:99 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 15:56:30.935 | WARNING  | __main__:coal_mixed_integer_optimization_v2:102 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 15:56:30.946 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 15:56:30.946 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 15:56:30.946 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 15:56:30.946 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 15:56:30.946 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 15:59:48.591 | WARNING  | __main__:coal_mixed_integer_optimization_v2:99 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 15:59:48.591 | WARNING  | __main__:coal_mixed_integer_optimization_v2:102 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 16:06:51.553 | WARNING  | __main__:coal_mixed_integer_optimization_v2:99 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 16:06:51.554 | WARNING  | __main__:coal_mixed_integer_optimization_v2:102 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 16:06:55.265 | WARNING  | __main__:coal_mixed_integer_optimization_v2:99 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 16:06:55.265 | WARNING  | __main__:coal_mixed_integer_optimization_v2:102 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 16:06:55.268 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 16:06:55.268 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 16:06:55.269 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 16:06:55.269 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 16:06:55.269 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 16:07:31.385 | WARNING  | __main__:coal_mixed_integer_optimization_v2:99 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 16:07:31.386 | WARNING  | __main__:coal_mixed_integer_optimization_v2:102 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 16:07:31.388 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 16:07:31.388 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 16:07:31.388 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 16:07:31.388 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 16:07:31.388 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 16:08:39.560 | WARNING  | __main__:coal_mixed_integer_optimization_v2:99 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 16:08:39.560 | WARNING  | __main__:coal_mixed_integer_optimization_v2:102 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 16:10:50.113 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 16:10:50.113 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 16:10:50.113 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 16:10:50.114 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 16:10:50.114 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 16:11:03.246 | WARNING  | __main__:coal_mixed_integer_optimization_v2:99 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 16:11:03.246 | WARNING  | __main__:coal_mixed_integer_optimization_v2:102 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 16:11:03.247 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 16:11:03.247 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 16:11:03.247 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 16:11:03.247 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 16:11:03.248 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 16:11:03.248 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 16:11:25.437 | WARNING  | __main__:coal_mixed_integer_optimization_v2:99 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 16:11:25.437 | WARNING  | __main__:coal_mixed_integer_optimization_v2:102 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 16:11:25.439 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 16:11:25.439 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 16:11:25.439 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 16:11:25.439 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 16:11:25.439 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 16:11:25.439 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 16:11:29.697 | WARNING  | __main__:coal_mixed_integer_optimization_v2:99 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 16:11:29.697 | WARNING  | __main__:coal_mixed_integer_optimization_v2:102 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 16:11:29.700 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 16:11:29.700 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 16:11:29.700 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 16:11:29.700 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 16:11:29.700 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 16:11:29.700 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 16:13:05.499 | WARNING  | __main__:coal_mixed_integer_optimization_v2:99 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 16:13:05.500 | WARNING  | __main__:coal_mixed_integer_optimization_v2:102 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 16:13:05.505 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 16:13:05.505 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 16:13:05.505 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 16:13:05.505 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 16:13:05.505 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 16:13:05.505 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 16:13:54.533 | WARNING  | __main__:coal_mixed_integer_optimization_v2:99 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 16:13:54.533 | WARNING  | __main__:coal_mixed_integer_optimization_v2:102 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 16:13:54.535 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[2]未指定煤种和比例，跳过
+2025-09-29 16:13:54.535 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 16:13:54.536 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 16:13:54.536 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 16:13:54.536 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 16:13:54.536 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 16:14:07.269 | WARNING  | __main__:coal_mixed_integer_optimization_v2:99 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 16:14:07.269 | WARNING  | __main__:coal_mixed_integer_optimization_v2:102 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 16:14:07.272 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 16:14:07.272 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 16:14:07.272 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 16:14:07.272 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 16:14:07.272 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 16:14:24.481 | WARNING  | __main__:coal_mixed_integer_optimization_v2:99 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 16:14:24.481 | WARNING  | __main__:coal_mixed_integer_optimization_v2:102 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 16:14:24.484 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 16:14:24.484 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 16:14:24.485 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 16:14:24.485 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 16:14:24.485 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 16:14:54.380 | WARNING  | __main__:coal_mixed_integer_optimization_v2:99 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 16:14:54.381 | WARNING  | __main__:coal_mixed_integer_optimization_v2:102 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 16:14:54.388 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 16:14:54.388 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 16:14:54.388 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 16:14:54.388 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 16:14:54.388 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 16:15:04.853 | WARNING  | __main__:coal_mixed_integer_optimization_v2:99 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 16:15:04.853 | WARNING  | __main__:coal_mixed_integer_optimization_v2:102 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 16:15:04.855 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 16:15:04.855 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 16:15:04.855 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 16:15:04.855 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 16:15:04.856 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 16:15:14.212 | WARNING  | __main__:coal_mixed_integer_optimization_v2:99 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 16:15:14.213 | WARNING  | __main__:coal_mixed_integer_optimization_v2:102 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 16:15:14.214 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 16:15:14.214 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 16:15:14.214 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 16:15:14.214 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 16:15:14.214 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 16:15:31.798 | WARNING  | __main__:coal_mixed_integer_optimization_v2:99 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 16:15:31.798 | WARNING  | __main__:coal_mixed_integer_optimization_v2:102 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 16:15:31.803 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 16:15:31.803 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 16:15:31.803 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 16:15:31.803 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 16:15:31.803 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 16:15:51.768 | WARNING  | __main__:coal_mixed_integer_optimization_v2:99 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 16:15:51.768 | WARNING  | __main__:coal_mixed_integer_optimization_v2:102 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 16:15:51.771 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 16:15:51.771 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 16:15:51.771 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 16:15:51.771 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 16:15:51.771 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 16:16:01.577 | WARNING  | __main__:coal_mixed_integer_optimization_v2:99 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 16:16:01.578 | WARNING  | __main__:coal_mixed_integer_optimization_v2:102 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 16:16:01.579 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 16:16:01.580 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 16:16:01.580 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 16:16:01.580 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 16:16:01.580 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 16:16:21.635 | WARNING  | __main__:coal_mixed_integer_optimization_v2:99 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 16:16:21.635 | WARNING  | __main__:coal_mixed_integer_optimization_v2:102 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 16:16:21.646 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 16:16:21.646 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 16:16:21.646 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 16:16:21.646 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 16:16:21.646 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 16:18:19.461 | WARNING  | __main__:coal_mixed_integer_optimization_v2:99 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 16:18:19.461 | WARNING  | __main__:coal_mixed_integer_optimization_v2:102 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 16:18:19.464 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 16:18:19.464 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 16:18:19.464 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 16:18:19.464 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 16:18:19.465 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 16:32:52.286 | WARNING  | __main__:coal_mixed_integer_optimization_v2:99 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 16:32:52.286 | WARNING  | __main__:coal_mixed_integer_optimization_v2:102 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 16:33:01.889 | WARNING  | __main__:coal_mixed_integer_optimization_v2:99 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 16:33:01.889 | WARNING  | __main__:coal_mixed_integer_optimization_v2:102 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 16:33:01.914 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 16:33:01.914 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 16:33:01.914 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 16:33:01.914 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 16:33:01.914 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 16:33:18.359 | WARNING  | __main__:coal_mixed_integer_optimization_v2:99 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 16:33:18.359 | WARNING  | __main__:coal_mixed_integer_optimization_v2:102 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 16:33:18.362 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 16:33:18.362 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 16:33:18.362 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 16:33:18.362 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 16:33:18.362 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[7]未指定煤种和比例，跳过
+2025-09-29 16:37:32.545 | WARNING  | __main__:coal_mixed_integer_optimization_v2:99 - 煤量[coal_quality_low: 1]小于epsilon,可能为0，已设置为1
+2025-09-29 16:37:32.545 | WARNING  | __main__:coal_mixed_integer_optimization_v2:102 - 煤量[coal_quality_high: 1]小于epsilon，可能为0，已设置为1
+2025-09-29 16:37:32.548 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[3]未指定煤种和比例，跳过
+2025-09-29 16:37:32.548 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[4]未指定煤种和比例，跳过
+2025-09-29 16:37:32.548 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[5]未指定煤种和比例，跳过
+2025-09-29 16:37:32.548 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[6]未指定煤种和比例，跳过
+2025-09-29 16:37:32.548 | WARNING  | __main__:coal_mixed_integer_optimization_v2:131 - 煤仓[7]未指定煤种和比例，跳过
