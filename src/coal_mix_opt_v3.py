@@ -11,14 +11,14 @@ import cvxpy as cp
 import numpy as np
 
 epsilon = 0.009
-I_COL = 0  #煤场索引
-W_COL = 1  #库存量
-Q_COL = 2  #热值     # Qnet,ar
-S_COL = 3  #硫分     # St,ar
-A_COL = 4  #灰分     # Aar
-V_COL = 5  #挥发分   # Vdaf
-M_COL = 6  #全水     # Mt,ar
-T_COL = 7  #灰熔点   # Taf
+I_COL = 0  # 煤场索引
+W_COL = 1  # 库存量
+Q_COL = 2  # 热值     # Qnet,ar
+S_COL = 3  # 硫分     # St,ar
+A_COL = 4  # 灰分     # Aar
+V_COL = 5  # 挥发分   # Vdaf
+M_COL = 6  # 全水     # Mt,ar
+T_COL = 7  # 灰熔点   # Taf
 
 
 def normalize_to_list(v):
@@ -161,27 +161,24 @@ def coal_mixed_integer_optimization_v3(coal_info, unit_constraint, container_con
             scaled_rates = [rate * scale_factor for rate in coal_rate]  # e.g., [1, 2]
             K = len(scaled_rates)
             zs = cp.Variable((n, K), boolean=True)
-
-            # allow_rates = scaled_rates+[0]
-            # for j in range(n):
-            #     constraint9.append(cp.sum(zs[j, :]) == 1)
-            #     constraint9.append(x[i, j] == cp.sum(cp.multiply(allow_rates, zs[j, :])))
-            # for k in range(K):
-            #     constraint9.append(cp.sum(zs[:, k]) >= 1)
-
+            # 每个比例值分配给恰好一个煤种
+            for k in range(K):
+                constraint9.append(cp.sum(zs[:, k]) == 1)
             # 约束1: 每个位置最多选择一个非零值
             for j in range(n):
                 constraint9.append(cp.sum(zs[j, :]) <= 1)
-
             # 约束2: 定义x[i, j]的值
             for j in range(n):
                 # x[i, j] = sum(允许的非零值 * 对应的二进制变量)
-                constraint9.append(x[i, j] == cp.sum(cp.multiply(scaled_rates, zs[j, :])))
+                constraint9.append(x[i, j] == scaled_rates @ zs[j, :])
+
+            # 总共使用K个煤种
+            constraint9.append(cp.sum(zs) == K)
 
     # 约束10：最大煤种约束
     # 如果z2[j] = 0 -> 列和必须 ≤ 0，而列和 ≥ 0（自然数保证），所以列和只能等于0。
     # 如果z2[j] = 1 -> 列和 ≤ m*M，允许正数。
-    constraint10 = [cp.sum(x, axis=0) <= m*M * z2, cp.sum(z2) <= mix_coal_num]
+    constraint10 = [cp.sum(x, axis=0) <= m * M * z2, cp.sum(z2) <= mix_coal_num]
 
     # 约束11：不同方案的最大数量限制 -------------------
     # 限制不同配煤方案的种类数量（例如最多 3 种）
@@ -258,9 +255,9 @@ def coal_mixed_integer_optimization_v3(coal_info, unit_constraint, container_con
         remain_q = remain_w @ coal_info[:, Q_COL]  # 标量
         # ---------------------- 综合目标函数 ----------------------
         # alpha/beta/gamma 为权重，可根据业务重要性调整
-        alpha = 0.5     # 热值偏差权重
-        beta = 0.3      # 环保（硫分）权重
-        gamma = 0.2     # 保留高热值煤权重
+        alpha = 0.5  # 热值偏差权重
+        beta = 0.3  # 环保（硫分）权重
+        gamma = 0.2  # 保留高热值煤权重
         # 最终目标：最小化热值偏差 + 硫分 - 剩余热值
         obj = alpha * q_dev + beta * avg_sulfur - gamma * remain_q
     # 煤价最低
