@@ -402,5 +402,6 @@
     0.0
   ],
   "mix_coal_num": 3,
-  "opt_flag": 3
+  "max_scheme_count": 3,
+  "opt_flag": 0
 }

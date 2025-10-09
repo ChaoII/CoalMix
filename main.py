@@ -36,7 +36,6 @@ class CoalMixSimpleInput(BaseModel):
     coal_info: list[list[float]]
     # 机组约束
     unit_constraint: list[list[float]]
-
     total_qty: float
     # 最大混煤数
     max_mix_coal: int
@@ -65,6 +64,17 @@ class CoalMixInputV2(BaseModel):
     coal_quality: List[float]
     mix_coal_num: int
     opt_flag: Optional[int] = 1
+
+
+class CoalMixInputV3(BaseModel):
+    coal_info: list[list[float]]
+    unit_constraint: list[list[list[float]]]
+    container_constraint: list
+    mix_ratio: List[List[int]]
+    coal_quality: List[float]
+    mix_coal_num: int = 3
+    max_scheme_count: int = 3
+    opt_flag: Optional[int] = 0
 
 
 class PurchaseOptInput(BaseModel):
@@ -154,7 +164,7 @@ def coal_mix_opt_v2(coal_mix_input_v2: CoalMixInputV2):
 
 
 @app.post("/api/coal_mix_opt_v3")
-def coal_mix_opt_v2(coal_mix_input_v3: CoalMixInputV2):
+def coal_mix_opt_v2(coal_mix_input_v3: CoalMixInputV3):
     s = coal_mix_input_v3.model_dump()
     json.dump(s, open("./coal_mix_input_v3.json", "w"))
     try:
@@ -165,6 +175,7 @@ def coal_mix_opt_v2(coal_mix_input_v3: CoalMixInputV2):
             np.array(coal_mix_input_v3.mix_ratio, int),
             coal_mix_input_v3.coal_quality,
             coal_mix_input_v3.mix_coal_num,
+            coal_mix_input_v3.max_scheme_count,
             coal_mix_input_v3.opt_flag)
         return {"code": 0,
                 "data": {"mix_rates": mix_rates, "mix_cases": mix_cases, "mix_infos": mix_infos,

@@ -1,6 +1,6 @@
 """
 author:AiChao
-date:2024-09-29
+date:2025-06-29
 针对鄂州项目做了一些调整优化，比如鄂州电厂没有煤价，没有负荷调度计划，也就没有计划煤量
 """
 import json
@@ -11,6 +11,14 @@ import cvxpy as cp
 import numpy as np
 
 epsilon = 0.009
+I_COL = 0  #煤场索引
+W_COL = 1  #库存量
+Q_COL = 2  #热值     # Qnet,ar
+S_COL = 3  #硫分     # St,ar
+A_COL = 4  #灰分     # Aar
+V_COL = 5  #挥发分   # Vdaf
+M_COL = 6  #全水     # Mt,ar
+T_COL = 7  #灰熔点   # Taf
 
 
 def normalize_to_list(v):
@@ -25,19 +33,19 @@ def normalize_to_list(v):
 
 
 def coal_mixed_integer_optimization_v3(coal_info, unit_constraint, container_constraint, mix_ratio,
-                                       coal_quality, mix_coal_num, opt_flag):
+                                       coal_quality, mix_coal_num, max_scheme_count, opt_flag):
     # ------------------------------数据初始化-------------------------------------------------
     # 求每一行混煤率的最大公约数
     gcd_s = 1
     for i in range(mix_ratio.shape[1]):
         gcd_s = np.gcd(gcd_s, mix_ratio[:, i])
-    mix_ratio = mix_ratio / gcd_s.reshape((-1, 1))
+    mix_ratio_normalized = mix_ratio / gcd_s.reshape((-1, 1))
     # 每一行混煤率的和
-    sum_mix_ratio = mix_ratio.sum(axis=1).reshape((-1, 1))
+    sum_mix_ratio = mix_ratio_normalized.sum(axis=1).reshape((-1, 1))
     # 混煤率和的最小公倍数(单仓煤仓煤量)
     max_ele = reduce(lambda c_, d_: lcm(int(c_), int(d_)), sum_mix_ratio.flatten(order="C").tolist())
     # 混煤比例元素集合
-    ele_s = np.unique(mix_ratio / np.tile(sum_mix_ratio, (1, mix_ratio.shape[1])) * max_ele)
+    ele_s = np.unique(mix_ratio_normalized / np.tile(sum_mix_ratio, (1, mix_ratio_normalized.shape[1])) * max_ele)
     # 煤仓数
     m = container_constraint.shape[0]
     # 煤种数
@@ -58,6 +66,7 @@ def coal_mixed_integer_optimization_v3(coal_info, unit_constraint, container_con
     # 二元{0，1}辅助变量(x > 0  时z=1，x==0 时 z=0)
     z0 = cp.Variable((m, n), boolean=True)
     z1 = cp.Variable((m * n, ele_s.shape[0]), boolean=True)
+    # 辅助变量use_coal，是否使用某种煤
     z2 = cp.Variable(n, boolean=True)
     z3 = cp.Variable(ele_s.shape[0], boolean=True)
     # 连续变量，X-A >= y && A-X >= y && y > 0    abs(x-A) > 0 的线性变换写法
@@ -75,7 +84,7 @@ def coal_mixed_integer_optimization_v3(coal_info, unit_constraint, container_con
     ]
     # 每行非零整数个数 <= 2
     for i in range(m):
-        constraint2.append(cp.sum(z0[i, :]) <= np.max(np.sum(mix_ratio > 0, axis=1)))
+        constraint2.append(cp.sum(z0[i, :]) <= np.max(np.sum(mix_ratio_normalized > 0, axis=1)))
 
     # 约束3：煤仓上煤比例约束在固定集合{ele_s} 中
     constraint3 = [cp.sum(z1, 1) == 1, z1 @ ele_s == x.flatten(order="C")]
@@ -101,8 +110,8 @@ def coal_mixed_integer_optimization_v3(coal_info, unit_constraint, container_con
         coal_quality[1] = 1
         logger.warning(f"煤量[coal_quality_high: {coal_quality[1]}]小于epsilon，可能为0，已设置为1")
 
-    constraint5_low = [cp.sum(x, axis=0) / total_quality_low <= (coal_info[:, 1] / coal_quality[0])]
-    constraint5_height = [cp.sum(x, axis=0) / total_quality_high <= (coal_info[:, 1] / coal_quality[1])]
+    constraint5_low = [cp.sum(x, axis=0) / total_quality_low <= (coal_info[:, W_COL] / coal_quality[0])]
+    constraint5_height = [cp.sum(x, axis=0) / total_quality_high <= (coal_info[:, W_COL] / coal_quality[1])]
     constraint5.extend(constraint5_low)
     constraint5.extend(constraint5_height)
 
@@ -171,24 +180,33 @@ def coal_mixed_integer_optimization_v3(coal_info, unit_constraint, container_con
 
     # 约束10：最大煤种约束
     # 如果z2[j] = 0 -> 列和必须 ≤ 0，而列和 ≥ 0（自然数保证），所以列和只能等于0。
-    # 如果z2[j] = 1 -> 列和 ≤ M，允许正数。
-    constraint10 = [cp.sum(x, axis=0) <= M * z2, cp.sum(z2) <= mix_coal_num]
+    # 如果z2[j] = 1 -> 列和 ≤ m*M，允许正数。
+    constraint10 = [cp.sum(x, axis=0) <= m*M * z2, cp.sum(z2) <= mix_coal_num]
 
-    # 目标函数
-    # 煤价最低
-    obj = None
-    if opt_flag == 1:
-        obj = cp.sum(x, axis=0) @ coal_info[:, -1]
-    # 最环保（硫分最合理）
-    elif opt_flag == 2:
-        lower_s = np.min(
-            [unit_constraint[0, 1, 1], unit_constraint[1, 1, 1], np.min(container_constraint[container_high_index, 9])])
-        obj = lower_s * total_quality_high - cp.sum(x, axis=0) @ coal_info[:, 4]
-    # 给煤机最小出力（热值最合理）
-    elif opt_flag == 3:
-        lower_q = np.min(
-            [unit_constraint[0, 0, 1], unit_constraint[1, 0, 1], np.min(container_constraint[container_high_index, 7])])
-        obj = lower_q * total_quality_high - cp.sum(x, axis=0) @ coal_info[:, 3]
+    # 约束11：不同方案的最大数量限制 -------------------
+    # 限制不同配煤方案的种类数量（例如最多 3 种）
+    K = max_scheme_count
+    # 定义布尔变量
+    use_scheme = cp.Variable(K, boolean=True)  # 哪些方案槽位被启用
+    assign = cp.Variable((m, K), boolean=True)  # 每个煤仓分配到哪个方案槽
+    scheme_pattern = cp.Variable((K, n), integer=True)  # 每种方案的具体配煤方案（n维整数）
+
+    constraint11 = []
+    # 每个煤仓必须分配到一个方案槽
+    for i in range(m):
+        constraint11.append(cp.sum(assign[i, :]) == 1)
+    # 每个煤仓只能分配给已启用的方案槽
+    for i in range(m):
+        for k in range(K):
+            constraint11.append(assign[i, k] <= use_scheme[k])
+    # 限制最多启用 K 种方案
+    constraint11.append(cp.sum(use_scheme) <= K)
+    # Big-M 逻辑：当 assign[i, k] == 1 时，强制 x[i, :] == scheme_pattern[k, :]
+    for i in range(m):
+        for k in range(K):
+            for j in range(n):
+                constraint11.append(x[i, j] - scheme_pattern[k, j] <= M * (1 - assign[i, k]))
+                constraint11.append(scheme_pattern[k, j] - x[i, j] <= M * (1 - assign[i, k]))
 
     # 构建约束列表
     constraints = []
@@ -203,11 +221,67 @@ def coal_mixed_integer_optimization_v3(coal_info, unit_constraint, container_con
     constraints.extend(constraint8)
     constraints.extend(constraint9)
     constraints.extend(constraint10)
+    constraints.extend(constraint11)
+
+    # 目标函数
+    obj = None
+    # 目标：无价格时的“综合寻优指标”设计
+    # 我们希望：
+    #  1.尽量让机组的配煤热值接近目标（≠过高或过低）；
+    #  2.避免高硫煤、保证环保；
+    #  3.保留高热值煤种不轻易使用（节约资源）；
+    #  4.整体热值利用率合理、差异小。
+    if opt_flag == 0:
+        # 限制逻辑：未使用的煤比例为 0
+        for j in range(n):
+            for i in range(m):
+                constraints.append(x[i, j] <= M * z2[j])
+
+        # 1. 各煤仓平均热值（与目标热值的偏差越小越好）
+        target_q = np.mean([
+            unit_constraint[0, 0, 1],
+            unit_constraint[1, 0, 1],
+            np.mean(container_constraint[container_high_index, 7])
+        ])
+
+        # 混煤热值
+        # x 是 m×n 矩阵，coal_info[:, Q_COL] 是 n×1 向量
+        mix_q = x @ coal_info[:, Q_COL]  # 结果应该是 m×1 向量
+        # 热值偏差 - 使用绝对值而不是平方，避免二次规划
+        q_dev = cp.sum(cp.abs(mix_q - target_q))
+        # 2. 各煤仓平均硫分（越低越好）
+        mix_sulfur = x @ coal_info[:, S_COL]  # m×1 向量
+        avg_sulfur = cp.sum(mix_sulfur) / m
+        # 3. 保留高热值煤（希望高热值煤尽量不被使用）
+        # coal_info[:, 1] 是 n×1 向量，(1 - z2) 是 n×1 向量
+        remain_w = cp.multiply(coal_info[:, 1], (1 - z2))  # 逐元素乘法
+        remain_q = remain_w @ coal_info[:, Q_COL]  # 标量
+        # ---------------------- 综合目标函数 ----------------------
+        # alpha/beta/gamma 为权重，可根据业务重要性调整
+        alpha = 0.5     # 热值偏差权重
+        beta = 0.3      # 环保（硫分）权重
+        gamma = 0.2     # 保留高热值煤权重
+        # 最终目标：最小化热值偏差 + 硫分 - 剩余热值
+        obj = alpha * q_dev + beta * avg_sulfur - gamma * remain_q
+    # 煤价最低
+    elif opt_flag == 1:
+        obj = cp.sum(x, axis=0) @ coal_info[:, -1]
+    # 最环保（硫分最合理）
+    elif opt_flag == 2:
+        lower_s = np.min(
+            [unit_constraint[0, 1, 1], unit_constraint[1, 1, 1], np.min(container_constraint[container_high_index, 9])])
+        obj = lower_s * total_quality_high - cp.sum(x, axis=0) @ coal_info[:, S_COL]
+    # 给煤机最小出力（热值最合理）
+    elif opt_flag == 3:
+        lower_q = np.min(
+            [unit_constraint[0, 0, 1], unit_constraint[1, 0, 1], np.min(container_constraint[container_high_index, 7])])
+        obj = lower_q * total_quality_high - cp.sum(x, axis=0) @ coal_info[:, Q_COL]
 
     problem = cp.Problem(cp.Minimize(obj), constraints)
     problem.solve(solver=cp.SCIPY)
     # 求解目标
-    if problem.status == cp.OPTIMAL:
+    if problem.status == cp.OPTIMAL or problem.status == cp.OPTIMAL_INACCURATE:
+        logger.info(f"找到最优解或近似最优解（可能由于数值精度），求解器状态{problem.status}")
         solution = x.value
         mix_info_low = np.sum(solution[container_low_index, :], axis=0) @ coal_info[:, 2:-1] / total_quality_low
         mix_info_high = np.sum(solution[container_high_index, :], axis=0) @ coal_info[:, 2:-1] / total_quality_high
@@ -222,8 +296,14 @@ def coal_mixed_integer_optimization_v3(coal_info, unit_constraint, container_con
             print(f"-mix_case_low:\n{mix_case_low}\n-mix_case_high:\n{mix_case_high}\n")
             print(f"-mix_info_low:\n{mix_info_low}\n-mix_info_high:\n{mix_info_high}\n")
             print(f"-mix_price_low:\n{mix_price_low}\n-mix_price_high:\n{mix_price_high}")
+        # 可以继续使用这个解
+    elif problem.status == cp.INFEASIBLE:
+        raise Exception("问题不可行，请检查约束条件,尝试放松某些约束")
+        # 可以尝试放松某些约束
+    elif problem.status == cp.UNBOUNDED:
+        raise Exception("问题无界，请检查目标函数")
     else:
-        raise Exception("Optimization failed!")
+        raise Exception(f"求解状态: {problem.status}")
         # 等效于abs(x-x.value)>=0但是abs()>=0是一个非凸的问题,需要构造连续辅助变量进行调整
     return result.tolist(), [mix_case_low.tolist(), mix_case_high.tolist()], \
         [mix_info_low.tolist(), mix_info_high.tolist()], [
@@ -239,7 +319,9 @@ if __name__ == '__main__':
     mix_ratio = mat_data["mix_ratio"]
     coal_quality = mat_data["coal_quality"]  # 替换为实际的数据
     mix_coal_num = mat_data["mix_coal_num"]
+    max_scheme_count = mat_data["max_scheme_count"]
     opt_flag = mat_data["opt_flag"]
     c = coal_mixed_integer_optimization_v3(np.array(coal_info), np.array(unit_constraint),
-                                           np.array(container_constraint, dtype=object), np.array(mix_ratio, dtype=int),
-                                           coal_quality, mix_coal_num, opt_flag)
+                                           np.array(container_constraint, dtype=object),
+                                           np.array(mix_ratio, dtype=int),
+                                           coal_quality, mix_coal_num, max_scheme_count, opt_flag)

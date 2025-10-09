@@ -134,12 +134,12 @@ def coal_mixed_integer_optimization_v2(coal_info, unit_constraint, container_con
     elif opt_flag == 2:
         lower_s = np.min(
             [unit_constraint[0, 1, 1], unit_constraint[1, 1, 1], np.min(container_constraint[container_high_index, 9])])
-        obj = lower_s * total_quality_high - cp.sum(x, axis=0) @ coal_info[:, 4]
+        obj = lower_s * total_quality_high - cp.sum(x, axis=0) @ coal_info[:, 3]
     # 给煤机最小出力（热值最合理）
     elif opt_flag == 3:
         lower_q = np.min(
             [unit_constraint[0, 0, 1], unit_constraint[1, 0, 1], np.min(container_constraint[container_high_index, 7])])
-        obj = lower_q * total_quality_high - cp.sum(x, axis=0) @ coal_info[:, 3]
+        obj = lower_q * total_quality_high - cp.sum(x, axis=0) @ coal_info[:, 2]
 
     # 构建约束列表
     constraints = []
