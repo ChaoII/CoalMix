@@ -32,6 +32,14 @@ def normalize_to_list(v):
     return [v]
 
 
+def safe_sum_with_index(x, indices, axis=0):
+    """安全求和：当索引全为False时返回0"""
+    if np.any(indices):
+        return cp.sum(x[indices, :], axis=axis)
+    else:
+        return 0
+
+
 def coal_mixed_integer_optimization_v3(coal_info, unit_constraint, container_constraint, mix_ratio,
                                        coal_quality, mix_coal_num, max_scheme_count, opt_flag):
     # ------------------------------数据初始化-------------------------------------------------
@@ -52,14 +60,26 @@ def coal_mixed_integer_optimization_v3(coal_info, unit_constraint, container_con
     n = coal_info.shape[0]
     # 大M法（Big M Method）中使用的一个足够大的常数，用于将逻辑约束转化为线性约束
     M = max_ele * 2
-    # 低负荷下总煤量单位
-    total_quality_low = np.sum(container_constraint[:, 0]) * max_ele
-    # 高负荷下总煤量单位
-    total_quality_high = np.sum(container_constraint[:, 1]) * max_ele
     # 低负荷下煤仓启动索引
     container_low_index = container_constraint[:, 0] != 0
     # 高负荷下煤仓启用索引
     container_high_index = container_constraint[:, 1] != 0
+    # 处理特殊情况：当所有索引都为False时的默认值
+    # 低负荷下总煤量单位
+    if not np.any(container_low_index):
+        logger.warning("所有低负荷煤仓索引都为False，使用默认值")
+        # 低负荷下总煤量单位（使用默认值1避免除0错误）
+        total_quality_low = 1
+    else:
+        total_quality_low = np.sum(container_constraint[:, 0]) * max_ele
+    # 高负荷下总煤量单位
+    if not np.any(container_high_index):
+        logger.warning("所有高负荷煤仓索引都为False，使用默认值")
+        # 高负荷下总煤量单位（使用默认值1避免除0错误）
+        total_quality_high = 1
+    else:
+        total_quality_high = np.sum(container_constraint[:, 1]) * max_ele
+
     # -----------------------------开始建模-------------------------------------------------
     # 待约束变量(整数)
     x = cp.Variable((m, n), integer=True)
@@ -74,8 +94,11 @@ def coal_mixed_integer_optimization_v3(coal_info, unit_constraint, container_con
     # 约束0：正整数约束，煤仓存煤量非负
     constraint0 = [x >= 0]
     # 约束1：给煤机出力一致性约束
-    constraint1 = [cp.sum(x[container_low_index, :], axis=1) == max_ele,
-                   cp.sum(x[container_high_index, :], axis=1) == max_ele]
+    constraint1 = []
+    if np.any(container_low_index):
+        constraint1.append(cp.sum(x[container_low_index, :], axis=1) == max_ele)
+    if np.any(container_high_index):
+        constraint1.append(cp.sum(x[container_high_index, :], axis=1) == max_ele)
     # 约束2：单仓上煤总数约束(构造二元辅助变量，计算二元辅助变量的值间接计算非零整数),如果指定煤种比例，则该仓煤种比例需要小于等于指定比例数量
     constraint2 = [
         x >= 0,  # 假设 x 非负整数(前面已经有相关约束)
@@ -90,16 +113,22 @@ def coal_mixed_integer_optimization_v3(coal_info, unit_constraint, container_con
     constraint3 = [cp.sum(z1, 1) == 1, z1 @ ele_s == x.flatten(order="C")]
     # 约束4：机组煤质约束
     # 低负荷约束
-    constraint4 = [(unit_constraint[0][:, 0] <= cp.sum(x[container_low_index, :], axis=0) @
-                    coal_info[:, 2:-1] / total_quality_low),
-                   (cp.sum(x[container_low_index, :], axis=0) @ coal_info[:, 2:-1] / total_quality_low <=
-                    unit_constraint[0][:, 1])]
-    # 高负荷约束
-    constraint4_high = [(unit_constraint[1][:, 0] <= cp.sum(x[container_high_index, :], axis=0) @
-                         coal_info[:, 2:-1] / total_quality_high),
-                        (cp.sum(x[container_high_index, :], axis=0) @ coal_info[:, 2:-1] / total_quality_high <=
-                         unit_constraint[1][:, 1])]
-    constraint4.extend(constraint4_high)
+    constraint4 = []
+    if np.any(container_low_index):
+        constraint4_low = [(unit_constraint[0][:, 0] <= cp.sum(x[container_low_index, :], axis=0) @
+                            coal_info[:, 2:-1] / total_quality_low),
+                           (cp.sum(x[container_low_index, :], axis=0) @ coal_info[:, 2:-1] / total_quality_low <=
+                            unit_constraint[0][:, 1])]
+        constraint4.extend(constraint4_low)
+
+        # 高负荷约束（只有存在高负荷煤仓时才添加）
+    if np.any(container_high_index):
+        constraint4_high = [(unit_constraint[1][:, 0] <= cp.sum(x[container_high_index, :], axis=0) @
+                             coal_info[:, 2:-1] / total_quality_high),
+                            (cp.sum(x[container_high_index, :], axis=0) @ coal_info[:, 2:-1] / total_quality_high <=
+                             unit_constraint[1][:, 1])]
+        constraint4.extend(constraint4_high)
+
 
     # 约束5煤量约束(煤量都是0)
     constraint5 = []
@@ -109,11 +138,12 @@ def coal_mixed_integer_optimization_v3(coal_info, unit_constraint, container_con
     if coal_quality[1] < epsilon:
         coal_quality[1] = 1
         logger.warning(f"煤量[coal_quality_high: {coal_quality[1]}]小于epsilon，可能为0，已设置为1")
-
-    constraint5_low = [cp.sum(x, axis=0) / total_quality_low <= (coal_info[:, W_COL] / coal_quality[0])]
-    constraint5_height = [cp.sum(x, axis=0) / total_quality_high <= (coal_info[:, W_COL] / coal_quality[1])]
-    constraint5.extend(constraint5_low)
-    constraint5.extend(constraint5_height)
+    if np.any(container_low_index) and total_quality_low > 0:
+        constraint5_low = [cp.sum(x, axis=0) / total_quality_low <= (coal_info[:, W_COL] / coal_quality[0])]
+        constraint5.extend(constraint5_low)
+    if np.any(container_high_index) and total_quality_high > 0:
+        constraint5_height = [cp.sum(x, axis=0) / total_quality_high <= (coal_info[:, W_COL] / coal_quality[1])]
+        constraint5.extend(constraint5_height)
 
     # 约束6：煤仓煤质约束
     lb_index = np.arange(7, 19, 2)
@@ -308,7 +338,7 @@ def coal_mixed_integer_optimization_v3(coal_info, unit_constraint, container_con
 
 
 if __name__ == '__main__':
-    mat_data = json.load(open("../test_data/mix_coal/input_v3_1.json"))
+    mat_data = json.load(open("../test_data/mix_coal/input_v3_3.json"))
     # 使用示例
     coal_info = mat_data["coal_info"]  # 替换为实际的数据
     unit_constraint = mat_data["unit_constraint"]

@@ -14,6 +14,7 @@ from src.coal_mix_opt_v2 import coal_mixed_integer_optimization_v2
 from src.coal_mix_opt_v3 import coal_mixed_integer_optimization_v3
 from src.purchase_opt import purchase_opt_impl
 from src.output_opt import output_opt_impl
+from src.auto_sampling import get_automatic_sampling_points
 from src.utils import register_offline_docs
 
 register_offline_docs(applications)
@@ -98,6 +99,17 @@ class OutputOptInput(BaseModel):
     total_qty: float
 
 
+class AutoSamplingInput(BaseModel):
+    # 车长
+    car_length: int
+    # 车宽
+    car_width: int
+    # 拉筋区域
+    car_lj: list[dict]
+    # 可选区域
+    car_kxqy: dict
+
+
 @app.post("/api/coal_mix_opt_simple")
 def _(coal_mix_input: CoalMixSimpleInput):
     s = coal_mix_input.model_dump()
@@ -164,7 +176,7 @@ def coal_mix_opt_v2(coal_mix_input_v2: CoalMixInputV2):
 
 
 @app.post("/api/coal_mix_opt_v3")
-def coal_mix_opt_v2(coal_mix_input_v3: CoalMixInputV3):
+def coal_mix_opt_v3(coal_mix_input_v3: CoalMixInputV3):
     s = coal_mix_input_v3.model_dump()
     json.dump(s, open("./coal_mix_input_v3.json", "w"))
     try:
@@ -218,6 +230,27 @@ def _(output_opt_input: OutputOptInput):
                                  np.array(output_opt_input.unit_constraint),
                                  np.array(output_opt_input.total_qty))
         return {"code": 0, "data": {"output": output.tolist()}, "err_msg": ""}
+    except Exception as e:
+        logger.error(f"{e}")
+        return {"code": -1, "data": {}, "err_msg": f"求解失败, {e}"}
+
+
+@app.post("/api/auto_sampling")
+def _(auto_sampling_input: AutoSamplingInput):
+    s = auto_sampling_input.model_dump()
+    json.dump(s, open("./auto_sampling_input.json", "w"))
+
+    length = auto_sampling_input.car_length
+    width = auto_sampling_input.car_width
+    ljs = []
+    for lj in auto_sampling_input.car_lj:
+        x0, y0 = lj["p0"]
+        x1, y1 = lj["p1"]
+        ljs.append([x0, y0, x1, y1])
+    kx = [*auto_sampling_input.car_kxqy["p0"], *auto_sampling_input.car_kxqy["p1"]]
+    try:
+        output = get_automatic_sampling_points(length, width, ljs, kx)
+        return {"code": 0, "data": {"points": output[0], "image": output[1]}, "err_msg": ""}
     except Exception as e:
         logger.error(f"{e}")
         return {"code": -1, "data": {}, "err_msg": f"求解失败, {e}"}
