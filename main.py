@@ -1,5 +1,4 @@
 import json
-from datetime import datetime
 from typing import List, Optional
 
 import numpy as np
@@ -7,14 +6,17 @@ from fastapi import FastAPI, applications
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from starlette.staticfiles import StaticFiles
+
 from log.log import logger
-from src.coal_mix_simple import coal_mixed_optimization_simple
+from src.auto_sampling import get_automatic_sampling_points
+from src.auto_sampling import get_automatic_sampling_regions
+from src.auto_sampling import get_automatic_sampling_points_from_regions
 from src.coal_mix_opt import coal_mixed_integer_optimization
 from src.coal_mix_opt_v2 import coal_mixed_integer_optimization_v2
 from src.coal_mix_opt_v3 import coal_mixed_integer_optimization_v3
-from src.purchase_opt import purchase_opt_impl
+from src.coal_mix_simple import coal_mixed_optimization_simple
 from src.output_opt import output_opt_impl
-from src.auto_sampling import get_automatic_sampling_points
+from src.purchase_opt import purchase_opt_impl
 from src.utils import register_offline_docs
 
 register_offline_docs(applications)
@@ -108,6 +110,11 @@ class AutoSamplingInput(BaseModel):
     car_lj: list[dict]
     # 可选区域
     car_kxqy: dict
+
+
+class AutoSamplingInputRegions(AutoSamplingInput):
+    # 采样区域
+    regions: list[list[int, int]]
 
 
 @app.post("/api/coal_mix_opt_simple")
@@ -235,7 +242,7 @@ def _(output_opt_input: OutputOptInput):
         return {"code": -1, "data": {}, "err_msg": f"求解失败, {e}"}
 
 
-@app.post("/api/auto_sampling")
+@app.post("/api/auto_sampling", deprecated=True, description="自动生成真实采样点")
 def _(auto_sampling_input: AutoSamplingInput):
     s = auto_sampling_input.model_dump()
     json.dump(s, open("./auto_sampling_input.json", "w"))
@@ -250,6 +257,37 @@ def _(auto_sampling_input: AutoSamplingInput):
     kx = [*auto_sampling_input.car_kxqy["p0"], *auto_sampling_input.car_kxqy["p1"]]
     try:
         output = get_automatic_sampling_points(length, width, ljs, kx)
+        return {"code": 0, "data": {"points": output[0], "image": output[1]}, "err_msg": ""}
+    except Exception as e:
+        logger.error(f"{e}")
+        return {"code": -1, "data": {}, "err_msg": f"求解失败, {e}"}
+
+
+@app.get("/api/auto_sampling_regions", description="获取自动生成采样点的小区信息")
+def _():
+    try:
+        regions = get_automatic_sampling_regions()
+        return {"code": 0, "data": {"regions": regions}, "err_msg": ""}
+    except Exception as e:
+        logger.error(f"{e}")
+        return {"code": -1, "data": {}, "err_msg": f"求解失败, {e}"}
+
+
+@app.post("/api/auto_sampling_points", description="根据采样小区和车辆信息自动生成真是采样点坐标")
+def _(auto_sampling_input: AutoSamplingInputRegions):
+    s = auto_sampling_input.model_dump()
+    json.dump(s, open("./auto_sampling_input.json", "w"))
+
+    length = auto_sampling_input.car_length
+    width = auto_sampling_input.car_width
+    ljs = []
+    for lj in auto_sampling_input.car_lj:
+        x0, y0 = lj["p0"]
+        x1, y1 = lj["p1"]
+        ljs.append([x0, y0, x1, y1])
+    kx = [*auto_sampling_input.car_kxqy["p0"], *auto_sampling_input.car_kxqy["p1"]]
+    try:
+        output = get_automatic_sampling_points_from_regions(length, width, ljs, kx, auto_sampling_input.regions)
         return {"code": 0, "data": {"points": output[0], "image": output[1]}, "err_msg": ""}
     except Exception as e:
         logger.error(f"{e}")

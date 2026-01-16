@@ -3,11 +3,13 @@ import random
 from io import BytesIO
 from typing import List, Tuple
 from log.log import logger
+import matplotlib
 import matplotlib.animation as animation
 import matplotlib.patches as patches
 import matplotlib.pyplot as plt
 import numpy as np
 
+matplotlib.use('Agg')
 plt.rcParams['font.sans-serif'] = ['SimHei', 'DejaVu Sans Fallback']
 plt.rcParams['axes.unicode_minus'] = False
 
@@ -27,6 +29,7 @@ class CoalSamplingOptimizer:
         self.cols = cols
         self.row_span = row_span
         self.col_span = col_span
+        self.num_points = rows * cols
 
         # 生成大区划分
         self.region_mask = self.generate_region_mask(rows, cols, row_span, col_span)
@@ -149,14 +152,10 @@ class CoalSamplingOptimizer:
             attempts += 1
         raise ValueError(f"区域 {region_id} 无法找到不相邻的采样点，已尝试{max_attempts}次")
 
-    def optimize_sampling(self, num_points: int) -> np.ndarray:
-        """
-        优化的采样点分配算法
-        每3个采样点为一组，均匀分布在3个大区中，确保不相邻
-        """
+    def get_min_regions(self) -> list[list[int, int]]:
         selected_points = []
         region_order = list(range(self.num_regions))  # [0, 1, 2] for 3 regions
-        for i in range(num_points // self.num_regions):
+        for i in range(self.num_points // self.num_regions):
             # 确定当前采样点应该分配到哪个区域
             random.shuffle(region_order)
             for region_id in region_order:
@@ -168,120 +167,203 @@ class CoalSamplingOptimizer:
                 )
                 selected_points.append(valid_point)
                 logger.info(f"第{i + 1}次采样，分配到区域{region_id}，位置{valid_point}")
-        # 注意，选择的采样点为[row,col] 索引，也就是[height,width],也就是[y,x]
-        result = np.array(selected_points)
+        return selected_points
+
+    def optimize_sampling_points_from_regions(self, regions: list[list[int, int]]) -> list[list[int, int]]:
+        result = np.array(regions)
         real_points = []
         for point in result:
             real_points.append(self.get_point1(*point))
-        # self.visualize_sampling_points_animated(result, num_points)
-        fig = self.visualize_sampling_points(result, real_points, num_points)
+        fig = self.visualize_sampling_points(result, real_points, self.rows * self.cols)
         buf = BytesIO()
         fig.savefig(buf, format='png', dpi=100, bbox_inches='tight', facecolor='white', edgecolor='none')
+        fig.savefig("2.png", format='png', dpi=100, bbox_inches='tight', facecolor='white', edgecolor='none')
         buf.seek(0)
         image_base64 = "data:image/png;base64," + base64.b64encode(buf.read()).decode('utf-8')
         buf.close()
         plt.close(fig)
         return real_points, image_base64
 
+    def optimize_sampling(self) -> np.ndarray:
+        """
+        优化的采样点分配算法
+        每3个采样点为一组，均匀分布在3个大区中，确保不相邻
+        """
+        result = self.get_min_regions()
+        return self.optimize_sampling_points_from_regions(result)
+
     def visualize_sampling_points(self, sampling_points: np.ndarray, real_points: list, num_points: int):
         """可视化采样点"""
         fig, ax = plt.subplots(figsize=(14, 8))
-
-        # 绘制网格
+        # 计算每个单元格的宽度和高度（根据实际比例）
+        cell_width = 1.0
+        cell_height = self.width / self.length  # 高度由长宽比决定
+        # 计算整个绘图区域的大小
+        plot_width = self.cols * cell_width
+        plot_height = self.rows * cell_height
+        # 设置坐标轴范围
+        ax.set_xlim(0, plot_width)
+        ax.set_ylim(0, plot_height)
+        # 绘制网格（考虑长宽比）
         for i in range(self.rows + 1):
-            ax.axhline(i, color='black', linewidth=2)
+            ax.axhline(i * cell_height, color='black', linewidth=2)
         for j in range(self.cols + 1):
-            ax.axvline(j, color='black', linewidth=2)
-
-        # 绘制大区背景色
+            ax.axvline(j * cell_width, color='black', linewidth=2)
+        # 绘制大区背景色（考虑长宽比）
         colors = plt.get_cmap('Pastel1', self.num_regions)
         for region_id in range(self.num_regions):
             region_color = colors(region_id)
             for i in range(self.rows):
                 for j in range(self.cols):
                     if self.region_mask[i, j] == region_id:
-                        rect = patches.Rectangle((j, i), 1, 1,
-                                                 edgecolor='none', facecolor=region_color, alpha=0.7)
+                        # 使用矩形绘制区域，考虑长宽比
+                        rect = patches.Rectangle(
+                            (j * cell_width, i * cell_height),
+                            cell_width, cell_height,
+                            edgecolor='none', facecolor=region_color, alpha=0.7
+                        )
                         ax.add_patch(rect)
 
-        # 绘制拉筋
-        width_scale = self.width / self.rows
-        length_scale = self.length / self.cols
-        for lj in self.ljs:
-            ax.add_patch(patches.Rectangle((lj[0] / length_scale, lj[1] / width_scale),
-                                           (lj[2] - lj[0]) / length_scale,
-                                           (lj[3] - lj[1]) / width_scale,
-                                           edgecolor='red', facecolor='red', linewidth=2, alpha=0.3))
-        # 绘制允许区域
-        ax.add_patch(patches.Rectangle((self.yx[0] / length_scale, self.yx[1] / width_scale),
-                                       (self.yx[2] - self.yx[0]) / length_scale,
-                                       (self.yx[3] - self.yx[1]) / width_scale,
-                                       edgecolor='green', facecolor='None', linewidth=2))
+        # 坐标轴的比例设置
+        ax.set_aspect('equal')
+        # 绘制拉筋（考虑实际坐标和长宽比）
+        width_scale = self.width / (self.rows * cell_height)
+        length_scale = self.length / (self.cols * cell_width)
 
-        # 绘制小区的坐标
+        for lj in self.ljs:
+            rect = patches.Rectangle(
+                (lj[0] / length_scale, lj[1] / width_scale),
+                (lj[2] - lj[0]) / length_scale,
+                (lj[3] - lj[1]) / width_scale,
+                edgecolor='red', facecolor='red', linewidth=2, alpha=0.3
+            )
+            ax.add_patch(rect)
+
+        # 绘制允许区域
+        ax.add_patch(
+            patches.Rectangle(
+                (self.yx[0] / length_scale, self.yx[1] / width_scale),
+                (self.yx[2] - self.yx[0]) / length_scale,
+                (self.yx[3] - self.yx[1]) / width_scale,
+                edgecolor='green', facecolor='None', linewidth=2
+            )
+        )
+
+        # 绘制小区的坐标（考虑长宽比）
         for i in range(self.rows):
             for j in range(self.cols):
-                ax.text(j + 0.5, i + 0.5 + 0.2, f"unit:({i},{j})",
-                        ha='center', va='center', fontsize=12, color='black')
+                center_x = (j + 0.5) * cell_width
+                center_y = (i + 0.5) * cell_height
+                ax.text(
+                    center_x, center_y + 0.2 * cell_height,
+                    f"({i},{j})",  # 简化标签
+                    ha='center', va='center', fontsize=10, color='black'
+                )
 
-        # 绘制真实坐标
+        # 绘制真实坐标和采样点
         for i in range(len(sampling_points)):
             current_row = sampling_points[i][0]
             current_col = sampling_points[i][1]
             real_point = real_points[i]
-            ax.text(current_col + 0.5, current_row + 0.5 + 0.3, f"real:({int(real_point[0])},{int(real_point[1])})",
-                    ha='center', va='center', fontsize=12, color='black')
-        # 标记采样区域序号
-        for idx, (i, j) in enumerate(sampling_points):
-            ax.plot(j + 0.5, i + 0.5, 'ro', markersize=36,
-                    markeredgecolor='darkred', markeredgewidth=1, zorder=5)
-            ax.text(j + 0.5, i + 0.5, f'{idx + 1}',
-                    ha='center', va='center', color='white', fontweight='bold', fontsize=24, zorder=10)
 
-        # 标记采样点
-        for idx, (x, y) in enumerate(real_points):
-            real_x = x / length_scale
-            real_y = y / width_scale
-            ax.plot(real_x, real_y, 'go', markersize=12,
-                    markeredgecolor='darkred', markeredgewidth=1, zorder=6)
+            # 单元格中心坐标
+            cell_center_x = (current_col + 0.5) * cell_width
+            cell_center_y = (current_row + 0.5) * cell_height
+
+            # 标记采样区域序号
+            ax.plot(
+                cell_center_x, cell_center_y,
+                'ro', markersize=36 * min(cell_width, cell_height),
+                markeredgecolor='darkred', markeredgewidth=2, zorder=5
+            )
+            ax.text(
+                cell_center_x, cell_center_y, f'{i + 1}',
+                ha='center', va='center', color='white',
+                fontweight='bold', fontsize=12, zorder=10
+            )
+
+            # 真实坐标位置
+            real_x = real_point[0] / length_scale
+            real_y = real_point[1] / width_scale
+
+            # 标记采样点
+            ax.plot(
+                real_x, real_y, 'go', markersize=15 * min(cell_width, cell_height),
+                markeredgecolor='darkred', markeredgewidth=2, zorder=6
+            )
+
+            # 显示真实坐标
+            ax.text(
+                cell_center_x, cell_center_y + 0.3 * cell_height,
+                f"({int(real_point[0])},{int(real_point[1])})",
+                ha='center', va='center', fontsize=9, color='black'
+            )
 
         # 设置图形属性
-        ax.set_xlim(0, self.cols)
-        ax.set_ylim(0, self.rows)
-        ax.set_aspect('equal')
         ax.set_xticks([])
         ax.set_yticks([])
+        ax.set_xlabel(f'长度方向 (cols) - 总长: {self.length}mm', fontsize=12)
+        ax.set_ylabel(f'宽度方向 (rows) - 总宽: {self.width}mm', fontsize=12)
 
         title = f'汽车煤采样点规划 (共{num_points}个采样点)\n'
-        ax.set_title(title, fontsize=12, fontweight='bold', pad=20)
+        title += f'网格: {self.rows}×{self.cols} ({self.rows}行×{self.cols}列)'
+        ax.set_title(title, fontsize=14, fontweight='bold', pad=20)
 
-        # 绘制legend
+        # 绘制图例
         legend_elements = []
         for region_id in range(self.num_regions):
             color = colors(region_id)
             legend_elements.append(
-                patches.Patch(facecolor=color, edgecolor='black',
-                              label=f'大区{region_id + 1}')
+                patches.Patch(
+                    facecolor=color, edgecolor='black',
+                    label=f'大区{region_id + 1}'
+                )
             )
 
         legend_elements.append(
-            patches.Patch(facecolor="red", alpha=0.3, edgecolor='black',
-                          label=f'拉筋区域')
+            patches.Patch(
+                facecolor="red", alpha=0.3, edgecolor='black',
+                label=f'拉筋区域'
+            )
         )
         legend_elements.append(
-            plt.Line2D([0], [0], marker='o', color='w', markerfacecolor='red',
-                       markersize=12, markeredgecolor='darkred', markeredgewidth=2, label='区域序号')
+            plt.Line2D(
+                [0], [0], marker='o', color='w', markerfacecolor='red',
+                markersize=12, markeredgecolor='darkred', markeredgewidth=2,
+                label='采样区域'
+            )
         )
         legend_elements.append(
-            plt.Line2D([0], [0], marker='o', color='w', markerfacecolor='green',
-                       markersize=12, markeredgecolor='darkred', markeredgewidth=2, label='采样点')
+            plt.Line2D(
+                [0], [0], marker='o', color='w', markerfacecolor='green',
+                markersize=12, markeredgecolor='darkred', markeredgewidth=2,
+                label='采样点'
+            )
         )
 
-        ax.legend(handles=legend_elements, loc='center left', bbox_to_anchor=(1.02, 0.5), fontsize=10)
+        ax.legend(
+            handles=legend_elements,
+            loc='center left',
+            bbox_to_anchor=(1.02, 0.5),
+            fontsize=10,
+            title="图例"
+        )
+
+        # 添加网格比例说明
+        info_text = f"每个单元格: {cell_width:.2f}×{cell_height:.2f}\n"
+        info_text += f"长宽比: {self.length / self.width:.2f}:1.00"
+        ax.text(
+            0.02, 0.98, info_text,
+            transform=ax.transAxes,
+            fontsize=10,
+            verticalalignment='top',
+            bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.5)
+        )
+
         plt.tight_layout()
-        plt.gca().invert_yaxis()
-        plt.gca().invert_xaxis()
-        # plt.show()
+        # 坐标轴反向
+        ax.invert_yaxis()
+        ax.invert_xaxis()
         return fig
 
     def visualize_sampling_points_animated(self, sampling_points: np.ndarray, num_points: int,
@@ -454,17 +536,27 @@ class CoalSamplingOptimizer:
                 input(f"按回车键继续显示第{step + 2}个采样点...")
 
 
-def get_automatic_sampling_points(car_length: int, car_width: int, car_lj: tuple = tuple(), car_kx: tuple = tuple):
+def get_automatic_sampling_points(car_length: int,
+                                  car_width: int,
+                                  car_lj: tuple = tuple(),
+                                  car_kx: tuple = tuple):
     logger.info(f"汽车长度：{car_length}")
     logger.info(f"汽车宽度：{car_width}")
     logger.info(f"拉筋区域：{car_lj}")
     logger.info(f"允许区域：{car_kx}")
-    opt = CoalSamplingOptimizer(rows=3, cols=6, row_span=3, col_span=2, length=car_length, width=car_width,
-                                ljs=car_lj, yx=car_kx)
+    opt = CoalSamplingOptimizer(
+        rows=3,
+        cols=6,
+        row_span=3,
+        col_span=2,
+        length=car_length,
+        width=car_width,
+        ljs=car_lj,
+        yx=car_kx)
     max_try_times = 100
     while True:
         try:
-            return opt.optimize_sampling(18)
+            return opt.optimize_sampling()
         except ValueError as e:
             logger.warning(e)
             max_try_times -= 1
@@ -472,3 +564,41 @@ def get_automatic_sampling_points(car_length: int, car_width: int, car_lj: tuple
                 error_msg = "尝试次数过多，请检查输入参数"
                 logger.error(error_msg)
                 raise ValueError(error_msg)
+
+
+def get_automatic_sampling_regions():
+    opt = CoalSamplingOptimizer(rows=3, cols=6, row_span=3, col_span=2)
+    max_try_times = 100
+    while True:
+        try:
+            return opt.get_min_regions()
+        except ValueError as e:
+            logger.warning(e)
+            max_try_times -= 1
+            if max_try_times == 0:
+                error_msg = "尝试次数过多，请检查输入参数"
+                logger.error(error_msg)
+                raise ValueError(error_msg)
+
+
+def get_automatic_sampling_points_from_regions(
+        car_length: int,
+        car_width: int,
+        car_lj: tuple = tuple(),
+        car_kx: tuple = tuple(),
+        regions: list[list[int, int]] = tuple()):
+    logger.info(f"汽车长度：{car_length}")
+    logger.info(f"汽车宽度：{car_width}")
+    logger.info(f"拉筋区域：{car_lj}")
+    logger.info(f"允许区域：{car_kx}")
+    opt = CoalSamplingOptimizer(
+        rows=3,
+        cols=6,
+        row_span=3,
+        col_span=2,
+        length=car_length,
+        width=car_width,
+        ljs=car_lj,
+        yx=car_kx)
+
+    return opt.optimize_sampling_points_from_regions(regions)
