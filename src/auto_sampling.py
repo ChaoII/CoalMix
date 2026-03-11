@@ -1,4 +1,5 @@
 import base64
+import pickle
 import random
 from io import BytesIO
 from typing import List, Tuple
@@ -76,7 +77,7 @@ class CoalSamplingOptimizer:
     def get_point1(self, current_row: int, current_col: int) -> list:
         region = self.get_region_coordinates1(current_row, current_col)
         max_try_count = 100
-        delta = 100
+        delta = 0
         while max_try_count:
             x = random.uniform(region[0] + delta, region[2] - delta)
             y = random.uniform(region[1] + delta, region[3] - delta)
@@ -177,7 +178,7 @@ class CoalSamplingOptimizer:
         fig = self.visualize_sampling_points(result, real_points, self.rows * self.cols)
         buf = BytesIO()
         fig.savefig(buf, format='png', dpi=100, bbox_inches='tight', facecolor='white', edgecolor='none')
-        fig.savefig("2.png", format='png', dpi=100, bbox_inches='tight', facecolor='white', edgecolor='none')
+        # fig.savefig("2.png", format='png', dpi=100, bbox_inches='tight', facecolor='white', edgecolor='none')
         buf.seek(0)
         image_base64 = "data:image/png;base64," + base64.b64encode(buf.read()).decode('utf-8')
         buf.close()
@@ -602,3 +603,22 @@ def get_automatic_sampling_points_from_regions(
         yx=car_kx)
 
     return opt.optimize_sampling_points_from_regions(regions)
+
+
+if __name__ == '__main__':
+    car_length = 11000
+    car_width = 5500
+    car_lj = [[2000, 100, 2200, 5400]]
+    car_kx = [100, 100, 10900, 5400]
+    s = []
+    for _ in range(300):
+        regions = get_automatic_sampling_regions()
+        sampling_points = get_automatic_sampling_points_from_regions(car_length, car_width, car_lj, car_kx, regions)
+        s.extend(sampling_points[0])
+    pickle.dump(s, open("sampling_points1.pkl", "wb"))
+
+    c = pickle.load(open("sampling_points1.pkl", "rb"))
+    print(c)
+    plt.plot([i[0] for i in c], [i[1] for i in c], '.')
+    plt.show()
+
