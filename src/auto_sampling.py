@@ -1,4 +1,5 @@
 import base64
+import os
 import pickle
 import random
 from io import BytesIO
@@ -13,7 +14,6 @@ import numpy as np
 matplotlib.use('Agg')
 plt.rcParams['font.sans-serif'] = ['SimHei', 'DejaVu Sans Fallback']
 plt.rcParams['axes.unicode_minus'] = False
-
 
 class CoalSamplingOptimizer:
     def __init__(self, rows: int = 3, cols: int = 6,
@@ -158,7 +158,8 @@ class CoalSamplingOptimizer:
         region_order = list(range(self.num_regions))  # [0, 1, 2] for 3 regions
         for i in range(self.num_points // self.num_regions):
             # 确定当前采样点应该分配到哪个区域
-            random.shuffle(region_order)
+            if os.getenv('SHUFFLE_REGION', '').lower() in ('true', '1', 'yes', 't'):
+                random.shuffle(region_order)
             for region_id in region_order:
                 # 从目标区域获取一个有效的采样点
                 valid_point = self.get_valid_choice_from_region(
