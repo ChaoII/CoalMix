@@ -2,6 +2,7 @@ getBestCase
 getBestCase.prj
 getBestCase.asv
 .idea
+.pickle
 __pycache__
 *.tar
 2.py
