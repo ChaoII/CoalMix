@@ -32,16 +32,23 @@ seed: int | None = None        # 不变（None=每次随机）
 
 ### 2. `plan_regions` 随机化
 
-黑格判定从固定 `(r+c)%2` 改为 `(r+c+phase_shift)%2`，`phase_shift = self._rng.randint(0, 1)` 每次调用随机取 0/1：
+黑格判定从固定 `(r+c)%2` 改为 `(r+c+phase_shift)%2`，`phase_shift = self._rng.randint(0, 1)` 每次调用随机取 0/1。
+
+**重要约束分析（实测）**：`phase_shift` 必须是**全局单一 bit**。若每区独立 shift，8 种组合中有 6 种会破坏"前 9 点互不相邻"（跨区边界格如 `(r,1)` 与 `(r,2)` 同时为黑格）。因此黑格集只有 2 种（全棋盘色 A 或全棋盘色 B），全局 shift 保证同色互不相邻。
+
+**多样性来源**：在全局 shift 固定的 2 种黑格集前提下，通过以下随机化让每次布局视觉差异大：
+1. 每区的黑格列表/白格列表在分配前用 `self._rng.shuffle` 打乱内部顺序（同区内第 1/2/3 个黑格的先后随机）。
+2. 大区轮序 `self._rng.shuffle(region_order)` 每轮随机。
+3. 全局 `phase_shift` 随机选 0/1。
 
 ```python
 def plan_regions(self) -> list[tuple[int, int]]:
     """随机化规划采样小区。
 
-    黑格相位随机（(r+c+shift)%2，shift 每次随机 0/1），配合大区轮序 shuffle，
-    每次调用生成不同的黑格集（每区 2 种 × 3 区 = 8 种组合）与放置顺序。
-    前 num_regions 轮分配黑格（互不相邻），后 num_regions 轮用白格填满，
-    实现全覆盖、无重复、每区均匀。seed 固定时可复现。
+    全局黑格相位随机（(r+c+shift)%2，shift 每次随机 0/1）保证前 num_regions 轮
+    黑格互不相邻；黑格/白格集合内部与区域轮序均随机打乱，使每次调用布局差异大。
+    前 num_regions 轮分配黑格，后 num_regions 轮用白格填满，实现全覆盖、无重复、
+    每区均匀。seed 固定时可复现。shuffle_regions=False 时完全确定性。
     """
     shuffle = self.config.shuffle_regions
     phase_shift = 0 if not shuffle else self._rng.randint(0, 1)
@@ -53,6 +60,9 @@ def plan_regions(self) -> list[tuple[int, int]]:
                 black[region_id].append((r, c))
             else:
                 white[region_id].append((r, c))
+        if shuffle:
+            self._rng.shuffle(black[region_id])
+            self._rng.shuffle(white[region_id])
 
     constrained_rounds = len(black[0])
     rounds = self.num_points // self.num_regions
@@ -90,7 +100,7 @@ def plan_regions(self) -> list[tuple[int, int]]:
 - 保留 `test_plan_regions_reproducible_with_seed`（seed 相同可复现）。
 - 改 `test_plan_regions_same_phase_points_never_adjacent`：相位判定同步为 `(r+c+shift)%2`，但测试无法预知 shift——改为固定 `shuffle_regions=False` 配置断言，或断言"同相位点互不相邻"用更通用的棋盘性质。
 - 动画测试 `test_render_sampling_animation_returns_base64_gif`：改传 `regions=regions`。
-- 新增 `test_plan_regions_varied_across_calls`：`shuffle_regions=True` 且不同 seed 时，两次调用的选格集合可不同（集合不完全一致）。
+- 新增 `test_plan_regions_varied_across_calls`：`shuffle_regions=True` 且不同 seed 时，两次调用结果顺序不同（`plan_regions()` 返回的完整序列不一致）。黑格集可能相同（仅 2 种），但内部排列与轮序必然引入差异。
 - 新增 `test_plan_regions_deterministic_when_shuffle_disabled`：`shuffle_regions=False` 且 seed 任意时，两次调用结果完全一致。
 
 ### 6. 生成多组 GIF
@@ -106,6 +116,6 @@ def plan_regions(self) -> list[tuple[int, int]]:
 ## 验证方式
 
 - `python -m pytest tests/test_auto_sampling.py -v` 全部通过。
-- 手动：不同 seed 下 `plan_regions()` 集合不同、放置顺序不同；同 seed 下完全一致。
+- 手动：不同 seed 下 `plan_regions()` 前 9 黑格集可能相同（2 种之一）但黑格/白格内部排列与区域轮序不同，整体布局顺序不同；同 seed 下完全一致。
 - `python -m py_compile src/auto_sampling.py src/sampling_visualization.py` 通过。
 - 生成多组 GIF 可打开、布局明显不同。

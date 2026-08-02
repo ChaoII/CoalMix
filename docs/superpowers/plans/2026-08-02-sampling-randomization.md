@@ -11,7 +11,7 @@
 ## Global Constraints
 
 - `SamplingConfig.shuffle_regions` 默认改为 `True`（原 `False`），`seed` 默认 `None`（每次随机）。
-- `plan_regions() -> list[tuple[int,int]]`：黑格判定 `(r+c+shift)%2`，`shuffle_regions=True` 时 `shift = self._rng.randint(0,1)` 且每轮 `self._rng.shuffle(region_order)`；`shuffle_regions=False` 时 `shift=0`、不 shuffle（确定性，向后兼容）。
+- `plan_regions() -> list[tuple[int,int]]`：黑格判定 `(r+c+shift)%2`，`shuffle_regions=True` 时 `shift = self._rng.randint(0,1)`、黑格/白格列表内部 `self._rng.shuffle`、每轮 `self._rng.shuffle(region_order)`；`shuffle_regions=False` 时 `shift=0`、不 shuffle（确定性，向后兼容）。黑格集只有 2 种（全局 shift），多样性靠内部排列与轮序。
 - 约束保持：18 格全覆盖无重复、每区 6 点、前 `num_regions` 轮（前 9 点）黑格互不相邻、后 9 点白格填满。
 - `render_sampling_animation(opt, real_points, regions=None, fps=1, interval=1000) -> str`：`regions` 传入时用其作为小区序列；`None` 时内部 `opt.plan_regions()`。
 - 测试文件 `tests/test_auto_sampling.py`，运行命令 `python -m pytest tests/test_auto_sampling.py -v`。
@@ -52,7 +52,7 @@ def test_default_config_matches_original_hardcoded_values():
 def test_plan_regions_varied_across_calls_with_seed():
     p1 = CoalSamplingOptimizer(SamplingConfig(shuffle_regions=True, seed=1)).plan_regions()
     p2 = CoalSamplingOptimizer(SamplingConfig(shuffle_regions=True, seed=2)).plan_regions()
-    assert set(p1) != set(p2), "不同 seed 的选格集合应不同"
+    assert p1 != p2, "不同 seed 的完整放置序列应不同"
 
 
 def test_plan_regions_deterministic_when_shuffle_disabled():
@@ -64,7 +64,7 @@ def test_plan_regions_deterministic_when_shuffle_disabled():
 - [ ] **Step 2: 运行测试确认失败**
 
 Run: `python -m pytest tests/test_auto_sampling.py -v`
-Expected: FAIL — `test_default_config...`（shuffle 仍 False）+ `test_plan_regions_varied_across_calls_with_seed`（当前 seed 1/2 集合相同，`set(p1)==set(p2)` 断言失败）+ `test_plan_regions_deterministic_when_shuffle_disabled` 可能通过。
+Expected: FAIL — `test_default_config...`（shuffle 仍 False）+ `test_plan_regions_varied_across_calls_with_seed`（当前 seed 1/2 集合相同，`p1==p2` 断言失败）+ `test_plan_regions_deterministic_when_shuffle_disabled` 可能通过。
 
 - [ ] **Step 3: 实现**
 
@@ -76,16 +76,16 @@ Expected: FAIL — `test_default_config...`（shuffle 仍 False）+ `test_plan_r
     max_coordinate_attempts: int = 100
 ```
 
-替换 `plan_regions` 方法（整块替换）：
+替换 `plan_regions` 方法（整块替换；注意黑格/白格列表内部 shuffle 是实现要点，保证 2 种黑格集下布局仍随机）：
 
 ```python
     def plan_regions(self) -> list[tuple[int, int]]:
         """随机化规划采样小区。
 
-        黑格相位随机（(r+c+shift)%2，shift 每次随机 0/1），配合大区轮序 shuffle，
-        每次调用生成不同的黑格集（每区 2 种 × 3 区 = 8 种组合）与放置顺序。
-        前 num_regions 轮分配黑格（互不相邻），后 num_regions 轮用白格填满，
-        实现全覆盖、无重复、每区均匀。seed 固定时可复现。
+        全局黑格相位随机（(r+c+shift)%2，shift 每次随机 0/1）保证前 num_regions 轮
+        黑格互不相邻；黑格/白格集合内部与区域轮序均随机打乱，使每次调用布局差异大。
+        前 num_regions 轮分配黑格，后 num_regions 轮用白格填满，实现全覆盖、无重复、
+        每区均匀。seed 固定时可复现。shuffle_regions=False 时完全确定性。
         """
         shuffle = self.config.shuffle_regions
         phase_shift = 0 if not shuffle else self._rng.randint(0, 1)
@@ -97,6 +97,9 @@ Expected: FAIL — `test_default_config...`（shuffle 仍 False）+ `test_plan_r
                     black[region_id].append((r, c))
                 else:
                     white[region_id].append((r, c))
+            if shuffle:
+                self._rng.shuffle(black[region_id])
+                self._rng.shuffle(white[region_id])
 
         constrained_rounds = len(black[0])
         rounds = self.num_points // self.num_regions
@@ -266,6 +269,6 @@ git commit -m "feat: accept regions param in animation to avoid desync"
 - `python -m py_compile src/auto_sampling.py src/sampling_visualization.py` 通过。
 - 手动验证：
   - `SamplingConfig().shuffle_regions is True`。
-  - 不同 seed 下 `plan_regions()` 选格集合不同；同 seed 完全一致。
+  - 不同 seed 下 `plan_regions()` 完整序列不同（内部排列与轮序随机）；同 seed 完全一致。
   - `SamplingConfig(shuffle_regions=False)` 两次调用结果一致（确定性）。
-  - 4 个 `sampling_anim_seed<N>.gif` 生成、header 为 GIF89a、首小区不同。
+  - 4 个 `sampling_anim_seed<N>.gif` 生成、header 为 GIF89a、布局顺序不同。
