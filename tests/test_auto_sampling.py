@@ -30,6 +30,11 @@ def test_invalid_config_raises_on_undividable_cols():
         SamplingConfig(grid_rows=4, grid_cols=6, region_row_span=2, region_col_span=4)
 
 
+def test_invalid_config_raises_when_single_region():
+    with pytest.raises(ValueError):
+        SamplingConfig(grid_rows=3, grid_cols=6, region_row_span=3, region_col_span=6)
+
+
 def test_sampling_error_is_exception():
     assert issubclass(SamplingError, Exception)
 

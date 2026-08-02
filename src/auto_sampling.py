@@ -32,6 +32,10 @@ class SamplingConfig:
             )
         if self.grid_rows * self.grid_cols % self.num_regions != 0:
             raise ValueError("单元格总数必须能被大区数整除")
+        if self.num_regions < 2:
+            raise ValueError(
+                f"num_regions({self.num_regions}) 必须至少为 2，否则无法保证相邻采样点位于不同大区"
+            )
 
     @property
     def num_regions(self) -> int:
@@ -153,10 +157,15 @@ class CoalSamplingOptimizer:
         prev_last = -1
         for round_idx in range(rounds):
             if shuffle:
-                while True:
+                attempts = 0
+                while attempts < 100:
                     self._rng.shuffle(region_order)
+                    attempts += 1
                     if region_order[0] != prev_last:
                         break
+                else:
+                    # 兜底：无法满足时不强制（num_regions<2 时可能发生）
+                    pass
             for region_id in region_order:
                 pool = black if round_idx < constrained_rounds else white
                 selected.append(pool[region_id].pop())
