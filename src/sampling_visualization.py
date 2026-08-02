@@ -10,8 +10,11 @@ plt.rcParams['font.sans-serif'] = ['SimHei', 'DejaVu Sans Fallback']
 plt.rcParams['axes.unicode_minus'] = False
 
 
-def render_sampling_preview(opt, sampling_points, real_points):
-    """绘制采样规划图，返回 base64 PNG 字符串。"""
+def _draw_base(ax, opt):
+    """绘制静态底层（网格、大区底色、拉筋、允许区域、格子标签、图例、坐标轴）。
+
+    返回 (width_scale, length_scale) 供真实坐标到绘图坐标的换算。
+    """
     rows, cols = opt.rows, opt.cols
     num_regions = opt.num_regions
     cell_width = 1.0
@@ -19,7 +22,6 @@ def render_sampling_preview(opt, sampling_points, real_points):
     plot_width = cols * cell_width
     plot_height = rows * cell_height
 
-    fig, ax = plt.subplots(figsize=(14, 8))
     ax.set_xlim(0, plot_width)
     ax.set_ylim(0, plot_height)
 
@@ -74,6 +76,45 @@ def render_sampling_preview(opt, sampling_points, real_points):
                 ha='center', va='center', fontsize=10, color='black'
             )
 
+    ax.set_xticks([])
+    ax.set_yticks([])
+    ax.set_xlabel(f'长度方向 (cols) - 总长: {opt.length}mm', fontsize=12)
+    ax.set_ylabel(f'宽度方向 (rows) - 总宽: {opt.width}mm', fontsize=12)
+
+    legend_elements = []
+    for region_id in range(num_regions):
+        color = colors(region_id)
+        legend_elements.append(
+            patches.Patch(facecolor=color, edgecolor='black', label=f'大区{region_id + 1}')
+        )
+    legend_elements.append(
+        patches.Patch(facecolor="red", alpha=0.3, edgecolor='black', label='拉筋区域')
+    )
+    legend_elements.append(
+        plt.Line2D([0], [0], marker='o', color='w', markerfacecolor='red',
+                   markersize=12, markeredgecolor='darkred', markeredgewidth=2,
+                   label='采样区域')
+    )
+    legend_elements.append(
+        plt.Line2D([0], [0], marker='o', color='w', markerfacecolor='green',
+                   markersize=12, markeredgecolor='darkred', markeredgewidth=2,
+                   label='采样点')
+    )
+    ax.legend(handles=legend_elements, loc='center left', bbox_to_anchor=(1.02, 0.5),
+              fontsize=10, title="图例")
+
+    return width_scale, length_scale
+
+
+def render_sampling_preview(opt, sampling_points, real_points):
+    """绘制采样规划图，返回 base64 PNG 字符串。"""
+    rows, cols = opt.rows, opt.cols
+    cell_width = 1.0
+    cell_height = opt.width / opt.length if opt.length else 1.0
+
+    fig, ax = plt.subplots(figsize=(14, 8))
+    width_scale, length_scale = _draw_base(ax, opt)
+
     for i in range(len(sampling_points)):
         current_row = sampling_points[i][0]
         current_col = sampling_points[i][1]
@@ -102,36 +143,9 @@ def render_sampling_preview(opt, sampling_points, real_points):
             ha='center', va='center', fontsize=9, color='black'
         )
 
-    ax.set_xticks([])
-    ax.set_yticks([])
-    ax.set_xlabel(f'长度方向 (cols) - 总长: {opt.length}mm', fontsize=12)
-    ax.set_ylabel(f'宽度方向 (rows) - 总宽: {opt.width}mm', fontsize=12)
-
     title = f'汽车煤采样点规划 (共{rows * cols}个采样点)\n'
     title += f'网格: {rows}×{cols} ({rows}行×{cols}列)'
     ax.set_title(title, fontsize=14, fontweight='bold', pad=20)
-
-    legend_elements = []
-    for region_id in range(num_regions):
-        color = colors(region_id)
-        legend_elements.append(
-            patches.Patch(facecolor=color, edgecolor='black', label=f'大区{region_id + 1}')
-        )
-    legend_elements.append(
-        patches.Patch(facecolor="red", alpha=0.3, edgecolor='black', label='拉筋区域')
-    )
-    legend_elements.append(
-        plt.Line2D([0], [0], marker='o', color='w', markerfacecolor='red',
-                   markersize=12, markeredgecolor='darkred', markeredgewidth=2,
-                   label='采样区域')
-    )
-    legend_elements.append(
-        plt.Line2D([0], [0], marker='o', color='w', markerfacecolor='green',
-                   markersize=12, markeredgecolor='darkred', markeredgewidth=2,
-                   label='采样点')
-    )
-    ax.legend(handles=legend_elements, loc='center left', bbox_to_anchor=(1.02, 0.5),
-              fontsize=10, title="图例")
 
     info_text = f"每个单元格: {cell_width:.2f}×{cell_height:.2f}\n"
     if opt.length and opt.width:
