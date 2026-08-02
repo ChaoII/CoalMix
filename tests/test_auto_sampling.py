@@ -206,6 +206,15 @@ def test_plan_regions_deterministic_when_shuffle_disabled():
     assert a == b
 
 
+def test_plan_regions_adjacent_points_in_different_regions():
+    opt = CoalSamplingOptimizer(SamplingConfig(shuffle_regions=True, seed=42))
+    points = opt.plan_regions()
+    for i in range(len(points) - 1):
+        r1 = opt.region_mask[points[i][0], points[i][1]]
+        r2 = opt.region_mask[points[i + 1][0], points[i + 1][1]]
+        assert r1 != r2, f"相邻点 {points[i]} 与 {points[i + 1]} 来自同一大区 {r1}"
+
+
 def test_phase_label_self_calibrates_with_shift():
     # 前 9 点应全为黑格相位；用首点奇偶性作为相位基准，所有前9点应一致
     for seed in range(8):
