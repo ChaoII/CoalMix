@@ -169,20 +169,19 @@ def render_sampling_preview(opt, sampling_points, real_points):
     return image_base64
 
 
-def render_sampling_animation(opt, real_points, fps: int = 1, interval: int = 1000) -> str:
+def render_sampling_animation(opt, real_points, regions=None, fps: int = 1, interval: int = 1000) -> str:
     """生成逐点放置采样点的 GIF 动画，返回 base64 GIF 字符串。
 
     每帧放置 1 个采样点（帧数 = len(real_points)）。每帧在标题区标注：
     当前点序号、小区(row,col)、真实坐标(mm)、黑格/白格阶段，以及规则检查结果
     （相邻性、是否落在允许区域、是否避开拉筋）。
 
-    本函数不接受 regions 参数：小区序列由 opt.plan_regions() 内部重建（确定性）。
-    警告：若 opt 配置了 shuffle_regions=True，调用方生成 real_points 后必须立即渲染
-    动画，不得复用同一个优化器再次调用 plan_regions()/sample_point_in_region()——
-    此时 rng 已推进，第二次 plan_regions() 可能返回不同顺序，导致小区标记与真实点错位。
+    regions: 采样小区序列，与 real_points 一一对应。必须传入——默认配置下
+    plan_regions() 每次调用返回随机不同布局，若省略本参数，函数内部重调
+    opt.plan_regions() 得到的小区序列可能与调用方生成 real_points 时的不同，
+    导致小区标记与真实坐标错位。缺省为 None（仅在确定性子场景下可用）。
 
-    interval 参数仅影响交互式 FuncAnimation 展示（本函数从不交互展示），对返回的
-    GIF 无任何效果；GIF 播放节奏完全由 fps 决定。
+    interval 仅影响交互式显示，返回的 GIF 播放速度由 fps 决定。
     """
     from matplotlib.animation import FuncAnimation, PillowWriter
 
@@ -193,6 +192,11 @@ def render_sampling_animation(opt, real_points, fps: int = 1, interval: int = 10
     cell_width = 1.0
     cell_height = opt.width / opt.length if opt.length else 1.0
     total = len(real_points)
+
+    if regions is None:
+        sampling_points = opt.plan_regions()
+    else:
+        sampling_points = list(regions)
 
     fig, ax = plt.subplots(figsize=(14, 8))
     width_scale, length_scale = _draw_base(ax, opt)
@@ -275,11 +279,6 @@ def render_sampling_animation(opt, real_points, fps: int = 1, interval: int = 10
         title = (f"第 {frame + 1}/{total} 点 · 小区({r},{c}) · 坐标({int(x)},{int(y)})mm · "
                  f"阶段:{phase}\n{status}")
         ax.set_title(title, fontsize=12, fontweight='bold', pad=20)
-
-    # 小区序列由 opt.plan_regions() 重建（确定性，与调用方生成 real_points 时一致）。
-    # 注意：shuffle_regions=True 时 rng 会推进，调用方必须先渲染动画再继续用同一
-    # 优化器采样，否则二次 plan_regions() 顺序可能变化导致标记与真实点错位。
-    sampling_points = opt.plan_regions()
 
     anim = FuncAnimation(fig, update, frames=total, interval=interval, blit=False)
     # matplotlib 3.11 的 PillowWriter 要求真实文件路径，不能传 BytesIO，故先写临时文件再读回

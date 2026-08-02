@@ -167,7 +167,7 @@ def test_render_sampling_animation_returns_base64_gif():
                                 yx=[100, 100, 10900, 5400])
     regions = opt.plan_regions()
     real_points = [opt.sample_point_in_region(r, c) for (r, c) in regions]
-    gif = render_sampling_animation(opt, real_points)
+    gif = render_sampling_animation(opt, real_points, regions=regions)
     assert gif.startswith("data:image/gif;base64,")
     raw = base64.b64decode(gif.split(",", 1)[1])
     assert raw[:6] in (b"GIF89a", b"GIF87a")
