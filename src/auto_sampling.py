@@ -177,6 +177,7 @@ class CoalSamplingOptimizer:
         for point in result:
             real_points.append(self.get_point1(*point))
         fig = self.visualize_sampling_points(result, real_points, self.rows * self.cols)
+        # fig = self.visualize_sampling_points_animated(result, self.rows * self.cols)
         buf = BytesIO()
         fig.savefig(buf, format='png', dpi=100, bbox_inches='tight', facecolor='white', edgecolor='none')
         # fig.savefig("2.png", format='png', dpi=100, bbox_inches='tight', facecolor='white', edgecolor='none')
