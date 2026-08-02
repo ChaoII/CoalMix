@@ -175,6 +175,14 @@ def render_sampling_animation(opt, real_points, fps: int = 1, interval: int = 10
     每帧放置 1 个采样点（帧数 = len(real_points)）。每帧在标题区标注：
     当前点序号、小区(row,col)、真实坐标(mm)、黑格/白格阶段，以及规则检查结果
     （相邻性、是否落在允许区域、是否避开拉筋）。
+
+    本函数不接受 regions 参数：小区序列由 opt.plan_regions() 内部重建（确定性）。
+    警告：若 opt 配置了 shuffle_regions=True，调用方生成 real_points 后必须立即渲染
+    动画，不得复用同一个优化器再次调用 plan_regions()/sample_point_in_region()——
+    此时 rng 已推进，第二次 plan_regions() 可能返回不同顺序，导致小区标记与真实点错位。
+
+    interval 参数仅影响交互式 FuncAnimation 展示（本函数从不交互展示），对返回的
+    GIF 无任何效果；GIF 播放节奏完全由 fps 决定。
     """
     from matplotlib.animation import FuncAnimation, PillowWriter
 
@@ -182,7 +190,6 @@ def render_sampling_animation(opt, real_points, fps: int = 1, interval: int = 10
     if len(real_points) != expected:
         raise ValueError(f"real_points 长度 {len(real_points)} 必须等于 {expected}")
 
-    rows, cols = opt.rows, opt.cols
     cell_width = 1.0
     cell_height = opt.width / opt.length if opt.length else 1.0
     total = len(real_points)
@@ -243,11 +250,13 @@ def render_sampling_animation(opt, real_points, fps: int = 1, interval: int = 10
         (x, y) = real_points[frame]
         phase = "黑格" if (r + c) % 2 == 0 else "白格"
 
-        # 规则检查：相邻性（对之前所有点）
+        # 规则检查：相邻性（只对比同相位点，黑格只查黑格、白格只查白格。
+        # 跨相位相邻是全覆盖规划的必然结构，不计为违反，避免白格阶段必然全红）
         violations = []
         if frame > 0:
-            prev_points = sampling_points[:frame]
-            if any(opt.is_adjacent((r, c), p) for p in prev_points):
+            prev_same_phase = [p for p in sampling_points[:frame]
+                               if (p[0] + p[1]) % 2 == (r + c) % 2]
+            if any(opt.is_adjacent((r, c), p) for p in prev_same_phase):
                 violations.append("相邻性")
         if not opt._in_allowed_region(x, y):
             violations.append("不在允许区域")
@@ -267,18 +276,20 @@ def render_sampling_animation(opt, real_points, fps: int = 1, interval: int = 10
                  f"阶段:{phase}\n{status}")
         ax.set_title(title, fontsize=12, fontweight='bold', pad=20)
 
-    # 需要采样小区坐标：由 real_points 推导不可行，改为调用方传入。
-    # 这里使用 opt.plan_regions() 重建小区序列（确定性），
-    # 与 get_automatic_sampling_points 的调用顺序一致。
+    # 小区序列由 opt.plan_regions() 重建（确定性，与调用方生成 real_points 时一致）。
+    # 注意：shuffle_regions=True 时 rng 会推进，调用方必须先渲染动画再继续用同一
+    # 优化器采样，否则二次 plan_regions() 顺序可能变化导致标记与真实点错位。
     sampling_points = opt.plan_regions()
 
     anim = FuncAnimation(fig, update, frames=total, interval=interval, blit=False)
     # matplotlib 3.11 的 PillowWriter 要求真实文件路径，不能传 BytesIO，故先写临时文件再读回
-    with tempfile.TemporaryDirectory() as tmpdir:
-        gif_path = os.path.join(tmpdir, "sampling_animation.gif")
-        anim.save(gif_path, writer=PillowWriter(fps=fps), dpi=100)
-        with open(gif_path, "rb") as f:
-            gif_bytes = f.read()
+    try:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            gif_path = os.path.join(tmpdir, "sampling_animation.gif")
+            anim.save(gif_path, writer=PillowWriter(fps=fps), dpi=100)
+            with open(gif_path, "rb") as f:
+                gif_bytes = f.read()
+    finally:
+        plt.close(fig)
     gif_base64 = "data:image/gif;base64," + base64.b64encode(gif_bytes).decode('utf-8')
-    plt.close(fig)
     return gif_base64

@@ -1,3 +1,5 @@
+import base64
+
 import pytest
 
 from src.auto_sampling import SamplingConfig, SamplingError
@@ -158,9 +160,6 @@ def test_render_sampling_preview_unchanged_after_draw_base_refactor():
     assert image.startswith("data:image/png;base64,")
 
 
-import base64
-
-
 def test_render_sampling_animation_returns_base64_gif():
     from src.sampling_visualization import render_sampling_animation
     opt = CoalSamplingOptimizer(length=11000, width=5500,
@@ -181,3 +180,15 @@ def test_render_sampling_animation_wrong_point_count_raises():
                                 yx=[100, 100, 10900, 5400])
     with pytest.raises(ValueError):
         render_sampling_animation(opt, [[0, 0]] * 5)
+
+
+def test_plan_regions_same_phase_points_never_adjacent():
+    opt = CoalSamplingOptimizer(length=11000, width=5500,
+                                ljs=[[2000, 100, 2200, 5400]],
+                                yx=[100, 100, 10900, 5400])
+    points = opt.plan_regions()
+    for i, (r, c) in enumerate(points):
+        prev_same_phase = [p for p in points[:i]
+                           if (p[0] + p[1]) % 2 == (r + c) % 2]
+        for p in prev_same_phase:
+            assert not opt.is_adjacent((r, c), p)
