@@ -364,11 +364,12 @@ def render_sampling_animation(opt, real_points, fps: int = 1, interval: int = 10
         (x, y) = real_points[frame]
         phase = "黑格" if (r + c) % 2 == 0 else "白格"
 
-        # 规则检查：相邻性（对之前所有点）
+        # 规则检查：相邻性（只对比同相位点，黑格只查黑格、白格只查白格。
+        # 跨相位相邻是全覆盖规划的必然结构，不计为违反，避免白格阶段必然全红）
         violations = []
         if frame > 0:
-            prev_points = sampling_points[:frame]
-            if any(opt.is_adjacent((r, c), p) for p in prev_points):
+            prev_same_phase = [p for p in sampling_points[:frame] if (p[0] + p[1]) % 2 == (r + c) % 2]
+            if any(opt.is_adjacent((r, c), p) for p in prev_same_phase):
                 violations.append("相邻性")
         if not opt._in_allowed_region(x, y):
             violations.append("不在允许区域")
