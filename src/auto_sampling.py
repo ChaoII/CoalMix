@@ -4,6 +4,7 @@ import pickle
 import random
 from io import BytesIO
 from typing import List, Tuple
+from dataclasses import dataclass
 from log.log import logger
 import matplotlib
 import matplotlib.animation as animation
@@ -14,6 +15,40 @@ import numpy as np
 matplotlib.use('Agg')
 plt.rcParams['font.sans-serif'] = ['SimHei', 'DejaVu Sans Fallback']
 plt.rcParams['axes.unicode_minus'] = False
+
+
+class SamplingError(Exception):
+    """采样过程中无法生成满足约束的点时抛出。"""
+
+
+@dataclass(frozen=True)
+class SamplingConfig:
+    grid_rows: int = 3
+    grid_cols: int = 6
+    region_row_span: int = 3
+    region_col_span: int = 2
+    shuffle_regions: bool = False
+    seed: int | None = None
+    max_coordinate_attempts: int = 100
+
+    def __post_init__(self):
+        if self.grid_rows % self.region_row_span != 0:
+            raise ValueError(
+                f"grid_rows({self.grid_rows}) 必须能被 region_row_span({self.region_row_span}) 整除"
+            )
+        if self.grid_cols % self.region_col_span != 0:
+            raise ValueError(
+                f"grid_cols({self.grid_cols}) 必须能被 region_col_span({self.region_col_span}) 整除"
+            )
+        if self.grid_rows * self.grid_cols % self.num_regions != 0:
+            raise ValueError("单元格总数必须能被大区数整除")
+
+    @property
+    def num_regions(self) -> int:
+        return (self.grid_rows // self.region_row_span) * (
+            self.grid_cols // self.region_col_span
+        )
+
 
 class CoalSamplingOptimizer:
     def __init__(self, rows: int = 3, cols: int = 6,
