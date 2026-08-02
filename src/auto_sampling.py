@@ -126,10 +126,10 @@ class CoalSamplingOptimizer:
     def plan_regions(self) -> list[tuple[int, int]]:
         """随机化规划采样小区。
 
-        黑格相位随机（(r+c+shift)%2，shift 每次随机 0/1），配合大区轮序 shuffle，
-        每次调用生成不同的黑格集（每区 2 种 × 3 区 = 8 种组合）与放置顺序。
-        前 num_regions 轮分配黑格（互不相邻），后 num_regions 轮用白格填满，
-        实现全覆盖、无重复、每区均匀。seed 固定时可复现。
+        全局黑格相位随机（(r+c+shift)%2，shift 每次随机 0/1）保证前 num_regions 轮
+        黑格互不相邻；黑格/白格集合内部与区域轮序均随机打乱，使每次调用布局差异大。
+        前 num_regions 轮分配黑格，后 num_regions 轮用白格填满，实现全覆盖、无重复、
+        每区均匀。seed 固定时可复现。shuffle_regions=False 时完全确定性。
         """
         shuffle = self.config.shuffle_regions
         phase_shift = 0 if not shuffle else self._rng.randint(0, 1)
@@ -141,6 +141,9 @@ class CoalSamplingOptimizer:
                     black[region_id].append((r, c))
                 else:
                     white[region_id].append((r, c))
+            if shuffle:
+                self._rng.shuffle(black[region_id])
+                self._rng.shuffle(white[region_id])
 
         constrained_rounds = len(black[0])
         rounds = self.num_points // self.num_regions
