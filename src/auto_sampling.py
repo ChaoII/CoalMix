@@ -82,58 +82,31 @@ class CoalSamplingOptimizer:
                     if self.region_mask[i, j] == region_id:
                         self.region_to_cells[region_id].append((i, j))
 
-    def get_region_coordinates(self, region_id: int):
-        current_row = region_id // 6
-        current_col = region_id % 6
-        return self.get_region_coordinates1(current_row, current_col)
-
-    def get_region_coordinates1(self, current_row: int, current_col: int):
+    def sample_point_in_region(self, row: int, col: int) -> list[float]:
+        """在指定格子(row, col)内随机生成一个满足约束的真实坐标点。"""
         region_length = self.length / self.cols
         region_width = self.width / self.rows
-        current_region_x0 = current_col * region_length
-        current_region_y0 = current_row * region_width
-        current_region_x1 = current_col * region_length + region_length
-        current_region_y1 = current_row * region_width + region_width
-        return [current_region_x0, current_region_y0, current_region_x1, current_region_y1]
-
-    def get_point(self, region_id: int) -> list:
-        region = self.get_region_coordinates(region_id)
-        while True:
-            x = random.uniform(region[0], region[1])
-            y = random.uniform(region[2], region[3])
-            for lj in self.ljs:
-                if lj[0] <= x <= lj[1] and lj[2] <= y <= lj[3]:
-                    continue
-            if self.yx[0] < x < self.yx[1] and self.yx[2] < y < self.yx[3]:
-                return [x, y]
-
-    def get_point1(self, current_row: int, current_col: int) -> list:
-        region = self.get_region_coordinates1(current_row, current_col)
-        max_try_count = 100
-        delta = 0
-        while max_try_count:
-            x = random.uniform(region[0] + delta, region[2] - delta)
-            y = random.uniform(region[1] + delta, region[3] - delta)
-
-            # 检查是否在拉筋区域内
-            in_lajin = False
-            for lj in self.ljs:
-                if lj[0] <= x <= lj[2] and lj[1] <= y <= lj[3]:
-                    in_lajin = True
-                    break  # 如果在拉筋内，直接跳出循环
-
-            # 如果在拉筋区域内，重新生成点
-            if in_lajin:
-                max_try_count -= 1
+        x0 = col * region_length
+        y0 = row * region_width
+        x1 = x0 + region_length
+        y1 = y0 + region_width
+        for _ in range(self.config.max_coordinate_attempts):
+            x = self._rng.uniform(x0, x1)
+            y = self._rng.uniform(y0, y1)
+            if self._in_lajin(x, y):
                 continue
-
-            # 检查是否在允许区域内
-            if self.yx[0] < x < self.yx[2] and self.yx[1] < y < self.yx[3]:
+            if self._in_allowed_region(x, y):
                 return [x, y]
+        raise SamplingError(
+            f"区域({row},{col})在{self.config.max_coordinate_attempts}次尝试内无法生成满足约束的采样点，"
+            "请检查拉筋和允许区域设置"
+        )
 
-            max_try_count -= 1
+    def _in_lajin(self, x: float, y: float) -> bool:
+        return any(lj[0] <= x <= lj[2] and lj[1] <= y <= lj[3] for lj in self.ljs)
 
-        raise ValueError("无法在给定区域中找到满足条件的点,请确认拉筋和允许区域设置正确，或请重新执行")
+    def _in_allowed_region(self, x: float, y: float) -> bool:
+        return self.yx[0] < x < self.yx[2] and self.yx[1] < y < self.yx[3]
 
     @staticmethod
     def generate_region_mask(rows: int, cols: int,
@@ -189,13 +162,11 @@ class CoalSamplingOptimizer:
                 logger.info(f"第{round_idx + 1}次采样，分配到区域{region_id}，位置{selected[-1]}")
         return selected
 
-    def optimize_sampling_points_from_regions(self, regions: list[list[int, int]]) -> list[list[int, int]]:
-        result = np.array(regions)
+    def realize_regions(self, regions: list[list[int, int]]) -> tuple[list[list[float]], str]:
         real_points = []
-        for point in result:
-            real_points.append(self.get_point1(*point))
-        fig = self.visualize_sampling_points(result, real_points, self.rows * self.cols)
-        # fig = self.visualize_sampling_points_animated(result, self.rows * self.cols)
+        for (r, c) in regions:
+            real_points.append(self.sample_point_in_region(r, c))
+        fig = self.visualize_sampling_points(regions, real_points, self.rows * self.cols)
         buf = BytesIO()
         fig.savefig(buf, format='png', dpi=100, bbox_inches='tight', facecolor='white', edgecolor='none')
         # fig.savefig("2.png", format='png', dpi=100, bbox_inches='tight', facecolor='white', edgecolor='none')
@@ -207,7 +178,7 @@ class CoalSamplingOptimizer:
 
     def optimize_sampling(self):
         result = self.plan_regions()
-        return self.optimize_sampling_points_from_regions(result)
+        return self.realize_regions(result)
 
     def visualize_sampling_points(self, sampling_points: np.ndarray, real_points: list, num_points: int):
         """可视化采样点"""
@@ -585,7 +556,7 @@ def get_automatic_sampling_points_from_regions(
     logger.info(f"允许区域：{car_kx}")
     opt = CoalSamplingOptimizer(config=config, length=car_length, width=car_width,
                                 ljs=car_lj, yx=car_kx)
-    return opt.optimize_sampling_points_from_regions(regions)
+    return opt.realize_regions(regions)
 
 
 if __name__ == '__main__':

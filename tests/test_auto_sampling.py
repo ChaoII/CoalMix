@@ -81,3 +81,39 @@ def test_plan_regions_reproducible_with_seed():
 def test_get_automatic_sampling_regions_returns_18():
     from src.auto_sampling import get_automatic_sampling_regions
     assert len(get_automatic_sampling_regions()) == 18
+
+
+def test_sample_point_stays_within_allowed_region():
+    opt = CoalSamplingOptimizer(length=11000, width=5500,
+                                ljs=[[2000, 100, 2200, 5400]],
+                                yx=[100, 100, 10900, 5400])
+    for _ in range(50):
+        x, y = opt.sample_point_in_region(0, 0)
+        assert 100 < x < 10900
+        assert 100 < y < 5400
+
+
+def test_sample_point_avoids_lajin():
+    opt = CoalSamplingOptimizer(length=11000, width=5500,
+                                ljs=[[2000, 100, 2200, 5400]],
+                                yx=[100, 100, 10900, 5400])
+    for _ in range(100):
+        x, y = opt.sample_point_in_region(0, 1)
+        assert not (2000 <= x <= 2200 and 100 <= y <= 5400)
+
+
+def test_sample_point_raises_sampling_error_when_impossible():
+    opt = CoalSamplingOptimizer(length=11000, width=5500,
+                                ljs=[], yx=[6000, 4000, 10900, 5400])
+    with pytest.raises(SamplingError):
+        opt.sample_point_in_region(0, 0)
+
+
+def test_get_automatic_sampling_points_from_regions_shape():
+    from src.auto_sampling import get_automatic_sampling_points_from_regions
+    regions = CoalSamplingOptimizer().plan_regions()
+    real_points, image = get_automatic_sampling_points_from_regions(
+        11000, 5500, [[2000, 100, 2200, 5400]], [100, 100, 10900, 5400], regions)
+    assert len(real_points) == 18
+    assert all(len(p) == 2 for p in real_points)
+    assert isinstance(image, str) and image.startswith("data:image/png;base64,")
