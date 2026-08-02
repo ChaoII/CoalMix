@@ -130,3 +130,18 @@ def test_render_sampling_preview_returns_base64_png():
     real_points = [opt.sample_point_in_region(r, c) for (r, c) in regions]
     image = render_sampling_preview(opt, regions, real_points)
     assert image.startswith("data:image/png;base64,")
+
+
+def test_optimize_sampling_removed():
+    opt = CoalSamplingOptimizer(length=11000, width=5500,
+                                ljs=[[2000, 100, 2200, 5400]],
+                                yx=[100, 100, 10900, 5400])
+    assert not hasattr(opt, 'optimize_sampling')
+
+
+def test_get_automatic_sampling_points_full_flow():
+    from src.auto_sampling import get_automatic_sampling_points
+    points, image = get_automatic_sampling_points(
+        11000, 5500, [[2000, 100, 2200, 5400]], [100, 100, 10900, 5400])
+    assert len(points) == 18
+    assert image.startswith("data:image/png;base64,")

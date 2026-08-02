@@ -1,7 +1,5 @@
-import os
-import pickle
 import random
-from typing import List, Tuple
+from typing import Tuple
 from dataclasses import dataclass
 from log.log import logger
 import numpy as np
@@ -161,11 +159,6 @@ class CoalSamplingOptimizer:
         image = render_sampling_preview(self, regions, real_points)
         return real_points, image
 
-    def optimize_sampling(self):
-        result = self.plan_regions()
-        return self.realize_regions(result)
-
-
 
 def get_automatic_sampling_points(car_length: int,
                                   car_width: int,
@@ -178,7 +171,7 @@ def get_automatic_sampling_points(car_length: int,
     logger.info(f"允许区域：{car_kx}")
     opt = CoalSamplingOptimizer(config=config, length=car_length, width=car_width,
                                 ljs=car_lj, yx=car_kx)
-    return opt.optimize_sampling()
+    return opt.realize_regions(opt.plan_regions())
 
 
 def get_automatic_sampling_regions(config: SamplingConfig | None = None):
@@ -207,15 +200,10 @@ if __name__ == '__main__':
     car_width = 5500
     car_lj = [[2000, 100, 2200, 5400]]
     car_kx = [100, 100, 10900, 5400]
-    s = []
-    for _ in range(300):
-        regions = get_automatic_sampling_regions()
-        sampling_points = get_automatic_sampling_points_from_regions(car_length, car_width, car_lj, car_kx, regions)
-        s.extend(sampling_points[0])
-    pickle.dump(s, open("sampling_points1.pkl", "wb"))
-
-    c = pickle.load(open("sampling_points1.pkl", "rb"))
-    print(c)
-    plt.plot([i[0] for i in c], [i[1] for i in c], '.')
-    plt.show()
+    regions = get_automatic_sampling_regions()
+    real_points, image = get_automatic_sampling_points_from_regions(
+        car_length, car_width, car_lj, car_kx, regions)
+    print("小区:", regions)
+    print("真实坐标:", real_points)
+    print("图片base64前缀:", image[:40])
 
