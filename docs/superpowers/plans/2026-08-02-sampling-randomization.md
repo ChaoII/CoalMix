@@ -46,7 +46,7 @@ def test_default_config_matches_original_hardcoded_values():
     assert cfg.max_coordinate_attempts == 100
 ```
 
-2) 在文件末尾追加两个新测试：
+2) 在文件末尾追加三个新测试：
 
 ```python
 def test_plan_regions_varied_across_calls_with_seed():
@@ -59,6 +59,15 @@ def test_plan_regions_deterministic_when_shuffle_disabled():
     a = CoalSamplingOptimizer(SamplingConfig(shuffle_regions=False)).plan_regions()
     b = CoalSamplingOptimizer(SamplingConfig(shuffle_regions=False)).plan_regions()
     assert a == b
+
+
+def test_plan_regions_adjacent_points_in_different_regions():
+    opt = CoalSamplingOptimizer(SamplingConfig(shuffle_regions=True, seed=42))
+    points = opt.plan_regions()
+    for i in range(len(points) - 1):
+        r1 = opt.region_mask[points[i][0], points[i][1]]
+        r2 = opt.region_mask[points[i + 1][0], points[i + 1][1]]
+        assert r1 != r2, f"相邻点 {points[i]} 与 {points[i + 1]} 来自同一大区 {r1}"
 ```
 
 - [ ] **Step 2: 运行测试确认失败**
@@ -76,14 +85,15 @@ Expected: FAIL — `test_default_config...`（shuffle 仍 False）+ `test_plan_r
     max_coordinate_attempts: int = 100
 ```
 
-替换 `plan_regions` 方法（整块替换；注意黑格/白格列表内部 shuffle 是实现要点，保证 2 种黑格集下布局仍随机）：
+替换 `plan_regions` 方法（整块替换；注意两点实现要点：①黑格/白格列表内部 shuffle 增加布局变化；②跨轮边界 `region_order[0] != prev_last` 保证任意相邻点不同大区）：
 
 ```python
     def plan_regions(self) -> list[tuple[int, int]]:
         """随机化规划采样小区。
 
         全局黑格相位随机（(r+c+shift)%2，shift 每次随机 0/1）保证前 num_regions 轮
-        黑格互不相邻；黑格/白格集合内部与区域轮序均随机打乱，使每次调用布局差异大。
+        黑格互不相邻；黑格/白格集合内部与区域轮序均随机打乱；每轮遍历所有大区
+        （每区放 1 点）且跨轮边界保证大区不同，因此任意相邻采样点来自不同大区。
         前 num_regions 轮分配黑格，后 num_regions 轮用白格填满，实现全覆盖、无重复、
         每区均匀。seed 固定时可复现。shuffle_regions=False 时完全确定性。
         """
@@ -105,13 +115,18 @@ Expected: FAIL — `test_default_config...`（shuffle 仍 False）+ `test_plan_r
         rounds = self.num_points // self.num_regions
         region_order = list(range(self.num_regions))
         selected: list[tuple[int, int]] = []
+        prev_last = -1
         for round_idx in range(rounds):
             if shuffle:
-                self._rng.shuffle(region_order)
+                while True:
+                    self._rng.shuffle(region_order)
+                    if region_order[0] != prev_last:
+                        break
             for region_id in region_order:
                 pool = black if round_idx < constrained_rounds else white
                 selected.append(pool[region_id].pop())
                 logger.info(f"第{round_idx + 1}次采样，分配到区域{region_id}，位置{selected[-1]}")
+            prev_last = region_order[-1]
         return selected
 ```
 
@@ -265,10 +280,11 @@ git commit -m "feat: accept regions param in animation to avoid desync"
 
 ## 完成标准
 
-- `python -m pytest tests/test_auto_sampling.py -v` 全部通过（25 passed）。
+- `python -m pytest tests/test_auto_sampling.py -v` 全部通过（26 passed）。
 - `python -m py_compile src/auto_sampling.py src/sampling_visualization.py` 通过。
 - 手动验证：
   - `SamplingConfig().shuffle_regions is True`。
   - 不同 seed 下 `plan_regions()` 完整序列不同（内部排列与轮序随机）；同 seed 完全一致。
   - `SamplingConfig(shuffle_regions=False)` 两次调用结果一致（确定性）。
+  - 任意相邻采样点（含跨轮边界）来自不同大区。
   - 4 个 `sampling_anim_seed<N>.gif` 生成、header 为 GIF89a、布局顺序不同。

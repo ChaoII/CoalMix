@@ -36,17 +36,21 @@ seed: int | None = None        # 不变（None=每次随机）
 
 **重要约束分析（实测）**：`phase_shift` 必须是**全局单一 bit**。若每区独立 shift，8 种组合中有 6 种会破坏"前 9 点互不相邻"（跨区边界格如 `(r,1)` 与 `(r,2)` 同时为黑格）。因此黑格集只有 2 种（全棋盘色 A 或全棋盘色 B），全局 shift 保证同色互不相邻。
 
-**多样性来源**：在全局 shift 固定的 2 种黑格集前提下，通过以下随机化让每次布局视觉差异大：
-1. 每区的黑格列表/白格列表在分配前用 `self._rng.shuffle` 打乱内部顺序（同区内第 1/2/3 个黑格的先后随机）。
-2. 大区轮序 `self._rng.shuffle(region_order)` 每轮随机。
-3. 全局 `phase_shift` 随机选 0/1。
+**核心原则（来自原始 `get_min_regions`，重构必须保持）**：18 个点按"每轮每个大区放 1 点"组织（共 6 轮），**任意相邻两个采样点来自不同大区**（轮内遍历所有大区）。用户要求更严格：**所有相邻点（含跨轮边界）都不同大区**。
+
+**算法结构（改造自黑格/白格两阶段）**：
+- 前 `num_regions` 轮（黑格轮）：每轮遍历所有大区，每区放 1 个黑格 → 前 9 点，相邻点跨区。
+- 后 `num_regions` 轮（白格轮）：每轮遍历所有大区，每区放 1 个白格 → 后 9 点，相邻点跨区。
+- **跨轮边界严格约束**：每轮 shuffle `region_order` 时，保证 `region_order[0] != prev_last`（本轮第一个大区 ≠ 上一轮最后一个大区），从而所有相邻点都不同区。
+- 黑格/白格列表内部 shuffle 增加变化；全局 `phase_shift` 随机选 0/1。
 
 ```python
 def plan_regions(self) -> list[tuple[int, int]]:
     """随机化规划采样小区。
 
     全局黑格相位随机（(r+c+shift)%2，shift 每次随机 0/1）保证前 num_regions 轮
-    黑格互不相邻；黑格/白格集合内部与区域轮序均随机打乱，使每次调用布局差异大。
+    黑格互不相邻；黑格/白格集合内部与区域轮序均随机打乱；每轮遍历所有大区
+    （每区放 1 点）且跨轮边界保证大区不同，因此任意相邻采样点来自不同大区。
     前 num_regions 轮分配黑格，后 num_regions 轮用白格填满，实现全覆盖、无重复、
     每区均匀。seed 固定时可复现。shuffle_regions=False 时完全确定性。
     """
@@ -68,17 +72,22 @@ def plan_regions(self) -> list[tuple[int, int]]:
     rounds = self.num_points // self.num_regions
     region_order = list(range(self.num_regions))
     selected: list[tuple[int, int]] = []
+    prev_last = -1
     for round_idx in range(rounds):
         if shuffle:
-            self._rng.shuffle(region_order)
+            while True:
+                self._rng.shuffle(region_order)
+                if region_order[0] != prev_last:
+                    break
         for region_id in region_order:
             pool = black if round_idx < constrained_rounds else white
             selected.append(pool[region_id].pop())
             logger.info(f"第{round_idx + 1}次采样，分配到区域{region_id}，位置{selected[-1]}")
+        prev_last = region_order[-1]
     return selected
 ```
 
-说明：当 `shuffle_regions=False` 时行为退化为原确定性棋盘式（shift 不影响布局集合唯一性，但仍会随机 shift——为保持"确定性"语义，需保证 `shuffle_regions=False` 时 phase_shift 固定为 0）。见下"确定性语义"节。
+说明：当 `shuffle_regions=False` 时行为退化为确定性棋盘式——`phase_shift=0`、轮序固定 `[0,1,2]`（每轮轮序不 shuffle，`prev_last` 约束在确定路径下由固定顺序自然满足：0,1,2 每轮重复，边界 2→0 不同区）。
 
 ### 3. 确定性语义
 
@@ -102,6 +111,7 @@ def plan_regions(self) -> list[tuple[int, int]]:
 - 动画测试 `test_render_sampling_animation_returns_base64_gif`：改传 `regions=regions`。
 - 新增 `test_plan_regions_varied_across_calls`：`shuffle_regions=True` 且不同 seed 时，两次调用结果顺序不同（`plan_regions()` 返回的完整序列不一致）。黑格集可能相同（仅 2 种），但内部排列与轮序必然引入差异。
 - 新增 `test_plan_regions_deterministic_when_shuffle_disabled`：`shuffle_regions=False` 且 seed 任意时，两次调用结果完全一致。
+- 新增 `test_plan_regions_adjacent_points_in_different_regions`：任意两个相邻采样点（含跨轮边界）大区不同。用 `opt.region_mask[r,c]` 判定大区，遍历全部相邻对断言不同。
 
 ### 6. 生成多组 GIF
 
@@ -117,5 +127,6 @@ def plan_regions(self) -> list[tuple[int, int]]:
 
 - `python -m pytest tests/test_auto_sampling.py -v` 全部通过。
 - 手动：不同 seed 下 `plan_regions()` 前 9 黑格集可能相同（2 种之一）但黑格/白格内部排列与区域轮序不同，整体布局顺序不同；同 seed 下完全一致。
+- 任意相邻采样点（含跨轮边界）大区不同。
 - `python -m py_compile src/auto_sampling.py src/sampling_visualization.py` 通过。
 - 生成多组 GIF 可打开、布局明显不同。
