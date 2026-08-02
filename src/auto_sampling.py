@@ -17,7 +17,7 @@ class SamplingConfig:
     grid_cols: int = 6
     region_row_span: int = 3
     region_col_span: int = 2
-    shuffle_regions: bool = False
+    shuffle_regions: bool = True
     seed: int | None = None
     max_coordinate_attempts: int = 100
 
@@ -124,17 +124,20 @@ class CoalSamplingOptimizer:
         return (abs(r1 - r2) == 1 and c1 == c2) or (abs(c1 - c2) == 1 and r1 == r2)
 
     def plan_regions(self) -> list[tuple[int, int]]:
-        """确定性规划采样小区。
+        """随机化规划采样小区。
 
-        棋盘式着色：黑格 ((r+c)%2==0) 两两不相邻，且每个大区恰好 3 个。
-        前 num_regions 轮分配黑格（保证互不相邻），后 num_regions 轮用白格填满，
-        实现全覆盖、无重复、每区均匀。
+        黑格相位随机（(r+c+shift)%2，shift 每次随机 0/1），配合大区轮序 shuffle，
+        每次调用生成不同的黑格集（每区 2 种 × 3 区 = 8 种组合）与放置顺序。
+        前 num_regions 轮分配黑格（互不相邻），后 num_regions 轮用白格填满，
+        实现全覆盖、无重复、每区均匀。seed 固定时可复现。
         """
+        shuffle = self.config.shuffle_regions
+        phase_shift = 0 if not shuffle else self._rng.randint(0, 1)
         black = {r: [] for r in range(self.num_regions)}
         white = {r: [] for r in range(self.num_regions)}
         for region_id in range(self.num_regions):
             for (r, c) in self.region_to_cells[region_id]:
-                if (r + c) % 2 == 0:
+                if (r + c + phase_shift) % 2 == 0:
                     black[region_id].append((r, c))
                 else:
                     white[region_id].append((r, c))
@@ -144,7 +147,7 @@ class CoalSamplingOptimizer:
         region_order = list(range(self.num_regions))
         selected: list[tuple[int, int]] = []
         for round_idx in range(rounds):
-            if self.config.shuffle_regions:
+            if shuffle:
                 self._rng.shuffle(region_order)
             for region_id in region_order:
                 pool = black if round_idx < constrained_rounds else white

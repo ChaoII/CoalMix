@@ -11,7 +11,7 @@ def test_default_config_matches_original_hardcoded_values():
     assert cfg.grid_cols == 6
     assert cfg.region_row_span == 3
     assert cfg.region_col_span == 2
-    assert cfg.shuffle_regions is False
+    assert cfg.shuffle_regions is True
     assert cfg.seed is None
     assert cfg.max_coordinate_attempts == 100
 
@@ -192,3 +192,15 @@ def test_plan_regions_same_phase_points_never_adjacent():
                            if (p[0] + p[1]) % 2 == (r + c) % 2]
         for p in prev_same_phase:
             assert not opt.is_adjacent((r, c), p)
+
+
+def test_plan_regions_varied_across_calls_with_seed():
+    p1 = CoalSamplingOptimizer(SamplingConfig(shuffle_regions=True, seed=1)).plan_regions()
+    p2 = CoalSamplingOptimizer(SamplingConfig(shuffle_regions=True, seed=0)).plan_regions()
+    assert set(p1[:9]) != set(p2[:9]), "不同 seed 的黑格集应不同"
+
+
+def test_plan_regions_deterministic_when_shuffle_disabled():
+    a = CoalSamplingOptimizer(SamplingConfig(shuffle_regions=False)).plan_regions()
+    b = CoalSamplingOptimizer(SamplingConfig(shuffle_regions=False)).plan_regions()
+    assert a == b
