@@ -117,3 +117,16 @@ def test_get_automatic_sampling_points_from_regions_shape():
     assert len(real_points) == 18
     assert all(len(p) == 2 for p in real_points)
     assert isinstance(image, str) and image.startswith("data:image/png;base64,")
+
+
+from src.sampling_visualization import render_sampling_preview
+
+
+def test_render_sampling_preview_returns_base64_png():
+    opt = CoalSamplingOptimizer(length=11000, width=5500,
+                                ljs=[[2000, 100, 2200, 5400]],
+                                yx=[100, 100, 10900, 5400])
+    regions = opt.plan_regions()
+    real_points = [opt.sample_point_in_region(r, c) for (r, c) in regions]
+    image = render_sampling_preview(opt, regions, real_points)
+    assert image.startswith("data:image/png;base64,")
