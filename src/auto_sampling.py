@@ -51,36 +51,34 @@ class SamplingConfig:
 
 
 class CoalSamplingOptimizer:
-    def __init__(self, rows: int = 3, cols: int = 6,
-                 row_span: int = 3, col_span: int = 2, length: int = 0, width: int = 0, ljs=tuple(),
-                 yx=tuple()):
-        """
-        初始化采样优化器
-        """
+    def __init__(self, config: SamplingConfig | None = None, length: int = 0,
+                 width: int = 0, ljs=tuple(), yx=tuple()):
+        """初始化采样优化器"""
+        self.config = config or SamplingConfig()
         self.length = length
         self.width = width
-        self.ljs = ljs
-        self.yx = yx
-        self.rows = rows
-        self.cols = cols
-        self.row_span = row_span
-        self.col_span = col_span
-        self.num_points = rows * cols
+        self.ljs = list(ljs)
+        self.yx = list(yx)
+        self.rows = self.config.grid_rows
+        self.cols = self.config.grid_cols
+        self.row_span = self.config.region_row_span
+        self.col_span = self.config.region_col_span
+        self.num_points = self.rows * self.cols
+        self.num_regions = self.config.num_regions
+
+        # 随机源：seed 固定时可复现
+        self._rng = random.Random(self.config.seed)
 
         # 生成大区划分
-        self.region_mask = self.generate_region_mask(rows, cols, row_span, col_span)
-        self.num_regions = int(np.max(self.region_mask)) + 1
+        self.region_mask = self.generate_region_mask(self.rows, self.cols,
+                                                     self.row_span, self.col_span)
 
-        # 构建各种映射关系
+        # 构建区域到格子的映射
         self.region_to_cells = {}
-        self.row_counts = {i: 0 for i in range(rows)}
-        self.col_counts = {j: 0 for j in range(cols)}
-        self.region_counts = {r: 0 for r in range(self.num_regions)}
-
         for region_id in range(self.num_regions):
             self.region_to_cells[region_id] = []
-            for i in range(rows):
-                for j in range(cols):
+            for i in range(self.rows):
+                for j in range(self.cols):
                     if self.region_mask[i, j] == region_id:
                         self.region_to_cells[region_id].append((i, j))
 
@@ -162,49 +160,34 @@ class CoalSamplingOptimizer:
         r2, c2 = point2
         return (abs(r1 - r2) == 1 and c1 == c2) or (abs(c1 - c2) == 1 and r1 == r2)
 
-    def is_adjacent_any(self, point: Tuple[int, int], points: List[Tuple[int, int]]):
-        for existing_point in points:
-            if self.is_adjacent(point, existing_point):
-                return True
-        return False
+    def plan_regions(self) -> list[tuple[int, int]]:
+        """确定性规划采样小区。
 
-    def get_valid_choice_from_region(self, region_id: int, used_points: List[Tuple[int, int]],
-                                     max_attempts: int = 50, is_adjacent_constraint: bool = True) -> Tuple[int, int]:
-        """从指定区域获取一个有效的、不与已有点相邻的采样点"""
-        available_cells = [cell for cell in self.region_to_cells[region_id]
-                           if cell not in used_points]
+        棋盘式着色：黑格 ((r+c)%2==0) 两两不相邻，且每个大区恰好 3 个。
+        前 num_regions 轮分配黑格（保证互不相邻），后 num_regions 轮用白格填满，
+        实现全覆盖、无重复、每区均匀。
+        """
+        black = {r: [] for r in range(self.num_regions)}
+        white = {r: [] for r in range(self.num_regions)}
+        for region_id in range(self.num_regions):
+            for (r, c) in self.region_to_cells[region_id]:
+                if (r + c) % 2 == 0:
+                    black[region_id].append((r, c))
+                else:
+                    white[region_id].append((r, c))
 
-        if not available_cells:
-            raise ValueError(f"区域 {region_id} 中没有可用的未使用单元格")
-
-        attempts = 0
-        while attempts < max_attempts:
-            choice = random.choice(available_cells)
-            if is_adjacent_constraint:
-                if not self.is_adjacent_any(choice, used_points):
-                    return choice
-            else:
-                return choice
-            attempts += 1
-        raise ValueError(f"区域 {region_id} 无法找到不相邻的采样点，已尝试{max_attempts}次")
-
-    def get_min_regions(self) -> list[list[int, int]]:
-        selected_points = []
-        region_order = list(range(self.num_regions))  # [0, 1, 2] for 3 regions
-        for i in range(self.num_points // self.num_regions):
-            # 确定当前采样点应该分配到哪个区域
-            if os.getenv('SHUFFLE_REGION', '').lower() in ('true', '1', 'yes', 't'):
-                random.shuffle(region_order)
+        constrained_rounds = len(black[0])
+        rounds = self.num_points // self.num_regions
+        region_order = list(range(self.num_regions))
+        selected: list[tuple[int, int]] = []
+        for round_idx in range(rounds):
+            if self.config.shuffle_regions:
+                self._rng.shuffle(region_order)
             for region_id in region_order:
-                # 从目标区域获取一个有效的采样点
-                valid_point = self.get_valid_choice_from_region(
-                    region_id=region_id,
-                    used_points=selected_points,
-                    is_adjacent_constraint=i * self.num_regions <= 6
-                )
-                selected_points.append(valid_point)
-                logger.info(f"第{i + 1}次采样，分配到区域{region_id}，位置{valid_point}")
-        return selected_points
+                pool = black if round_idx < constrained_rounds else white
+                selected.append(pool[region_id].pop())
+                logger.info(f"第{round_idx + 1}次采样，分配到区域{region_id}，位置{selected[-1]}")
+        return selected
 
     def optimize_sampling_points_from_regions(self, regions: list[list[int, int]]) -> list[list[int, int]]:
         result = np.array(regions)
@@ -222,12 +205,8 @@ class CoalSamplingOptimizer:
         plt.close(fig)
         return real_points, image_base64
 
-    def optimize_sampling(self) -> np.ndarray:
-        """
-        优化的采样点分配算法
-        每3个采样点为一组，均匀分布在3个大区中，确保不相邻
-        """
-        result = self.get_min_regions()
+    def optimize_sampling(self):
+        result = self.plan_regions()
         return self.optimize_sampling_points_from_regions(result)
 
     def visualize_sampling_points(self, sampling_points: np.ndarray, real_points: list, num_points: int):
@@ -577,46 +556,20 @@ class CoalSamplingOptimizer:
 def get_automatic_sampling_points(car_length: int,
                                   car_width: int,
                                   car_lj: tuple = tuple(),
-                                  car_kx: tuple = tuple):
+                                  car_kx: tuple = tuple(),
+                                  config: SamplingConfig | None = None):
     logger.info(f"汽车长度：{car_length}")
     logger.info(f"汽车宽度：{car_width}")
     logger.info(f"拉筋区域：{car_lj}")
     logger.info(f"允许区域：{car_kx}")
-    opt = CoalSamplingOptimizer(
-        rows=3,
-        cols=6,
-        row_span=3,
-        col_span=2,
-        length=car_length,
-        width=car_width,
-        ljs=car_lj,
-        yx=car_kx)
-    max_try_times = 100
-    while True:
-        try:
-            return opt.optimize_sampling()
-        except ValueError as e:
-            logger.warning(e)
-            max_try_times -= 1
-            if max_try_times == 0:
-                error_msg = "尝试次数过多，请检查输入参数"
-                logger.error(error_msg)
-                raise ValueError(error_msg)
+    opt = CoalSamplingOptimizer(config=config, length=car_length, width=car_width,
+                                ljs=car_lj, yx=car_kx)
+    return opt.optimize_sampling()
 
 
-def get_automatic_sampling_regions():
-    opt = CoalSamplingOptimizer(rows=3, cols=6, row_span=3, col_span=2)
-    max_try_times = 100
-    while True:
-        try:
-            return opt.get_min_regions()
-        except ValueError as e:
-            logger.warning(e)
-            max_try_times -= 1
-            if max_try_times == 0:
-                error_msg = "尝试次数过多，请检查输入参数"
-                logger.error(error_msg)
-                raise ValueError(error_msg)
+def get_automatic_sampling_regions(config: SamplingConfig | None = None):
+    opt = CoalSamplingOptimizer(config=config)
+    return opt.plan_regions()
 
 
 def get_automatic_sampling_points_from_regions(
@@ -624,21 +577,14 @@ def get_automatic_sampling_points_from_regions(
         car_width: int,
         car_lj: tuple = tuple(),
         car_kx: tuple = tuple(),
-        regions: list[list[int, int]] = tuple()):
+        regions: list[list[int, int]] = tuple(),
+        config: SamplingConfig | None = None):
     logger.info(f"汽车长度：{car_length}")
     logger.info(f"汽车宽度：{car_width}")
     logger.info(f"拉筋区域：{car_lj}")
     logger.info(f"允许区域：{car_kx}")
-    opt = CoalSamplingOptimizer(
-        rows=3,
-        cols=6,
-        row_span=3,
-        col_span=2,
-        length=car_length,
-        width=car_width,
-        ljs=car_lj,
-        yx=car_kx)
-
+    opt = CoalSamplingOptimizer(config=config, length=car_length, width=car_width,
+                                ljs=car_lj, yx=car_kx)
     return opt.optimize_sampling_points_from_regions(regions)
 
 
