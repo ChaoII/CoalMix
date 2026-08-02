@@ -1,4 +1,6 @@
 import base64
+import os
+import tempfile
 from io import BytesIO
 
 import matplotlib
@@ -165,3 +167,118 @@ def render_sampling_preview(opt, sampling_points, real_points):
     buf.close()
     plt.close(fig)
     return image_base64
+
+
+def render_sampling_animation(opt, real_points, fps: int = 1, interval: int = 1000) -> str:
+    """生成逐点放置采样点的 GIF 动画，返回 base64 GIF 字符串。
+
+    每帧放置 1 个采样点（帧数 = len(real_points)）。每帧在标题区标注：
+    当前点序号、小区(row,col)、真实坐标(mm)、黑格/白格阶段，以及规则检查结果
+    （相邻性、是否落在允许区域、是否避开拉筋）。
+    """
+    from matplotlib.animation import FuncAnimation, PillowWriter
+
+    expected = opt.rows * opt.cols
+    if len(real_points) != expected:
+        raise ValueError(f"real_points 长度 {len(real_points)} 必须等于 {expected}")
+
+    rows, cols = opt.rows, opt.cols
+    cell_width = 1.0
+    cell_height = opt.width / opt.length if opt.length else 1.0
+    total = len(real_points)
+
+    fig, ax = plt.subplots(figsize=(14, 8))
+    width_scale, length_scale = _draw_base(ax, opt)
+
+    # 动态层：已放置的小区红圈、白字序号、真实坐标绿点
+    cell_markers = []
+    cell_labels = []
+    real_markers = []
+    coord_labels = []
+    status_text = ax.text(
+        0.02, 0.92, "", transform=ax.transAxes, fontsize=12,
+        verticalalignment='top',
+        bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.5)
+    )
+
+    def _clear_dynamic():
+        for artist in cell_markers + cell_labels + real_markers + coord_labels:
+            artist.remove()
+        cell_markers.clear()
+        cell_labels.clear()
+        real_markers.clear()
+        coord_labels.clear()
+
+    def _place_point(k):
+        (r, c) = sampling_points[k]
+        (x, y) = real_points[k]
+        cell_cx = (c + 0.5) * cell_width
+        cell_cy = (r + 0.5) * cell_height
+        cell_markers.append(
+            ax.plot(cell_cx, cell_cy, 'ro',
+                    markersize=36 * min(cell_width, cell_height),
+                    markeredgecolor='darkred', markeredgewidth=2, zorder=5)[0]
+        )
+        cell_labels.append(
+            ax.text(cell_cx, cell_cy, f'{k + 1}', ha='center', va='center',
+                    color='white', fontweight='bold', fontsize=12, zorder=10)
+        )
+        rx, ry = x / length_scale, y / width_scale
+        real_markers.append(
+            ax.plot(rx, ry, 'go', markersize=15 * min(cell_width, cell_height),
+                    markeredgecolor='darkred', markeredgewidth=2, zorder=6)[0]
+        )
+        coord_labels.append(
+            ax.text(cell_cx, cell_cy + 0.3 * cell_height,
+                    f"({int(x)},{int(y)})",
+                    ha='center', va='center', fontsize=9, color='black')
+        )
+
+    def update(frame):
+        _clear_dynamic()
+        for k in range(frame + 1):
+            _place_point(k)
+
+        (r, c) = sampling_points[frame]
+        (x, y) = real_points[frame]
+        phase = "黑格" if (r + c) % 2 == 0 else "白格"
+
+        # 规则检查：相邻性（对之前所有点）
+        violations = []
+        if frame > 0:
+            prev_points = sampling_points[:frame]
+            if any(opt.is_adjacent((r, c), p) for p in prev_points):
+                violations.append("相邻性")
+        if not opt._in_allowed_region(x, y):
+            violations.append("不在允许区域")
+        if opt._in_lajin(x, y):
+            violations.append("落在拉筋")
+
+        if violations:
+            status = f"⚠️ 规则违反: {'、'.join(violations)}"
+            color = 'red'
+        else:
+            status = "✅ 规则通过"
+            color = 'green'
+        status_text.set_text(status)
+        status_text.set_color(color)
+
+        title = (f"第 {frame + 1}/{total} 点 · 小区({r},{c}) · 坐标({int(x)},{int(y)})mm · "
+                 f"阶段:{phase}\n{status}")
+        ax.set_title(title, fontsize=12, fontweight='bold', pad=20)
+
+    # 需要采样小区坐标：由 real_points 推导不可行，改为调用方传入。
+    # 这里使用 opt.plan_regions() 重建小区序列（确定性），
+    # 与 get_automatic_sampling_points 的调用顺序一致。
+    sampling_points = opt.plan_regions()
+
+    anim = FuncAnimation(fig, update, frames=total, interval=interval, blit=False)
+    # matplotlib 3.11 的 PillowWriter 要求真实文件路径，不能传 BytesIO，故先写临时文件再读回
+    with tempfile.TemporaryDirectory() as tmpdir:
+        gif_path = os.path.join(tmpdir, "sampling_animation.gif")
+        anim.save(gif_path, writer=PillowWriter(fps=fps), dpi=100)
+        with open(gif_path, "rb") as f:
+            gif_bytes = f.read()
+    gif_base64 = "data:image/gif;base64," + base64.b64encode(gif_bytes).decode('utf-8')
+    plt.close(fig)
+    return gif_base64
