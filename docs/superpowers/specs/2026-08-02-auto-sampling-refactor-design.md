@@ -80,15 +80,16 @@ def get_automatic_sampling_points_from_regions(car_length, car_width, car_lj=(),
 
 ### 5. 可视化拆分
 
-- `visualize_sampling_points` 保留为规划结果可视化（返回 base64）。
+- 可视化相关函数拆到独立模块 `src/sampling_visualization.py`，`auto_sampling.py` 只保留配置、规划、坐标生成与入口函数。
+- 保留 `visualize_sampling_points`（规划结果可视化，返回 base64），在 `sampling_visualization.py` 中定义。
 - 死代码 `visualize_sampling_points_animated`、`visualize_sampling_points_step_by_step` 删除。
-- 不做独立文件拆分（保持文件内聚，避免过度拆分），但删除 `animation` 相关 import。
+- `auto_sampling.py` 删除 `matplotlib.animation` 等仅可视化需要的 import。
 
 ### 6. 删除项
 
 - `get_point`（无限循环、未使用）
 - `get_region_coordinates`（含 `//6 %6` 魔法数）
-- `optimize_sampling`、`optimize_sampling_points_from_regions`（合并进入口逻辑，如仍需要则保留一个内部方法）
+- `optimize_sampling`、`optimize_sampling_points_from_regions`：`optimize_sampling_points_from_regions` 保留为内部方法（负责把小区坐标转真实坐标并渲染图），`optimize_sampling` 删除（由入口函数直接组合）。
 - `os.getenv('SHUFFLE_REGION')` 读取逻辑
 - `main` 块中的 `pickle` 示例代码（改为简洁 demo）
 
