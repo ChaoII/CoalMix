@@ -197,6 +197,12 @@ def render_sampling_animation(opt, real_points, regions=None, fps: int = 1, inte
         sampling_points = opt.plan_regions()
     else:
         sampling_points = list(regions)
+    if len(sampling_points) != len(real_points):
+        raise ValueError(
+            f"regions 长度 {len(sampling_points)} 必须与 real_points 长度 {len(real_points)} 一致"
+        )
+
+    black_parity = (sampling_points[0][0] + sampling_points[0][1]) % 2
 
     fig, ax = plt.subplots(figsize=(14, 8))
     width_scale, length_scale = _draw_base(ax, opt)
@@ -252,7 +258,7 @@ def render_sampling_animation(opt, real_points, regions=None, fps: int = 1, inte
 
         (r, c) = sampling_points[frame]
         (x, y) = real_points[frame]
-        phase = "黑格" if (r + c) % 2 == 0 else "白格"
+        phase = "黑格" if (r + c) % 2 == black_parity else "白格"
 
         # 规则检查：相邻性（只对比同相位点，黑格只查黑格、白格只查白格。
         # 跨相位相邻是全覆盖规划的必然结构，不计为违反，避免白格阶段必然全红）

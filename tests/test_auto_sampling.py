@@ -204,3 +204,14 @@ def test_plan_regions_deterministic_when_shuffle_disabled():
     a = CoalSamplingOptimizer(SamplingConfig(shuffle_regions=False)).plan_regions()
     b = CoalSamplingOptimizer(SamplingConfig(shuffle_regions=False)).plan_regions()
     assert a == b
+
+
+def test_phase_label_self_calibrates_with_shift():
+    # 前 9 点应全为黑格相位；用首点奇偶性作为相位基准，所有前9点应一致
+    for seed in range(8):
+        opt = CoalSamplingOptimizer(SamplingConfig(shuffle_regions=True, seed=seed))
+        points = opt.plan_regions()
+        black_parity = (points[0][0] + points[0][1]) % 2
+        first9 = points[:9]
+        assert all((r + c) % 2 == black_parity for (r, c) in first9), \
+            f"seed {seed}: 前9点相位不一致"
