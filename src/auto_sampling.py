@@ -130,11 +130,20 @@ class CoalSamplingOptimizer:
     def plan_regions(self) -> list[tuple[int, int]]:
         """规划采样小区（从右往左）。
 
-        全局黑格相位随机（(r+c+shift)%2，shift 每次随机 0/1）保证前 num_regions 轮
-        黑格互不相邻；每轮大区固定从右往左（region num_regions-1 → 0），保证相邻
-        采样点来自不同大区；黑格/白格集合内部随机排列。前 num_regions 轮分配黑格，
-        后 num_regions 轮用白格填满，实现全覆盖、无重复、每区均匀。
-        seed 固定时可复现。shuffle_regions=False 时完全确定性。
+        核心思想（棋盘格 + 相位随机 + 区内随机）：
+        1. 棋盘格只有 2 种着色——phase_shift 随机取 0/1，黑格判定为
+           (r+c+shift)%2==0。黑格集为 9 格（每区 3 格），同相位格子彼此
+           不相邻，因此前 num_regions 轮的黑格互不相邻是结构保证。
+        2. 相位随机选完后，棋盘格即确定；之后每个大区只在对应颜色的
+           集合内部随机排列（self._rng.shuffle），再按固定顺序 pop。
+        3. 大区轮序固定从右往左（region num_regions-1 → 0），每轮每区放
+           1 点，因此任意相邻采样点来自不同大区（跨轮边界也满足）。
+        4. 前 num_regions 轮取黑格（9 点），后 num_regions 轮取白格（9 点），
+           实现 18 格全覆盖、无重复、每区 6 点。
+
+        随机性来源：phase_shift（1 bit，决定黑格为偶格/奇格）+ 每区黑/白
+        集合内部排列。seed 固定时可复现；shuffle_regions=False 时完全确定性
+        （shift 固定 0、区内不 shuffle）。
         """
         shuffle = self.config.shuffle_regions
         phase_shift = 0 if not shuffle else self._rng.randint(0, 1)

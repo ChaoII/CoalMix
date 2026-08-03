@@ -117,6 +117,16 @@ def plan_regions(self) -> list[tuple[int, int]]:
 
 用 seed 1/2/3/4 各生成一组 `sampling_anim_seed<N>.gif`，展示布局差异（供用户检查随机性）。
 
+### 7. 棋盘格逻辑说明（当前实现）
+
+当前 `plan_regions()` 的逻辑可概括为三步（后续右→左改动见 `docs/superpowers/specs/2026-08-02-sampling-right-to-left-design.md`）：
+
+1. **相位随机选棋盘格**：`phase_shift` 随机取 0/1，黑格判定为 `(r+c+shift)%2==0`。棋盘格只有 2 种着色（黑格=偶格 或 黑格=奇格），同相位格子彼此不相邻，故前 9 点黑格互不相邻是结构保证。**相位选完棋盘格即确定**，观察者可从第一个点的奇偶性反推相位。
+2. **区内随机**：每个大区在黑/白集合内部 `self._rng.shuffle` 随机排列，再按固定顺序 pop。
+3. **大区固定右→左**：`region_order = [num_regions-1, ..., 0]`（默认 `[2,1,0]`），每轮每区放 1 点，前 `num_regions` 轮取黑格、后 `num_regions` 轮取白格，18 格全覆盖。
+
+随机性来源：`phase_shift`（1 bit）+ 每区黑/白集合内部排列。大区轮序固定，不随机。
+
 ## 不做的事
 
 - 不改 main.py / FastAPI 接口签名。
