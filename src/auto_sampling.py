@@ -128,13 +128,13 @@ class CoalSamplingOptimizer:
         return (abs(r1 - r2) == 1 and c1 == c2) or (abs(c1 - c2) == 1 and r1 == r2)
 
     def plan_regions(self) -> list[tuple[int, int]]:
-        """随机化规划采样小区。
+        """规划采样小区（从右往左）。
 
         全局黑格相位随机（(r+c+shift)%2，shift 每次随机 0/1）保证前 num_regions 轮
-        黑格互不相邻；黑格/白格集合内部与区域轮序均随机打乱；每轮遍历所有大区
-        （每区放 1 点）且跨轮边界保证大区不同，因此任意相邻采样点来自不同大区。
-        前 num_regions 轮分配黑格，后 num_regions 轮用白格填满，实现全覆盖、无重复、
-        每区均匀。seed 固定时可复现。shuffle_regions=False 时完全确定性。
+        黑格互不相邻；每轮大区固定从右往左（region num_regions-1 → 0），保证相邻
+        采样点来自不同大区；黑格/白格集合内部随机排列。前 num_regions 轮分配黑格，
+        后 num_regions 轮用白格填满，实现全覆盖、无重复、每区均匀。
+        seed 固定时可复现。shuffle_regions=False 时完全确定性。
         """
         shuffle = self.config.shuffle_regions
         phase_shift = 0 if not shuffle else self._rng.randint(0, 1)
@@ -152,25 +152,13 @@ class CoalSamplingOptimizer:
 
         constrained_rounds = len(black[0])
         rounds = self.num_points // self.num_regions
-        region_order = list(range(self.num_regions))
+        region_order = list(range(self.num_regions - 1, -1, -1))  # 从右往左
         selected: list[tuple[int, int]] = []
-        prev_last = -1
         for round_idx in range(rounds):
-            if shuffle:
-                attempts = 0
-                while attempts < 100:
-                    self._rng.shuffle(region_order)
-                    attempts += 1
-                    if region_order[0] != prev_last:
-                        break
-                else:
-                    # 兜底：无法满足时不强制（num_regions<2 时可能发生）
-                    pass
             for region_id in region_order:
                 pool = black if round_idx < constrained_rounds else white
                 selected.append(pool[region_id].pop())
                 logger.info(f"第{round_idx + 1}次采样，分配到区域{region_id}，位置{selected[-1]}")
-            prev_last = region_order[-1]
         return selected
 
     def realize_regions(self, regions: list[list[int, int]]) -> tuple[list[list[float]], str]:

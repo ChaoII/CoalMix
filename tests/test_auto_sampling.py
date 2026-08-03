@@ -229,3 +229,11 @@ def test_phase_label_self_calibrates_with_shift():
         first9 = points[:9]
         assert all((r + c) % 2 == black_parity for (r, c) in first9), \
             f"seed {seed}: 前9点相位不一致"
+
+
+def test_plan_regions_region_order_right_to_left():
+    opt = CoalSamplingOptimizer(SamplingConfig(shuffle_regions=True, seed=42))
+    points = opt.plan_regions()
+    regions = [int(opt.region_mask[r, c]) for (r, c) in points]
+    expected = [2, 1, 0] * 6
+    assert regions == expected, f"大区序列应为右→左循环，实际 {regions}"
