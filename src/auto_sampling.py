@@ -249,33 +249,41 @@ def get_automatic_sampling_regions_rolling(
     """跨车滚动采样：返回 (本车应采的编号列表, 对应格子列表)。
 
     used: 当前轮已用编号（无重复，1-18 范围）。need: 本车要采点数。
-    未用编号数不足 need 时，先取全部未用，再清空 used 从编号 1 换轮重取。
-    返回编号按当次 plan_regions() 格子序排序。编号->格子映射固定（_NUMBERING）。
+    按当次 plan_regions() 棋盘格序（每轮大区右→左轮流）取未用格子，
+    保证返回的点跨大区分布（相邻点不同大区）。未用不足时清空换轮从棋盘格序开头补足。
+    编号->格子映射固定（_NUMBERING，列优先从右往左）。
     """
     if need <= 0:
         return [], []
 
     numbering = _ensure_numbering(config)
-    total = len(numbering)
 
     used_set = set(used or [])
-    unused = [i for i in range(1, total + 1) if i not in used_set]
 
-    if len(unused) >= need:
-        allocated = unused[:need]
-    else:
-        # 未用不足：取全部未用，再清空换轮从 1 补足
-        wrap_count = need - len(unused)
-        allocated = unused + list(range(1, wrap_count + 1))
-
-    # 按当次 plan_regions() 格子序排序返回
+    # 按当次 plan_regions() 棋盘格序（每轮大区右→左轮流）取未用格子，
+    # 保证返回的点跨大区分布（相邻点不同大区）。
     opt = CoalSamplingOptimizer(config=config)
     current = opt.plan_regions()
-    cur_pos = {cell: idx for idx, cell in enumerate(current)}
-    ordered = sorted(allocated, key=lambda n: cur_pos[numbering[n]])
+    cell_to_num = {cell: n for n, cell in numbering.items()}
 
-    cells = [list(numbering[n]) for n in ordered]
-    return ordered, cells
+    allocated: list[int] = []
+    for cell in current:
+        n = cell_to_num[cell]
+        if n not in used_set:
+            allocated.append(n)
+        if len(allocated) >= need:
+            break
+
+    if len(allocated) < need:
+        # 未用不足：清空换轮，从棋盘格序开头重新取，直到补足 need
+        for cell in current:
+            n = cell_to_num[cell]
+            allocated.append(n)
+            if len(allocated) >= need:
+                break
+
+    cells = [list(numbering[n]) for n in allocated]
+    return allocated, cells
 
 
 if __name__ == '__main__':

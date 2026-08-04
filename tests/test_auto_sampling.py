@@ -239,30 +239,50 @@ def test_plan_regions_region_order_right_to_left():
     assert regions == expected, f"大区序列应为右→左循环，实际 {regions}"
 
 
-def test_rolling_round1():
+def _region_of(num):
+    from src.auto_sampling import _NUMBERING
+    c = _NUMBERING[num][1]
+    return 2 if c >= 4 else (1 if c >= 2 else 0)
+
+
+def test_rolling_round1_crosses_regions():
     from src.auto_sampling import get_automatic_sampling_regions_rolling
     nums, cells = get_automatic_sampling_regions_rolling(used=[], need=5)
     assert len(nums) == 5
     assert len(cells) == 5
-    assert set(nums) == {1, 2, 3, 4, 5}
+    assert len(set(nums)) == 5
+    # 相邻点应来自不同大区（棋盘格：每轮大区右→左轮流）
+    regions = [_region_of(n) for n in nums]
+    for i in range(4):
+        assert regions[i] != regions[i + 1], f"相邻点同一大区: {nums}"
+    # 第一点应来自最右大区（大区2），且跨大区（含大区0/1/2）
+    assert regions[0] == 2
+    assert set(regions) == {0, 1, 2}
 
 
-def test_rolling_round2():
+def test_rolling_round2_no_overlap():
     from src.auto_sampling import get_automatic_sampling_regions_rolling
-    nums, _ = get_automatic_sampling_regions_rolling(used=[1, 2, 3, 4, 5], need=6)
-    assert set(nums) == {6, 7, 8, 9, 10, 11}
+    r1, _ = get_automatic_sampling_regions_rolling(used=[], need=5)
+    r2, _ = get_automatic_sampling_regions_rolling(used=r1, need=6)
+    assert len(set(r1) & set(r2)) == 0, "本轮不应与上轮重复"
 
 
-def test_rolling_round3():
+def test_rolling_round3_accumulates():
     from src.auto_sampling import get_automatic_sampling_regions_rolling
-    nums, _ = get_automatic_sampling_regions_rolling(used=list(range(1, 12)), need=5)
-    assert set(nums) == {12, 13, 14, 15, 16}
+    r1, _ = get_automatic_sampling_regions_rolling(used=[], need=5)
+    r2, _ = get_automatic_sampling_regions_rolling(used=r1, need=6)
+    r3, _ = get_automatic_sampling_regions_rolling(used=sorted(set(r1) | set(r2)), need=5)
+    acc = set(r1) | set(r2) | set(r3)
+    assert len(acc) == 16, "三轮累计应覆盖 16 个不同编号"
 
 
-def test_rolling_round4_wrap():
+def test_rolling_round4_wrap_crosses_regions():
     from src.auto_sampling import get_automatic_sampling_regions_rolling
-    nums, _ = get_automatic_sampling_regions_rolling(used=list(range(1, 17)), need=6)
-    assert set(nums) == {1, 2, 3, 4, 17, 18}
+    used = list(range(1, 17))
+    nums, _ = get_automatic_sampling_regions_rolling(used=used, need=6)
+    # 换轮：先采未用的17,18，再从棋盘格序开头补足 4 个（新一轮）
+    assert {17, 18} <= set(nums), f"应优先采未用的17,18，实际 {nums}"
+    assert len(set(nums)) == 6, f"不应有重复，实际 {nums}"
 
 
 def test_rolling_empty_need():
@@ -273,8 +293,11 @@ def test_rolling_empty_need():
 
 def test_rolling_used_none():
     from src.auto_sampling import get_automatic_sampling_regions_rolling
-    nums, _ = get_automatic_sampling_regions_rolling(used=None, need=3)
-    assert set(nums) == {1, 2, 3}
+    nums, cells = get_automatic_sampling_regions_rolling(used=None, need=3)
+    assert len(nums) == 3
+    assert len(set(nums)) == 3
+    regions = [_region_of(n) for n in nums]
+    assert regions[0] == 2, "第一点应来自最右大区"
 
 
 def test_rolling_cells_match_numbering():
