@@ -1,4 +1,5 @@
 import random
+import threading
 from typing import Tuple
 from dataclasses import dataclass
 from log.log import logger
@@ -211,6 +212,59 @@ def get_automatic_sampling_points_from_regions(
     opt = CoalSamplingOptimizer(config=config, length=car_length, width=car_width,
                                 ljs=car_lj, yx=car_kx)
     return opt.realize_regions(regions)
+
+
+# 编号 -> 格子映射缓存（服务启动时首次 plan_regions() 建立，生命周期不变）
+_NUMBERING: dict[int, tuple[int, int]] | None = None
+_NUMBERING_LOCK = threading.Lock()
+
+
+def _ensure_numbering(config: SamplingConfig | None) -> dict[int, tuple[int, int]]:
+    """建立并返回编号 1..num_points -> 格子 的固定映射。"""
+    global _NUMBERING
+    if _NUMBERING is None:
+        with _NUMBERING_LOCK:
+            if _NUMBERING is None:
+                opt = CoalSamplingOptimizer(config=config)
+                cells = opt.plan_regions()
+                _NUMBERING = {i + 1: cell for i, cell in enumerate(cells)}
+    return _NUMBERING
+
+
+def get_automatic_sampling_regions_rolling(
+        used: list[int] | None = None,
+        need: int = 0,
+        config: SamplingConfig | None = None) -> tuple[list[int], list[list[int]]]:
+    """跨车滚动采样：返回 (本车应采的编号列表, 对应格子列表)。
+
+    used: 当前轮已用编号（无重复，1-18 范围）。need: 本车要采点数。
+    未用编号数不足 need 时，先取全部未用，再清空 used 从编号 1 换轮重取。
+    返回编号按当次 plan_regions() 格子序排序。编号->格子映射固定（_NUMBERING）。
+    """
+    if need <= 0:
+        return [], []
+
+    numbering = _ensure_numbering(config)
+    total = len(numbering)
+
+    used_set = set(used or [])
+    unused = [i for i in range(1, total + 1) if i not in used_set]
+
+    if len(unused) >= need:
+        allocated = unused[:need]
+    else:
+        # 未用不足：取全部未用，再清空换轮从 1 补足
+        wrap_count = need - len(unused)
+        allocated = unused + list(range(1, wrap_count + 1))
+
+    # 按当次 plan_regions() 格子序排序返回
+    opt = CoalSamplingOptimizer(config=config)
+    current = opt.plan_regions()
+    cur_pos = {cell: idx for idx, cell in enumerate(current)}
+    ordered = sorted(allocated, key=lambda n: cur_pos[numbering[n]])
+
+    cells = [list(numbering[n]) for n in ordered]
+    return ordered, cells
 
 
 if __name__ == '__main__':

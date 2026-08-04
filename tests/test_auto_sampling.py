@@ -237,3 +237,73 @@ def test_plan_regions_region_order_right_to_left():
     regions = [int(opt.region_mask[r, c]) for (r, c) in points]
     expected = [2, 1, 0] * 6
     assert regions == expected, f"大区序列应为右→左循环，实际 {regions}"
+
+
+def test_rolling_round1():
+    from src.auto_sampling import get_automatic_sampling_regions_rolling
+    nums, cells = get_automatic_sampling_regions_rolling(used=[], need=5)
+    assert len(nums) == 5
+    assert len(cells) == 5
+    assert set(nums) == {1, 2, 3, 4, 5}
+
+
+def test_rolling_round2():
+    from src.auto_sampling import get_automatic_sampling_regions_rolling
+    nums, _ = get_automatic_sampling_regions_rolling(used=[1, 2, 3, 4, 5], need=6)
+    assert set(nums) == {6, 7, 8, 9, 10, 11}
+
+
+def test_rolling_round3():
+    from src.auto_sampling import get_automatic_sampling_regions_rolling
+    nums, _ = get_automatic_sampling_regions_rolling(used=list(range(1, 12)), need=5)
+    assert set(nums) == {12, 13, 14, 15, 16}
+
+
+def test_rolling_round4_wrap():
+    from src.auto_sampling import get_automatic_sampling_regions_rolling
+    nums, _ = get_automatic_sampling_regions_rolling(used=list(range(1, 17)), need=6)
+    assert set(nums) == {1, 2, 3, 4, 17, 18}
+
+
+def test_rolling_empty_need():
+    from src.auto_sampling import get_automatic_sampling_regions_rolling
+    nums, cells = get_automatic_sampling_regions_rolling(used=[1, 2], need=0)
+    assert nums == [] and cells == []
+
+
+def test_rolling_used_none():
+    from src.auto_sampling import get_automatic_sampling_regions_rolling
+    nums, _ = get_automatic_sampling_regions_rolling(used=None, need=3)
+    assert set(nums) == {1, 2, 3}
+
+
+def test_rolling_cells_match_numbering():
+    from src.auto_sampling import get_automatic_sampling_regions_rolling
+    from src.auto_sampling import _NUMBERING
+    nums, cells = get_automatic_sampling_regions_rolling(used=[], need=5)
+    for n, cell in zip(nums, cells):
+        assert _NUMBERING[n] == tuple(cell), f"编号{n}格子不匹配"
+
+
+def test_rolling_numbering_fixed_across_calls():
+    from src.auto_sampling import get_automatic_sampling_regions_rolling
+    get_automatic_sampling_regions_rolling(used=[], need=1)
+    from src.auto_sampling import _NUMBERING
+    snapshot = dict(_NUMBERING)
+    get_automatic_sampling_regions_rolling(used=[1], need=2)
+    from src.auto_sampling import _NUMBERING
+    assert _NUMBERING == snapshot, "编号映射应跨调用固定"
+
+
+def test_rolling_ordering_follows_current_plan():
+    from src.auto_sampling import get_automatic_sampling_regions_rolling
+    from src.auto_sampling import CoalSamplingOptimizer, SamplingConfig, _NUMBERING
+    cfg = SamplingConfig(shuffle_regions=True, seed=7)
+    # 用固定 config 保证 _NUMBERING 与该 config 一致
+    get_automatic_sampling_regions_rolling(used=[], need=5, config=cfg)
+    opt = CoalSamplingOptimizer(cfg)
+    current = opt.plan_regions()
+    cur_pos = {tuple(cell): idx for idx, cell in enumerate(current)}
+    nums, cells = get_automatic_sampling_regions_rolling(used=[], need=5, config=cfg)
+    positions = [cur_pos[tuple(c)] for c in cells]
+    assert positions == sorted(positions), "返回编号应按当次 plan 格子序排序"
