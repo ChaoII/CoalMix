@@ -214,20 +214,31 @@ def get_automatic_sampling_points_from_regions(
     return opt.realize_regions(regions)
 
 
-# 编号 -> 格子映射缓存（服务启动时首次 plan_regions() 建立，生命周期不变）
+# 编号 -> 格子映射缓存（确定性：列优先从右往左，生命周期不变）
 _NUMBERING: dict[int, tuple[int, int]] | None = None
 _NUMBERING_LOCK = threading.Lock()
 
 
 def _ensure_numbering(config: SamplingConfig | None) -> dict[int, tuple[int, int]]:
-    """建立并返回编号 1..num_points -> 格子 的固定映射。"""
+    """建立并返回编号 1..num_points -> 格子 的固定映射。
+
+    编号规则（列优先、从右往左）：按列从右到左遍历，每列内行从小到大。
+    因此编号 1..num_regions*rows 对应最右大区，逐列左移。
+    确定性映射，与 plan_regions() 的随机顺序无关。
+    """
     global _NUMBERING
     if _NUMBERING is None:
         with _NUMBERING_LOCK:
             if _NUMBERING is None:
                 opt = CoalSamplingOptimizer(config=config)
-                cells = opt.plan_regions()
-                _NUMBERING = {i + 1: cell for i, cell in enumerate(cells)}
+                rows, cols = opt.rows, opt.cols
+                numbering: dict[int, tuple[int, int]] = {}
+                n = 1
+                for c in range(cols - 1, -1, -1):
+                    for r in range(rows):
+                        numbering[n] = (r, c)
+                        n += 1
+                _NUMBERING = numbering
     return _NUMBERING
 
 

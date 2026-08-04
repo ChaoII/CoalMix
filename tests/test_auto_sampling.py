@@ -295,6 +295,24 @@ def test_rolling_numbering_fixed_across_calls():
     assert _NUMBERING == snapshot, "编号映射应跨调用固定"
 
 
+def test_rolling_numbering_column_first_right_to_left():
+    from src.auto_sampling import get_automatic_sampling_regions_rolling
+    from src.auto_sampling import _NUMBERING
+    get_automatic_sampling_regions_rolling(used=[], need=1)
+    expected = {}
+    n = 1
+    # 列优先从右往左：列 5..0，每列内行 0..2
+    for c in range(5, -1, -1):
+        for r in range(3):
+            expected[n] = (r, c)
+            n += 1
+    assert _NUMBERING == expected, f"编号应按列优先从右往左映射，实际 {_NUMBERING}"
+    # 大区分组：1-6 最右大区(列4,5)，7-12 中间(列2,3)，13-18 最左(列0,1)
+    assert all(_NUMBERING[i][1] in (4, 5) for i in range(1, 7))
+    assert all(_NUMBERING[i][1] in (2, 3) for i in range(7, 13))
+    assert all(_NUMBERING[i][1] in (0, 1) for i in range(13, 19))
+
+
 def test_rolling_ordering_follows_current_plan():
     from src.auto_sampling import get_automatic_sampling_regions_rolling
     from src.auto_sampling import CoalSamplingOptimizer, SamplingConfig, _NUMBERING

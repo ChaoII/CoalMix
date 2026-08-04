@@ -133,20 +133,31 @@ from src.sampling_visualization import render_sampling_preview
 2) 在文件末尾（`__main__` 块之前）新增缓存与函数：
 
 ```python
-# 编号 -> 格子映射缓存（服务启动时首次 plan_regions() 建立，生命周期不变）
+# 编号 -> 格子映射缓存（确定性：列优先从右往左，生命周期不变）
 _NUMBERING: dict[int, tuple[int, int]] | None = None
 _NUMBERING_LOCK = threading.Lock()
 
 
 def _ensure_numbering(config: SamplingConfig | None) -> dict[int, tuple[int, int]]:
-    """建立并返回编号 1..num_points -> 格子 的固定映射。"""
+    """建立并返回编号 1..num_points -> 格子 的固定映射。
+
+    编号规则（列优先、从右往左）：按列从右到左遍历，每列内行从小到大。
+    因此编号 1..num_regions*rows 对应最右大区，逐列左移。
+    确定性映射，与 plan_regions() 的随机顺序无关。
+    """
     global _NUMBERING
     if _NUMBERING is None:
         with _NUMBERING_LOCK:
             if _NUMBERING is None:
                 opt = CoalSamplingOptimizer(config=config)
-                cells = opt.plan_regions()
-                _NUMBERING = {i + 1: cell for i, cell in enumerate(cells)}
+                rows, cols = opt.rows, opt.cols
+                numbering: dict[int, tuple[int, int]] = {}
+                n = 1
+                for c in range(cols - 1, -1, -1):
+                    for r in range(rows):
+                        numbering[n] = (r, c)
+                        n += 1
+                _NUMBERING = numbering
     return _NUMBERING
 
 
@@ -207,8 +218,8 @@ git commit -m "feat: add rolling cross-truck sampling region allocation"
 
 ## 完成标准
 
-- `python -m pytest tests/test_auto_sampling.py -v` 全部通过（38 passed）。
-- 用户 4 轮例子逐轮正确（round1 `[1..5]`、round2 `[6..11]`、round3 `[12..16]`、round4 `{1,2,3,4,17,18}`）。
-- 编号→格子映射跨调用固定（`_NUMBERING` 缓存）。
-- 返回编号按当次 plan 格子序排序。
+- `python -m pytest tests/test_auto_sampling.py -v` 全部通过（39 passed）。
+- 用户 4 轮例子逐轮正确（round1 `{1..5}`、round2 `{6..11}`、round3 `{12..16}`、round4 `{1,2,3,4,17,18}`）。
+- 编号→格子映射为**列优先从右往左**（编号 1-6 最右大区、7-12 中间、13-18 最左），确定性，跨调用固定。
+- 返回编号按当次 plan 格子序排序（棋盘格不相邻处理）。
 - `python -m py_compile src/auto_sampling.py` 通过。

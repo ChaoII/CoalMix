@@ -30,10 +30,10 @@
 
 ### 已确认规则
 
-- **编号固定映射格子**：编号 1-18 = 服务启动时首次 `plan_regions()` 返回的 18 格顺序（模块级缓存，跨车不变）。
+- **编号固定映射格子（列优先、从右往左）**：编号 1-18 按"列从右到左、每列内行从小到大"固定映射格子（确定性，与 seed 无关）。编号 1-6 = 最右大区（列 4,5），7-12 = 中间大区（列 2,3），13-18 = 最左大区（列 0,1）。模块级缓存，跨车不变。
 - **used 语义**：当前轮已用编号，无重复、最多 18 个。
 - **换轮规则**：未用编号数 ≥ need 时按编号序取前 need 个；未用数 < need 时先取完全部未用，再清空 used 从编号 1 重新取剩余（返回可跨轮，如 `[17,18,1,2,3,4]`）。
-- **返回顺序**：要返回的编号按**当次 `plan_regions()` 格子序**排序。
+- **返回顺序**：要返回的编号按**当次 `plan_regions()` 格子序**排序（棋盘格不相邻处理，返回编号可能不是连续递增）。
 - **返回结构**：`(编号列表, 对应格子列表)`，编号→格子映射在服务端，前端无需理解。
 - **方法2**：复用现有 `get_automatic_sampling_points_from_regions(car_length, car_width, car_lj, car_kx, regions)`，接收格子列表生成真实坐标。
 
@@ -58,7 +58,7 @@ def get_automatic_sampling_regions_rolling(
 ```
 
 逻辑：
-1. 首次调用建立 `_NUMBERING`（若为 None）：`plan_regions()` → 18 格顺序 → 编号 1-18 映射。
+1. 首次调用建立 `_NUMBERING`（若为 None）：按"列从右到左、每列内行从小到大"构建编号 1-18 → 格子映射（确定性，不依赖 `plan_regions()` 随机顺序）。
 2. `used` 转 set 去重（防御性）；`need <= 0` 返回空。
 3. 未用编号 = `[i for i in 1..18 if i not in used]`，按编号序。
 4. 若 `len(未用) >= need`：分配 = 未用[:need]。
@@ -85,6 +85,7 @@ FastAPI 多线程场景下，`_NUMBERING` 首次赋值可能竞态。用模块�
 - `test_rolling_returns_matching_cells`: 返回编号与格子一一对应（通过 `_NUMBERING`）。
 - `test_rolling_numbering_fixed_across_calls`: 两次调用，编号→格子映射一致（缓存生效）。
 - `test_rolling_ordering_follows_current_plan`: 返回编号按当次 plan 格子序排序（验证排序逻辑）。
+- `test_rolling_numbering_column_first_right_to_left`: 编号映射 = 列优先从右往左；1-6 最右大区(列4,5)、7-12 中间(列2,3)、13-18 最左(列0,1)。
 
 ## 不做的事
 
