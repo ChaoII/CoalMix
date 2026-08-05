@@ -244,15 +244,17 @@ def _ensure_numbering(config: SamplingConfig | None) -> dict[int, tuple[int, int
     return _NUMBERING
 
 
-def _generate_batch_order(config: SamplingConfig | None) -> list[int]:
+def _generate_batch_order(config: SamplingConfig | None, start_region: int | None = None) -> list[int]:
     """生成一次批次的随机采样顺序。
 
     约束：
-    - 大区严格 2->1->0 轮转（每轮大区 num_regions-1 -> 0）。
+    - 大区严格轮转（2->1->0，递减循环），从 start_region 开始；
+      未指定时从最右大区（num_regions-1）开始。
     - 前 num_regions 轮取同一种奇偶格（互不相邻），后 num_regions 轮取另一种。
     - 先黑(偶)后白(奇) 或 先白后黑 随机。
     - 每个大区的同奇偶格子内部随机排列。
-    结果：18 个编号，大区序列严格 [2,1,0]*6，前 9 同色后 9 另一色。
+    结果：18 个编号，大区序列从 start_region 起 2->1->0 循环，
+    前 9 同色后 9 另一色。
     """
     numbering = _ensure_numbering(config)
     opt = CoalSamplingOptimizer(config=config)
@@ -275,11 +277,15 @@ def _generate_batch_order(config: SamplingConfig | None) -> list[int]:
     # 随机决定先取偶格还是奇格
     first, second = (even, odd) if random.random() < 0.5 else (odd, even)
 
+    # 大区轮转顺序：从 start_region 起递减循环（2->1->0->2->...）
+    if start_region is None:
+        start_region = num_regions - 1
+    region_cycle = [(start_region - k) % num_regions for k in range(num_regions)]
+
     order: list[int] = []
     rounds = (rows * cols) // num_regions
-    region_order = list(range(num_regions - 1, -1, -1))
     for round_idx in range(rounds):
-        for reg in region_order:
+        for reg in region_cycle:
             pool = first if round_idx < num_regions else second
             order.append(pool[reg][round_idx % num_regions])
     return order
@@ -295,11 +301,11 @@ def _ensure_batch_order(config: SamplingConfig | None) -> list[int]:
     return _BATCH_ORDER
 
 
-def _new_batch(config: SamplingConfig | None) -> list[int]:
-    """强制开始新批次：重新随机生成采样顺序。"""
+def _new_batch(config: SamplingConfig | None, start_region: int | None = None) -> list[int]:
+    """强制开始新批次：重新随机生成采样顺序，大区从 start_region 起轮转。"""
     global _BATCH_ORDER
     with _NUMBERING_LOCK:
-        _BATCH_ORDER = _generate_batch_order(config)
+        _BATCH_ORDER = _generate_batch_order(config, start_region)
     return _BATCH_ORDER
 
 
@@ -309,11 +315,17 @@ def get_automatic_sampling_regions_rolling(
         config: SamplingConfig | None = None) -> tuple[list[int], list[list[int]]]:
     """跨车滚动采样：返回 (本车应采的编号列表, 对应格子列表)。
 
-    used: 当前批次已用编号（无重复，1-18 范围）。need: 本车要采点数。
-    采样顺序在批次开始时随机生成一次（大区 2->1->0 轮转、先黑后白或先白后黑随机、
-    每大区同色格内部随机），批次内跨车复用保证大区持续轮转且不重复。
+    used: 当前批次已用编号（顺序前缀，无重复，1-18 范围）。need: 本车要采点数。
+    采样顺序在批次开始时随机生成一次（大区严格 2->1->0 轮转、先黑后白或先白后黑
+    随机、每大区同色格内部随机），批次内跨车复用保证大区持续轮转且不重复。
     used 为空（None/[]）时视为新批次，重新随机生成顺序。
-    未用编号不足 need 时，先取完全部未用，再换轮从顺序开头补足。
+
+    换轮：未用编号不足 need 时，先取完全部未用（旧批次收尾），再生成新批次。
+    新批次大区从"旧批次最后一个收尾点的下一个大区"起（递减循环），保证全局
+    2->1->0->2->... 跨批次无缝连续轮转。补足点 = 新批次顺序前若干编号。
+    返回中旧批次收尾在前、新批次补足在后；前端下轮应传"新批次补足部分"
+    作为 used（而非空 []），服务端即延续新批次。
+
     编号->格子映射固定（_NUMBERING，列优先从右往左）。
     """
     if need <= 0:
@@ -337,14 +349,20 @@ def get_automatic_sampling_regions_rolling(
             break
 
     if len(allocated) < need:
-        # 未用不足：当前批次已采完，生成新的 18 点批次并从其开头补足
-        # （跳过已分配的编号，避免重复）。补足点来自新批次顺序，
-        # 下一轮前端应传新批次已用的编号（而非空 []）。
-        order = _new_batch(config)
+        # 未用不足：当前批次已采完，生成新的 18 点批次。
+        # 新批次大区从"旧批次最后一个收尾点的下一个大区"起（递减循环），
+        # 保证全局 2->1->0->2->... 跨批次无缝连续轮转。
+        # 补足点 = 新批次顺序前 (need - len(allocated)) 个编号，不跳过，
+        # 大区连续优先（新批次开头可能含旧批次已采编号，允许编号重复，
+        # 但每个编号对应格子固定，重复采同一格由前端/实际采样处理）。
+        opt = CoalSamplingOptimizer(config=config)
+        old_last = allocated[-1]  # 旧批次收尾的最后一个点
+        last_region = int(opt.region_mask[numbering[old_last][0],
+                                          numbering[old_last][1]])
+        next_start = (last_region - 1) % opt.num_regions
+        order = _new_batch(config, start_region=next_start)
         for n in order:
-            if n not in allocated_set:
-                allocated.append(n)
-                allocated_set.add(n)
+            allocated.append(n)
             if len(allocated) >= need:
                 break
 

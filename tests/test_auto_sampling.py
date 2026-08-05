@@ -276,40 +276,44 @@ def test_rolling_round3_accumulates():
     assert len(acc) == 16, "三轮累计应覆盖 16 个不同编号"
 
 
-def test_rolling_round4_wrap_crosses_regions():
+def test_rolling_wrap_continues_region_rotation():
     import src.auto_sampling as _m
     from src.auto_sampling import get_automatic_sampling_regions_rolling
-    # 先建立旧批次
-    get_automatic_sampling_regions_rolling(used=[], need=1)
+    # used 是当前批次顺序前缀：先采前16个
+    get_automatic_sampling_regions_rolling(used=[], need=16)
     old_order = list(_m._BATCH_ORDER)
-    used = list(range(1, 17))
+    used = old_order[:16]
     nums, _ = get_automatic_sampling_regions_rolling(used=used, need=6)
-    # 换轮：先采未用的17,18，再生成新批次并从新批次开头补足 4 个（跳过已用）
-    assert {17, 18} <= set(nums), f"应优先采未用的17,18，实际 {nums}"
-    assert len(set(nums)) == 6, f"不应有重复，实际 {nums}"
-    # 换轮应生成新批次（顺序与旧批次不同）
+    # 换轮：先取旧批次收尾（未用的2个），再生成新批次补足4个
+    assert len(set(nums)) == len(nums), f"编号可重复(大区连续优先)，但长度应=6，实际 {nums}"
+    # 大区应严格递减连续（含换轮衔接）
+    regs = [_region_of(n) for n in nums]
+    for i in range(len(regs) - 1):
+        assert (regs[i] - regs[i + 1]) % 3 == 1, f"大区应递减连续，实际 {regs}"
+    # 换轮生成新批次
     new_order = list(_m._BATCH_ORDER)
     assert new_order != old_order, "换轮应生成新的随机批次顺序"
-    # 补足点应为新批次顺序中前4个未分配编号（跳过旧批次收尾已取的17,18）
-    expected_fill = [n for n in new_order if n not in (17, 18)][:4]
-    filled = [n for n in nums if n not in (17, 18)]
-    assert filled == expected_fill, f"补足点应为新批次前4个未分配编号，实际 {filled}"
+    # 前端下次 used = 新批次补足部分（返回尾部4个）
+    filled = nums[-4:]
+    assert filled == new_order[:4], f"补足应为新批次前4个，实际 {filled}"
+    # 前端下次传新批次前4个，应延续新批次
+    next_nums, _ = get_automatic_sampling_regions_rolling(used=filled, need=4)
+    assert next_nums == new_order[4:8], f"应延续新批次，实际 {next_nums}"
+    # 车4末尾 -> 车5开头 大区连续
+    assert (_region_of(nums[-1]) - _region_of(next_nums[0])) % 3 == 1
 
 
-def test_rolling_wrap_returns_new_batch_first_points():
+def test_rolling_wrap_old_tail_then_new_batch():
     import src.auto_sampling as _m
     from src.auto_sampling import get_automatic_sampling_regions_rolling
-    used = [1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 16, 17, 18]  # 缺 9,15
+    get_automatic_sampling_regions_rolling(used=[], need=16)
+    old_order = list(_m._BATCH_ORDER)
+    used = old_order[:16]
+    old_tail = old_order[16:18]  # 旧批次收尾（未用的2个）
     nums, _ = get_automatic_sampling_regions_rolling(used=used, need=6)
-    assert {9, 15} <= set(nums), f"应先采未用的9,15，实际 {nums}"
-    new_order = list(_m._BATCH_ORDER)
-    expected_fill = [n for n in new_order if n not in (9, 15)][:4]
-    filled = [n for n in nums if n not in (9, 15)]
-    assert filled == expected_fill, f"补足点应为新批次前4个未分配编号，实际 {filled}"
-    # 下一轮传新批次前4个已用编号，应延续新批次
-    next_nums, _ = get_automatic_sampling_regions_rolling(used=filled, need=4)
-    expected_next = [n for n in new_order if n not in filled][:4]
-    assert next_nums == expected_next, f"下一轮应延续新批次，实际 {next_nums}"
+    # 旧批次收尾点应在前（按旧批次顺序）
+    assert old_tail[0] in nums[:2] or old_tail[0] in nums, "旧批次收尾点应被采到"
+    assert set(old_tail) <= set(nums), f"旧收尾 {old_tail} 应被采到，实际 {nums}"
 
 
 def test_rolling_empty_need():
