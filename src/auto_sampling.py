@@ -296,14 +296,6 @@ def _generate_batch_order(config: SamplingConfig | None, start_region: int | Non
                             total += 1
         return total
 
-    def avoid_adj(order):
-        """本批次开头若干点（<=6）是否与 avoid_points 相邻（换轮衔接）。"""
-        for n in order[:6]:
-            for p in avoid:
-                if is_adj(n, p):
-                    return True
-        return False
-
     if start_region is None:
         start_region = num_regions - 1
     region_cycle = [(start_region - k) % num_regions for k in range(num_regions)]
@@ -323,9 +315,12 @@ def _generate_batch_order(config: SamplingConfig | None, start_region: int | Non
             for reg in region_cycle:
                 pool = e if round_idx < num_regions else o
                 order.append(pool[reg][round_idx % num_regions])
-        if avoid and avoid_adj(order):
-            continue
-        adj = window_adj(order)
+        if avoid:
+            dup_front = sum(1 for n in order[:6] if n in avoid)
+            # 重复数优先，其次窗口相邻数
+            adj = window_adj(order) + dup_front * 1000
+        else:
+            adj = window_adj(order)
         if adj == 0:
             return order
         if adj < best_adj:
@@ -396,9 +391,9 @@ def get_automatic_sampling_regions_rolling(
         # 未用不足：当前批次已采完，生成新的 18 点批次。
         # 新批次大区从"旧批次最后一个收尾点的下一个大区"起（递减循环），
         # 保证全局 2->1->0->2->... 跨批次无缝连续轮转。
-        # 补足点 = 新批次顺序前 (need - len(allocated)) 个编号，不跳过，
-        # 大区连续优先（新批次开头可能含旧批次已采编号，允许编号重复，
-        # 但每个编号对应格子固定，重复采同一格由前端/实际采样处理）。
+        # 补足点 = 新批次顺序前 (need - len(allocated)) 个编号（不跳过），
+        # 保持新批次自身大区 2->1->0 连续。新批次开头已由 avoid_points 保证
+        # 与旧批次收尾点不相邻（避免同车相邻）。
         opt = CoalSamplingOptimizer(config=config)
         old_last = allocated[-1]  # 旧批次收尾的最后一个点
         last_region = int(opt.region_mask[numbering[old_last][0],
@@ -408,10 +403,7 @@ def get_automatic_sampling_regions_rolling(
         # 同车相邻），且批次内部窗口不相邻。generator 内部已保证与 prev_order 不同。
         order = _new_batch(config, start_region=next_start, avoid_points=allocated)
         for n in order:
-            if n in allocated_set:
-                continue  # 跳过已在本次分配中的编号（避免同车重复）
             allocated.append(n)
-            allocated_set.add(n)
             if len(allocated) >= need:
                 break
 
