@@ -336,13 +336,16 @@ def test_rolling_numbering_column_first_right_to_left():
     assert all(_NUMBERING[i][1] in (0, 1) for i in range(13, 19))
 
 
-def test_rolling_ordering_follows_sampling_order():
+def test_rolling_ordering_follows_batch_order():
     from src.auto_sampling import get_automatic_sampling_regions_rolling
-    from src.auto_sampling import _SAMPLING_ORDER
-    # 返回编号应严格按确定性采样顺序（大区2->1->0轮转）
-    get_automatic_sampling_regions_rolling(used=[], need=1)
-    nums, _ = get_automatic_sampling_regions_rolling(used=[], need=5)
-    assert nums == _SAMPLING_ORDER[:5], f"返回编号应按采样顺序，实际 {nums}"
+    import src.auto_sampling as _m
+    # 批次内：返回编号应严格按当前批次采样顺序（大区2->1->0轮转）
+    r1, _ = get_automatic_sampling_regions_rolling(used=[], need=5)  # 开始新批次
+    order = list(_m._BATCH_ORDER)
+    assert r1 == order[:5], f"首车返回应按批次顺序，实际 {r1}"
+    # 跨车（used 非空）沿用同一批次顺序
+    r2, _ = get_automatic_sampling_regions_rolling(used=r1, need=5)
+    assert r2 == order[5:10], f"次车返回应延续批次顺序，实际 {r2}"
 
 
 def test_rolling_region_sequence_continuous():
@@ -364,11 +367,11 @@ def test_rolling_region_sequence_continuous():
     assert regions[:18] == expected, f"前18点大区应持续2->1->0轮转，实际 {regions[:18]}"
 
 
-def test_rolling_black_then_white():
+def test_rolling_same_color_first_9():
     from src.auto_sampling import get_automatic_sampling_regions_rolling
     from src.auto_sampling import _NUMBERING
-    # 18 点先用完黑格再用白格：(r+c)%2==0 为黑
+    # 前 9 点应为同一种奇偶（黑或白），后 9 点为另一种
     nums, _ = get_automatic_sampling_regions_rolling(used=[], need=18)
-    black = [(r + c) % 2 for (r, c) in (_NUMBERING[n] for n in nums)]
-    assert black[:9] == [0] * 9, "前9个点应为黑格"
-    assert black[9:] == [1] * 9, "后9个点应为白格"
+    parities = [(r + c) % 2 for (r, c) in (_NUMBERING[n] for n in nums)]
+    assert parities[:9] == [parities[0]] * 9, "前9个点应同色（互不相邻）"
+    assert parities[9:] == [1 - parities[0]] * 9, "后9个点应为另一色"

@@ -216,8 +216,8 @@ def get_automatic_sampling_points_from_regions(
 
 # 编号 -> 格子映射缓存（确定性：列优先从右往左，生命周期不变）
 _NUMBERING: dict[int, tuple[int, int]] | None = None
-# 确定性采样顺序缓存：大区严格 2->1->0 轮转，前 num_regions*rows/2 黑格、后白格
-_SAMPLING_ORDER: list[int] | None = None
+# 当前批次的采样顺序缓存（批次开始时随机生成一次，批次内跨车复用）
+_BATCH_ORDER: list[int] | None = None
 _NUMBERING_LOCK = threading.Lock()
 
 
@@ -244,47 +244,63 @@ def _ensure_numbering(config: SamplingConfig | None) -> dict[int, tuple[int, int
     return _NUMBERING
 
 
-def _ensure_sampling_order(config: SamplingConfig | None) -> list[int]:
-    """建立并返回确定性采样顺序（大区 2->1->0 轮转，前黑后白）。
+def _generate_batch_order(config: SamplingConfig | None) -> list[int]:
+    """生成一次批次的随机采样顺序。
 
-    规则：
-    - 每轮遍历大区从右到左（region num_regions-1 -> 0）。
-    - 前 num_regions 轮取黑格（(r+c)%2==0），后 num_regions 轮取白格。
-    - 每个大区的黑格/白格按编号升序排列后依序取出。
-    结果：18 个编号，大区序列严格 [2,1,0]*6，前 9 黑后 9 白。
+    约束：
+    - 大区严格 2->1->0 轮转（每轮大区 num_regions-1 -> 0）。
+    - 前 num_regions 轮取同一种奇偶格（互不相邻），后 num_regions 轮取另一种。
+    - 先黑(偶)后白(奇) 或 先白后黑 随机。
+    - 每个大区的同奇偶格子内部随机排列。
+    结果：18 个编号，大区序列严格 [2,1,0]*6，前 9 同色后 9 另一色。
     """
-    global _SAMPLING_ORDER
-    if _SAMPLING_ORDER is None:
+    numbering = _ensure_numbering(config)
+    opt = CoalSamplingOptimizer(config=config)
+    mask = opt.region_mask
+    num_regions = opt.num_regions
+    rows, cols = opt.rows, opt.cols
+
+    even = {r: [] for r in range(num_regions)}   # (r+c)%2==0
+    odd = {r: [] for r in range(num_regions)}    # (r+c)%2==1
+    for n, (r, c) in numbering.items():
+        reg = int(mask[r, c])
+        if (r + c) % 2 == 0:
+            even[reg].append(n)
+        else:
+            odd[reg].append(n)
+    for reg in range(num_regions):
+        random.shuffle(even[reg])
+        random.shuffle(odd[reg])
+
+    # 随机决定先取偶格还是奇格
+    first, second = (even, odd) if random.random() < 0.5 else (odd, even)
+
+    order: list[int] = []
+    rounds = (rows * cols) // num_regions
+    region_order = list(range(num_regions - 1, -1, -1))
+    for round_idx in range(rounds):
+        for reg in region_order:
+            pool = first if round_idx < num_regions else second
+            order.append(pool[reg][round_idx % num_regions])
+    return order
+
+
+def _ensure_batch_order(config: SamplingConfig | None) -> list[int]:
+    """返回当前批次采样顺序；无缓存时（新批次）随机生成一次。"""
+    global _BATCH_ORDER
+    if _BATCH_ORDER is None:
         with _NUMBERING_LOCK:
-            if _SAMPLING_ORDER is None:
-                numbering = _ensure_numbering(config)
-                opt = CoalSamplingOptimizer(config=config)
-                mask = opt.region_mask
-                num_regions = opt.num_regions
-                rows, cols = opt.rows, opt.cols
-                cell_to_num = {cell: n for n, cell in numbering.items()}
+            if _BATCH_ORDER is None:
+                _BATCH_ORDER = _generate_batch_order(config)
+    return _BATCH_ORDER
 
-                black = {r: [] for r in range(num_regions)}
-                white = {r: [] for r in range(num_regions)}
-                for n, (r, c) in numbering.items():
-                    reg = int(mask[r, c])
-                    if (r + c) % 2 == 0:
-                        black[reg].append(n)
-                    else:
-                        white[reg].append(n)
-                for reg in range(num_regions):
-                    black[reg].sort()
-                    white[reg].sort()
 
-                order: list[int] = []
-                rounds = (rows * cols) // num_regions
-                region_order = list(range(num_regions - 1, -1, -1))
-                for round_idx in range(rounds):
-                    for reg in region_order:
-                        pool = black if round_idx < num_regions else white
-                        order.append(pool[reg][round_idx % num_regions])
-                _SAMPLING_ORDER = order
-    return _SAMPLING_ORDER
+def _new_batch(config: SamplingConfig | None) -> list[int]:
+    """强制开始新批次：重新随机生成采样顺序。"""
+    global _BATCH_ORDER
+    with _NUMBERING_LOCK:
+        _BATCH_ORDER = _generate_batch_order(config)
+    return _BATCH_ORDER
 
 
 def get_automatic_sampling_regions_rolling(
@@ -293,31 +309,39 @@ def get_automatic_sampling_regions_rolling(
         config: SamplingConfig | None = None) -> tuple[list[int], list[list[int]]]:
     """跨车滚动采样：返回 (本车应采的编号列表, 对应格子列表)。
 
-    used: 当前轮已用编号（无重复，1-18 范围）。need: 本车要采点数。
-    采样顺序确定（大区 2->1->0 轮转，前黑后白），跨车一致：
-    按顺序从未用编号取 need 个，保证返回的点大区持续 2->1->0 轮转。
-    未用不足时清空换轮，从顺序开头重新取补足。
+    used: 当前批次已用编号（无重复，1-18 范围）。need: 本车要采点数。
+    采样顺序在批次开始时随机生成一次（大区 2->1->0 轮转、先黑后白或先白后黑随机、
+    每大区同色格内部随机），批次内跨车复用保证大区持续轮转且不重复。
+    used 为空（None/[]）时视为新批次，重新随机生成顺序。
+    未用编号不足 need 时，先取完全部未用，再换轮从顺序开头补足。
     编号->格子映射固定（_NUMBERING，列优先从右往左）。
     """
     if need <= 0:
         return [], []
 
     numbering = _ensure_numbering(config)
-    order = _ensure_sampling_order(config)
 
     used_set = set(used or [])
+    if not used_set:
+        order = _new_batch(config)
+    else:
+        order = _ensure_batch_order(config)
 
     allocated: list[int] = []
+    allocated_set: set[int] = set()
     for n in order:
         if n not in used_set:
             allocated.append(n)
+            allocated_set.add(n)
         if len(allocated) >= need:
             break
 
     if len(allocated) < need:
-        # 未用不足：清空换轮，从顺序开头重新取补足
+        # 未用不足：先取全部未用，再换轮从顺序开头补足（跳过已分配）
         for n in order:
-            allocated.append(n)
+            if n not in allocated_set:
+                allocated.append(n)
+                allocated_set.add(n)
             if len(allocated) >= need:
                 break
 
