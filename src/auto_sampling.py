@@ -337,7 +337,10 @@ def get_automatic_sampling_regions_rolling(
             break
 
     if len(allocated) < need:
-        # 未用不足：先取全部未用，再换轮从顺序开头补足（跳过已分配）
+        # 未用不足：当前批次已采完，生成新的 18 点批次并从其开头补足
+        # （跳过已分配的编号，避免重复）。补足点来自新批次顺序，
+        # 下一轮前端应传新批次已用的编号（而非空 []）。
+        order = _new_batch(config)
         for n in order:
             if n not in allocated_set:
                 allocated.append(n)

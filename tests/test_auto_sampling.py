@@ -277,12 +277,39 @@ def test_rolling_round3_accumulates():
 
 
 def test_rolling_round4_wrap_crosses_regions():
+    import src.auto_sampling as _m
     from src.auto_sampling import get_automatic_sampling_regions_rolling
+    # 先建立旧批次
+    get_automatic_sampling_regions_rolling(used=[], need=1)
+    old_order = list(_m._BATCH_ORDER)
     used = list(range(1, 17))
     nums, _ = get_automatic_sampling_regions_rolling(used=used, need=6)
-    # 换轮：先采未用的17,18，再从棋盘格序开头补足 4 个（新一轮）
+    # 换轮：先采未用的17,18，再生成新批次并从新批次开头补足 4 个（跳过已用）
     assert {17, 18} <= set(nums), f"应优先采未用的17,18，实际 {nums}"
     assert len(set(nums)) == 6, f"不应有重复，实际 {nums}"
+    # 换轮应生成新批次（顺序与旧批次不同）
+    new_order = list(_m._BATCH_ORDER)
+    assert new_order != old_order, "换轮应生成新的随机批次顺序"
+    # 补足点应为新批次顺序中前4个未分配编号（跳过旧批次收尾已取的17,18）
+    expected_fill = [n for n in new_order if n not in (17, 18)][:4]
+    filled = [n for n in nums if n not in (17, 18)]
+    assert filled == expected_fill, f"补足点应为新批次前4个未分配编号，实际 {filled}"
+
+
+def test_rolling_wrap_returns_new_batch_first_points():
+    import src.auto_sampling as _m
+    from src.auto_sampling import get_automatic_sampling_regions_rolling
+    used = [1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 16, 17, 18]  # 缺 9,15
+    nums, _ = get_automatic_sampling_regions_rolling(used=used, need=6)
+    assert {9, 15} <= set(nums), f"应先采未用的9,15，实际 {nums}"
+    new_order = list(_m._BATCH_ORDER)
+    expected_fill = [n for n in new_order if n not in (9, 15)][:4]
+    filled = [n for n in nums if n not in (9, 15)]
+    assert filled == expected_fill, f"补足点应为新批次前4个未分配编号，实际 {filled}"
+    # 下一轮传新批次前4个已用编号，应延续新批次
+    next_nums, _ = get_automatic_sampling_regions_rolling(used=filled, need=4)
+    expected_next = [n for n in new_order if n not in filled][:4]
+    assert next_nums == expected_next, f"下一轮应延续新批次，实际 {next_nums}"
 
 
 def test_rolling_empty_need():
