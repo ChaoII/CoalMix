@@ -316,6 +316,51 @@ def test_rolling_wrap_old_tail_then_new_batch():
     assert set(old_tail) <= set(nums), f"旧收尾 {old_tail} 应被采到，实际 {nums}"
 
 
+def test_rolling_same_car_non_adjacent_need_le_6():
+    import src.auto_sampling as _m
+    from src.auto_sampling import get_automatic_sampling_regions_rolling
+    _N = _m._NUMBERING
+
+    def is_adj(a, b):
+        r1, c1 = _N[a]; r2, c2 = _N[b]
+        return (abs(r1 - r2) == 1 and c1 == c2) or (abs(c1 - c2) == 1 and r1 == r2)
+
+    # 多轮滚动，need<=6 的车同车任意两点不相邻
+    need_seq = [5, 6, 5, 6, 4, 5, 3, 6, 5, 5, 6, 4, 5, 5, 4]
+    used = []
+    total = 18
+    for need in need_seq:
+        nums, _ = get_automatic_sampling_regions_rolling(used=used, need=need)
+        for a in range(len(nums)):
+            for b in range(a + 1, len(nums)):
+                assert not is_adj(nums[a], nums[b]), \
+                    f"need={need} 同车相邻: {nums[a]}({_N[nums[a]]}) 与 {nums[b]}({_N[nums[b]]})"
+        used = sorted(set(used) | set(nums))
+        if len(used) >= total:
+            used = []
+
+
+def test_sampling_order_same_car_non_adjacent():
+    import src.auto_sampling as _m
+    from src.auto_sampling import get_automatic_sampling_regions_rolling
+    _N = _m._NUMBERING
+
+    def is_adj(a, b):
+        r1, c1 = _N[a]; r2, c2 = _N[b]
+        return (abs(r1 - r2) == 1 and c1 == c2) or (abs(c1 - c2) == 1 and r1 == r2)
+
+    # 批次顺序按 need=6 窗口切分，任意窗口内两两不相邻
+    get_automatic_sampling_regions_rolling(used=[], need=1)
+    order = list(_m._BATCH_ORDER)
+    win = 6
+    for start in range(0, len(order) - win + 1):
+        window = order[start:start + win]
+        for a in range(len(window)):
+            for b in range(a + 1, len(window)):
+                assert not is_adj(window[a], window[b]), \
+                    f"窗口内相邻: {window[a]} 与 {window[b]}"
+
+
 def test_rolling_empty_need():
     from src.auto_sampling import get_automatic_sampling_regions_rolling
     nums, cells = get_automatic_sampling_regions_rolling(used=[1, 2], need=0)

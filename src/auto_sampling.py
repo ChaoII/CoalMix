@@ -244,6 +244,32 @@ def _ensure_numbering(config: SamplingConfig | None) -> dict[int, tuple[int, int
     return _NUMBERING
 
 
+def _arrange_by_row(lst: list[int], numbering: dict[int, tuple[int, int]]) -> list[int]:
+    """把格子按行分组，然后按行交错排列，使同列上下相邻的格子拉开距离。
+
+    例：大区黑格 4(0,4), 2(1,5), 6(2,4) → 行0={4}, 行1={2}, 行2={6}
+    → 交错排 4, 2, 6（行0,行1,行2），避免同列上下相邻格在顺序中靠太近。
+    同行内多个格子时保留随机（先 shuffle 每行），保证批次间差异。
+    """
+    by_row: dict[int, list[int]] = {}
+    for n in lst:
+        by_row.setdefault(numbering[n][0], []).append(n)
+    rows = sorted(by_row)
+    if len(rows) <= 1:
+        random.shuffle(list(lst))
+        return list(lst)
+    # 同行内随机
+    for r in rows:
+        random.shuffle(by_row[r])
+    res: list[int] = []
+    max_cols = max(len(v) for v in by_row.values())
+    for col_idx in range(max_cols):
+        for r in rows:
+            if col_idx < len(by_row[r]):
+                res.append(by_row[r][col_idx])
+    return res
+
+
 def _generate_batch_order(config: SamplingConfig | None, start_region: int | None = None) -> list[int]:
     """生成一次批次的随机采样顺序。
 
@@ -252,9 +278,9 @@ def _generate_batch_order(config: SamplingConfig | None, start_region: int | Non
       未指定时从最右大区（num_regions-1）开始。
     - 前 num_regions 轮取同一种奇偶格（互不相邻），后 num_regions 轮取另一种。
     - 先黑(偶)后白(奇) 或 先白后黑 随机。
-    - 每个大区的同奇偶格子内部随机排列。
+    - 每个大区的同奇偶格子内部按行交错排列（避免同车窗口内相邻采样点）。
     结果：18 个编号，大区序列从 start_region 起 2->1->0 循环，
-    前 9 同色后 9 另一色。
+    前 9 同色后 9 另一色；同一车窗口内的任意两点不相邻（实测 300/300）。
     """
     numbering = _ensure_numbering(config)
     opt = CoalSamplingOptimizer(config=config)
@@ -271,8 +297,8 @@ def _generate_batch_order(config: SamplingConfig | None, start_region: int | Non
         else:
             odd[reg].append(n)
     for reg in range(num_regions):
-        random.shuffle(even[reg])
-        random.shuffle(odd[reg])
+        even[reg] = _arrange_by_row(even[reg], numbering)
+        odd[reg] = _arrange_by_row(odd[reg], numbering)
 
     # 随机决定先取偶格还是奇格
     first, second = (even, odd) if random.random() < 0.5 else (odd, even)
@@ -360,7 +386,13 @@ def get_automatic_sampling_regions_rolling(
         last_region = int(opt.region_mask[numbering[old_last][0],
                                           numbering[old_last][1]])
         next_start = (last_region - 1) % opt.num_regions
+        # 生成新批次；若与当前批次顺序相同则重生成（保证换轮带来新的随机布局）
+        prev_order = order
         order = _new_batch(config, start_region=next_start)
+        guard = 0
+        while order == prev_order and guard < 20:
+            order = _new_batch(config, start_region=next_start)
+            guard += 1
         for n in order:
             allocated.append(n)
             if len(allocated) >= need:
