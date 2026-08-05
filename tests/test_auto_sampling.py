@@ -336,15 +336,39 @@ def test_rolling_numbering_column_first_right_to_left():
     assert all(_NUMBERING[i][1] in (0, 1) for i in range(13, 19))
 
 
-def test_rolling_ordering_follows_current_plan():
+def test_rolling_ordering_follows_sampling_order():
     from src.auto_sampling import get_automatic_sampling_regions_rolling
-    from src.auto_sampling import CoalSamplingOptimizer, SamplingConfig, _NUMBERING
-    cfg = SamplingConfig(shuffle_regions=True, seed=7)
-    # 用固定 config 保证 _NUMBERING 与该 config 一致
-    get_automatic_sampling_regions_rolling(used=[], need=5, config=cfg)
-    opt = CoalSamplingOptimizer(cfg)
-    current = opt.plan_regions()
-    cur_pos = {tuple(cell): idx for idx, cell in enumerate(current)}
-    nums, cells = get_automatic_sampling_regions_rolling(used=[], need=5, config=cfg)
-    positions = [cur_pos[tuple(c)] for c in cells]
-    assert positions == sorted(positions), "返回编号应按当次 plan 格子序排序"
+    from src.auto_sampling import _SAMPLING_ORDER
+    # 返回编号应严格按确定性采样顺序（大区2->1->0轮转）
+    get_automatic_sampling_regions_rolling(used=[], need=1)
+    nums, _ = get_automatic_sampling_regions_rolling(used=[], need=5)
+    assert nums == _SAMPLING_ORDER[:5], f"返回编号应按采样顺序，实际 {nums}"
+
+
+def test_rolling_region_sequence_continuous():
+    from src.auto_sampling import get_automatic_sampling_regions_rolling
+    from src.auto_sampling import _NUMBERING
+    # 滚动跨车：大区序列应持续 2->1->0 轮转
+    used = []
+    seq_nums = []
+    for need in [5, 6, 5, 6]:
+        nums, _ = get_automatic_sampling_regions_rolling(used=used, need=need)
+        seq_nums.extend(nums)
+        used = sorted(set(used) | set(nums))
+    regions = []
+    for n in seq_nums:
+        c = _NUMBERING[n][1]
+        regions.append(2 if c >= 4 else (1 if c >= 2 else 0))
+    # 前 18 点（换轮前）大区应严格 [2,1,0]*6
+    expected = [2, 1, 0] * 6
+    assert regions[:18] == expected, f"前18点大区应持续2->1->0轮转，实际 {regions[:18]}"
+
+
+def test_rolling_black_then_white():
+    from src.auto_sampling import get_automatic_sampling_regions_rolling
+    from src.auto_sampling import _NUMBERING
+    # 18 点先用完黑格再用白格：(r+c)%2==0 为黑
+    nums, _ = get_automatic_sampling_regions_rolling(used=[], need=18)
+    black = [(r + c) % 2 for (r, c) in (_NUMBERING[n] for n in nums)]
+    assert black[:9] == [0] * 9, "前9个点应为黑格"
+    assert black[9:] == [1] * 9, "后9个点应为白格"

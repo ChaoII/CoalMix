@@ -216,6 +216,8 @@ def get_automatic_sampling_points_from_regions(
 
 # 编号 -> 格子映射缓存（确定性：列优先从右往左，生命周期不变）
 _NUMBERING: dict[int, tuple[int, int]] | None = None
+# 确定性采样顺序缓存：大区严格 2->1->0 轮转，前 num_regions*rows/2 黑格、后白格
+_SAMPLING_ORDER: list[int] | None = None
 _NUMBERING_LOCK = threading.Lock()
 
 
@@ -242,6 +244,49 @@ def _ensure_numbering(config: SamplingConfig | None) -> dict[int, tuple[int, int
     return _NUMBERING
 
 
+def _ensure_sampling_order(config: SamplingConfig | None) -> list[int]:
+    """建立并返回确定性采样顺序（大区 2->1->0 轮转，前黑后白）。
+
+    规则：
+    - 每轮遍历大区从右到左（region num_regions-1 -> 0）。
+    - 前 num_regions 轮取黑格（(r+c)%2==0），后 num_regions 轮取白格。
+    - 每个大区的黑格/白格按编号升序排列后依序取出。
+    结果：18 个编号，大区序列严格 [2,1,0]*6，前 9 黑后 9 白。
+    """
+    global _SAMPLING_ORDER
+    if _SAMPLING_ORDER is None:
+        with _NUMBERING_LOCK:
+            if _SAMPLING_ORDER is None:
+                numbering = _ensure_numbering(config)
+                opt = CoalSamplingOptimizer(config=config)
+                mask = opt.region_mask
+                num_regions = opt.num_regions
+                rows, cols = opt.rows, opt.cols
+                cell_to_num = {cell: n for n, cell in numbering.items()}
+
+                black = {r: [] for r in range(num_regions)}
+                white = {r: [] for r in range(num_regions)}
+                for n, (r, c) in numbering.items():
+                    reg = int(mask[r, c])
+                    if (r + c) % 2 == 0:
+                        black[reg].append(n)
+                    else:
+                        white[reg].append(n)
+                for reg in range(num_regions):
+                    black[reg].sort()
+                    white[reg].sort()
+
+                order: list[int] = []
+                rounds = (rows * cols) // num_regions
+                region_order = list(range(num_regions - 1, -1, -1))
+                for round_idx in range(rounds):
+                    for reg in region_order:
+                        pool = black if round_idx < num_regions else white
+                        order.append(pool[reg][round_idx % num_regions])
+                _SAMPLING_ORDER = order
+    return _SAMPLING_ORDER
+
+
 def get_automatic_sampling_regions_rolling(
         used: list[int] | None = None,
         need: int = 0,
@@ -249,35 +294,29 @@ def get_automatic_sampling_regions_rolling(
     """跨车滚动采样：返回 (本车应采的编号列表, 对应格子列表)。
 
     used: 当前轮已用编号（无重复，1-18 范围）。need: 本车要采点数。
-    按当次 plan_regions() 棋盘格序（每轮大区右→左轮流）取未用格子，
-    保证返回的点跨大区分布（相邻点不同大区）。未用不足时清空换轮从棋盘格序开头补足。
+    采样顺序确定（大区 2->1->0 轮转，前黑后白），跨车一致：
+    按顺序从未用编号取 need 个，保证返回的点大区持续 2->1->0 轮转。
+    未用不足时清空换轮，从顺序开头重新取补足。
     编号->格子映射固定（_NUMBERING，列优先从右往左）。
     """
     if need <= 0:
         return [], []
 
     numbering = _ensure_numbering(config)
+    order = _ensure_sampling_order(config)
 
     used_set = set(used or [])
 
-    # 按当次 plan_regions() 棋盘格序（每轮大区右→左轮流）取未用格子，
-    # 保证返回的点跨大区分布（相邻点不同大区）。
-    opt = CoalSamplingOptimizer(config=config)
-    current = opt.plan_regions()
-    cell_to_num = {cell: n for n, cell in numbering.items()}
-
     allocated: list[int] = []
-    for cell in current:
-        n = cell_to_num[cell]
+    for n in order:
         if n not in used_set:
             allocated.append(n)
         if len(allocated) >= need:
             break
 
     if len(allocated) < need:
-        # 未用不足：清空换轮，从棋盘格序开头重新取，直到补足 need
-        for cell in current:
-            n = cell_to_num[cell]
+        # 未用不足：清空换轮，从顺序开头重新取补足
+        for n in order:
             allocated.append(n)
             if len(allocated) >= need:
                 break
