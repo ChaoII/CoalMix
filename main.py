@@ -11,6 +11,7 @@ from log.log import logger
 from src.auto_sampling import get_automatic_sampling_points
 from src.auto_sampling import get_automatic_sampling_regions
 from src.auto_sampling import get_automatic_sampling_points_from_regions
+from src.auto_sampling import get_automatic_sampling_regions_rolling
 from src.coal_mix_opt import coal_mixed_integer_optimization
 from src.coal_mix_opt_v2 import coal_mixed_integer_optimization_v2
 from src.coal_mix_opt_v3 import coal_mixed_integer_optimization_v3
@@ -115,6 +116,23 @@ class AutoSamplingInput(BaseModel):
 class AutoSamplingInputRegions(AutoSamplingInput):
     # 采样区域
     regions: list[list[int, int]]
+
+
+class AutoSamplingRollingInput(BaseModel):
+    # 当前批次已采编号列表（无需排序，服务端自动去重）
+    used: list[int] = []
+    # 本车要采点数
+    need: int
+    # 车长
+    car_length: int
+    # 车宽
+    car_width: int
+    # 拉筋区域
+    car_lj: list[dict] = []
+    # 可选区域
+    car_kxqy: dict = {}
+    # 是否同时返回真实坐标（默认 false 只返回编号+格子）
+    with_points: bool = False
 
 
 @app.post("/api/coal_mix_opt_simple")
@@ -289,6 +307,36 @@ def _(auto_sampling_input: AutoSamplingInputRegions):
     try:
         output = get_automatic_sampling_points_from_regions(length, width, ljs, kx, auto_sampling_input.regions)
         return {"code": 0, "data": {"points": output[0], "image": output[1]}, "err_msg": ""}
+    except Exception as e:
+        logger.error(f"{e}")
+        return {"code": -1, "data": {}, "err_msg": f"求解失败, {e}"}
+
+
+@app.post("/api/auto_sampling_rolling", description="跨车滚动采样：传 used + need，返回本车应采的编号与格子")
+def _(rolling_input: AutoSamplingRollingInput):
+    s = rolling_input.model_dump()
+    json.dump(s, open("./auto_sampling_rolling_input.json", "w"))
+
+    used = rolling_input.used or []
+    need = rolling_input.need
+    length = rolling_input.car_length
+    width = rolling_input.car_width
+    ljs = []
+    for lj in rolling_input.car_lj:
+        x0, y0 = lj["p0"]
+        x1, y1 = lj["p1"]
+        ljs.append([x0, y0, x1, y1])
+    kx = [*rolling_input.car_kxqy["p0"], *rolling_input.car_kxqy["p1"]] if rolling_input.car_kxqy else []
+    try:
+        nums, cells = get_automatic_sampling_regions_rolling(used=used, need=need)
+        data = {"nums": nums, "cells": cells}
+        # 可选：把格子转真实坐标
+        if rolling_input.with_points and length and width:
+            from src.auto_sampling import get_automatic_sampling_points_from_regions
+            real_points, _ = get_automatic_sampling_points_from_regions(
+                length, width, ljs, kx, cells)
+            data["points"] = real_points
+        return {"code": 0, "data": data, "err_msg": ""}
     except Exception as e:
         logger.error(f"{e}")
         return {"code": -1, "data": {}, "err_msg": f"求解失败, {e}"}
