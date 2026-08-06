@@ -311,8 +311,8 @@ def _(rolling_input: AutoSamplingRollingInput):
     used = rolling_input.used or []
     need = rolling_input.need
     try:
-        nums, cells = get_automatic_sampling_regions_rolling(used=used, need=need)
-        return {"code": 0, "data": {"nums": nums, "cells": cells}, "err_msg": ""}
+        nums, regions = get_automatic_sampling_regions_rolling(used=used, need=need)
+        return {"code": 0, "data": {"nums": nums, "regions": regions}, "err_msg": ""}
     except Exception as e:
         logger.error(f"{e}")
         return {"code": -1, "data": {}, "err_msg": f"求解失败, {e}"}
