@@ -120,6 +120,8 @@ class AutoSamplingInputRegions(AutoSamplingInput):
 
 
 class AutoSamplingRollingInput(BaseModel):
+    # 采样机标识（多台采样机各自独立滚动，互不干扰）
+    sampler_id: str = "default"
     # 当前批次已采编号列表（无需排序，服务端自动去重）
     used: list[int] = []
     # 本车要采点数
@@ -310,8 +312,10 @@ def _(rolling_input: AutoSamplingRollingInput):
 
     used = rolling_input.used or []
     need = rolling_input.need
+    sampler_id = rolling_input.sampler_id or "default"
     try:
-        nums, regions = get_automatic_sampling_regions_rolling(used=used, need=need)
+        nums, regions = get_automatic_sampling_regions_rolling(used=used, need=need,
+                                                               sampler_id=sampler_id)
         return {"code": 0, "data": {"nums": nums, "regions": regions}, "err_msg": ""}
     except Exception as e:
         logger.error(f"{e}")

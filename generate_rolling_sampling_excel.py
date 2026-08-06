@@ -83,7 +83,7 @@ def sim_batch(need_seq):
     for i, need in enumerate(need_seq, 1):
         nums, cells = roll(used, need)
         if batch_order is None:
-            batch_order = list(m._BATCH_ORDER)
+            batch_order = list(m._BATCH_ORDER["default"])
         regs = [region_of(n) for n in nums]
         phases = [phase_of(n) for n in nums]
         unused = [n for n in range(1, total + 1) if n not in set(used)]
@@ -114,7 +114,7 @@ def sim_batch(need_seq):
         prev_last_region = regs[-1]
         if wrapped:
             fill = need - len(unused)
-            used = list(m._BATCH_ORDER[:fill])
+            used = list(m._BATCH_ORDER["default"][:fill])
         else:
             used = sorted(set(used) | set(nums))
         if len(used) >= total:
@@ -248,7 +248,7 @@ def build_workbook(need_seq=None) -> Workbook:
         cell.border = border
     for b in range(1, 6):
         roll([], 1)
-        order = list(m._BATCH_ORDER)
+        order = list(m._BATCH_ORDER["default"])
         regs = [region_of(n) for n in order]
         vals = ["批次%d" % b, str(order), str(regs), phase_of(order[0]), phase_of(order[9])]
         for c, v in enumerate(vals, 1):

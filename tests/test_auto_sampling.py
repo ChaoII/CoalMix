@@ -281,7 +281,7 @@ def test_rolling_wrap_continues_region_rotation():
     from src.auto_sampling import get_automatic_sampling_regions_rolling
     # used 是当前批次顺序前缀：先采前16个
     get_automatic_sampling_regions_rolling(used=[], need=16)
-    old_order = list(_m._BATCH_ORDER)
+    old_order = list(_m._BATCH_ORDER['default'])
     used = old_order[:16]
     nums, _ = get_automatic_sampling_regions_rolling(used=used, need=6)
     # 换轮：先取旧批次收尾（未用的2个），再生成新批次补足4个
@@ -291,7 +291,7 @@ def test_rolling_wrap_continues_region_rotation():
     for i in range(len(regs) - 1):
         assert (regs[i] - regs[i + 1]) % 3 == 1, f"大区应递减连续，实际 {regs}"
     # 换轮生成新批次
-    new_order = list(_m._BATCH_ORDER)
+    new_order = list(_m._BATCH_ORDER['default'])
     assert new_order != old_order, "换轮应生成新的随机批次顺序"
     # 前端下次 used = 新批次补足部分（返回尾部4个）
     filled = nums[-4:]
@@ -307,7 +307,7 @@ def test_rolling_wrap_old_tail_then_new_batch():
     import src.auto_sampling as _m
     from src.auto_sampling import get_automatic_sampling_regions_rolling
     get_automatic_sampling_regions_rolling(used=[], need=16)
-    old_order = list(_m._BATCH_ORDER)
+    old_order = list(_m._BATCH_ORDER['default'])
     used = old_order[:16]
     old_tail = old_order[16:18]  # 旧批次收尾（未用的2个）
     nums, _ = get_automatic_sampling_regions_rolling(used=used, need=6)
@@ -350,7 +350,7 @@ def test_sampling_order_core_constraints():
     from src.auto_sampling import get_automatic_sampling_regions_rolling
     get_automatic_sampling_regions_rolling(used=[], need=1)
     _N = _m._NUMBERING
-    order = list(_m._BATCH_ORDER)
+    order = list(_m._BATCH_ORDER['default'])
     # 大区轮转 [2,1,0]*6
     def region(n):
         c = _N[n][1]
@@ -423,7 +423,7 @@ def test_rolling_ordering_follows_batch_order():
     import src.auto_sampling as _m
     # 批次内：返回编号应严格按当前批次采样顺序（大区2->1->0轮转）
     r1, _ = get_automatic_sampling_regions_rolling(used=[], need=5)  # 开始新批次
-    order = list(_m._BATCH_ORDER)
+    order = list(_m._BATCH_ORDER['default'])
     assert r1 == order[:5], f"首车返回应按批次顺序，实际 {r1}"
     # 跨车（used 非空）沿用同一批次顺序
     r2, _ = get_automatic_sampling_regions_rolling(used=r1, need=5)

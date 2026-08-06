@@ -216,8 +216,8 @@ def get_automatic_sampling_points_from_regions(
 
 # 编号 -> 格子映射缓存（确定性：列优先从右往左，生命周期不变）
 _NUMBERING: dict[int, tuple[int, int]] | None = None
-# 当前批次的采样顺序缓存（批次开始时随机生成一次，批次内跨车复用）
-_BATCH_ORDER: list[int] | None = None
+# 各采样机的批次采样顺序缓存（key=sampler_id，批次开始时随机生成一次，批次内跨车复用）
+_BATCH_ORDER: dict[str, list[int]] = {}
 _NUMBERING_LOCK = threading.Lock()
 # 生成批次时同车不相邻的重试上限（约几十 ms/批次，仅初始化一次）
 _BATCH_MAX_TRIES = 3000
@@ -329,30 +329,33 @@ def _generate_batch_order(config: SamplingConfig | None, start_region: int | Non
     return best_order
 
 
-def _ensure_batch_order(config: SamplingConfig | None) -> list[int]:
-    """返回当前批次采样顺序；无缓存时（新批次）随机生成一次。"""
-    global _BATCH_ORDER
-    if _BATCH_ORDER is None:
+def _ensure_batch_order(config: SamplingConfig | None, sampler_id: str = "default") -> list[int]:
+    """返回指定采样机的当前批次采样顺序；无缓存时（新批次）随机生成一次。"""
+    if sampler_id not in _BATCH_ORDER:
         with _NUMBERING_LOCK:
-            if _BATCH_ORDER is None:
-                _BATCH_ORDER = _generate_batch_order(config)
-    return _BATCH_ORDER
+            if sampler_id not in _BATCH_ORDER:
+                _BATCH_ORDER[sampler_id] = _generate_batch_order(config)
+    return _BATCH_ORDER[sampler_id]
 
 
 def _new_batch(config: SamplingConfig | None, start_region: int | None = None,
-               avoid_points: list[int] | None = None) -> list[int]:
-    """强制开始新批次：重新随机生成采样顺序，大区从 start_region 起轮转。"""
-    global _BATCH_ORDER
+               avoid_points: list[int] | None = None,
+               sampler_id: str = "default") -> list[int]:
+    """强制开始指定采样机的新批次：重新随机生成采样顺序，大区从 start_region 起轮转。"""
     with _NUMBERING_LOCK:
-        _BATCH_ORDER = _generate_batch_order(config, start_region, avoid_points)
-    return _BATCH_ORDER
+        _BATCH_ORDER[sampler_id] = _generate_batch_order(config, start_region, avoid_points)
+    return _BATCH_ORDER[sampler_id]
 
 
 def get_automatic_sampling_regions_rolling(
         used: list[int] | None = None,
         need: int = 0,
-        config: SamplingConfig | None = None) -> tuple[list[int], list[list[int]]]:
+        config: SamplingConfig | None = None,
+        sampler_id: str = "default") -> tuple[list[int], list[list[int]]]:
     """跨车滚动采样：返回 (本车应采的编号列表, 对应格子列表)。
+
+    sampler_id: 采样机标识。多台采样机各自独立滚动（每台维护自己的批次顺序缓存），
+    互不干扰。同一采样机需用同一 id 跨车调用。
 
     used: 当前批次已用编号（顺序前缀，无重复，1-18 范围）。need: 本车要采点数。
     采样顺序在批次开始时随机生成一次（大区严格 2->1->0 轮转、先黑后白或先白后黑
@@ -374,9 +377,9 @@ def get_automatic_sampling_regions_rolling(
 
     used_set = set(used or [])
     if not used_set:
-        order = _new_batch(config)
+        order = _new_batch(config, sampler_id=sampler_id)
     else:
-        order = _ensure_batch_order(config)
+        order = _ensure_batch_order(config, sampler_id=sampler_id)
 
     allocated: list[int] = []
     allocated_set: set[int] = set()
@@ -401,7 +404,8 @@ def get_automatic_sampling_regions_rolling(
         next_start = (last_region - 1) % opt.num_regions
         # 生成新批次：要求其开头若干点（<=6）与旧批次收尾点不相邻（避免换轮边界
         # 同车相邻），且批次内部窗口不相邻。generator 内部已保证与 prev_order 不同。
-        order = _new_batch(config, start_region=next_start, avoid_points=allocated)
+        order = _new_batch(config, start_region=next_start, avoid_points=allocated,
+                           sampler_id=sampler_id)
         for n in order:
             allocated.append(n)
             if len(allocated) >= need:
