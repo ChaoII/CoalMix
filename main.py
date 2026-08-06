@@ -305,17 +305,16 @@ def _(auto_sampling_input: AutoSamplingInputRegions):
         return {"code": -1, "data": {}, "err_msg": f"求解失败, {e}"}
 
 
-@app.post("/api/auto_sampling_rolling_regions", description="跨车滚动采样：传 used + need，返回本车应采的编号与采样小区格子")
+@app.post("/api/auto_sampling_rolling_regions",
+          description="跨车滚动采样：传 used + need，返回本车应采的编号与采样小区格子")
 def _(rolling_input: AutoSamplingRollingInput):
     s = rolling_input.model_dump()
     json.dump(s, open("./auto_sampling_rolling_input.json", "w"))
-
     used = rolling_input.used or []
     need = rolling_input.need
     sampler_id = rolling_input.sampler_id or "default"
     try:
-        nums, regions = get_automatic_sampling_regions_rolling(used=used, need=need,
-                                                               sampler_id=sampler_id)
+        nums, regions = get_automatic_sampling_regions_rolling(used=used, need=need, sampler_id=sampler_id)
         return {"code": 0, "data": {"nums": nums, "regions": regions}, "err_msg": ""}
     except Exception as e:
         logger.error(f"{e}")
