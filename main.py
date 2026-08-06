@@ -126,19 +126,6 @@ class AutoSamplingRollingInput(BaseModel):
     need: int
 
 
-class AutoSamplingRollingPointsInput(BaseModel):
-    # 采样小区格子坐标（由 /api/auto_sampling_rolling_regions 返回的 cells）
-    cells: list[list[int]]
-    # 车长
-    car_length: int
-    # 车宽
-    car_width: int
-    # 拉筋区域
-    car_lj: list[dict] = []
-    # 可选区域
-    car_kxqy: dict = {}
-
-
 @app.post("/api/coal_mix_opt_simple")
 def _(coal_mix_input: CoalMixSimpleInput):
     s = coal_mix_input.model_dump()
@@ -295,7 +282,7 @@ def _():
         return {"code": -1, "data": {}, "err_msg": f"求解失败, {e}"}
 
 
-@app.post("/api/auto_sampling_points", description="根据采样小区和车辆信息自动生成真是采样点坐标")
+@app.post("/api/auto_sampling_points", description="根据采样小区和车辆信息自动生成真实采样点坐标")
 def _(auto_sampling_input: AutoSamplingInputRegions):
     s = auto_sampling_input.model_dump()
     json.dump(s, open("./auto_sampling_input.json", "w"))
@@ -326,28 +313,6 @@ def _(rolling_input: AutoSamplingRollingInput):
     try:
         nums, cells = get_automatic_sampling_regions_rolling(used=used, need=need)
         return {"code": 0, "data": {"nums": nums, "cells": cells}, "err_msg": ""}
-    except Exception as e:
-        logger.error(f"{e}")
-        return {"code": -1, "data": {}, "err_msg": f"求解失败, {e}"}
-
-
-@app.post("/api/auto_sampling_rolling_points", description="根据采样小区和车辆信息生成真实采样点坐标")
-def _(rolling_points_input: AutoSamplingRollingPointsInput):
-    s = rolling_points_input.model_dump()
-    json.dump(s, open("./auto_sampling_rolling_input.json", "w"))
-
-    length = rolling_points_input.car_length
-    width = rolling_points_input.car_width
-    ljs = []
-    for lj in rolling_points_input.car_lj:
-        x0, y0 = lj["p0"]
-        x1, y1 = lj["p1"]
-        ljs.append([x0, y0, x1, y1])
-    kx = [*rolling_points_input.car_kxqy["p0"], *rolling_points_input.car_kxqy["p1"]] if rolling_points_input.car_kxqy else []
-    try:
-        output = get_automatic_sampling_points_from_regions(
-            length, width, ljs, kx, rolling_points_input.cells)
-        return {"code": 0, "data": {"points": output[0], "image": output[1]}, "err_msg": ""}
     except Exception as e:
         logger.error(f"{e}")
         return {"code": -1, "data": {}, "err_msg": f"求解失败, {e}"}
