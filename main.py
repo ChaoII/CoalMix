@@ -4,6 +4,7 @@ from typing import List, Optional
 import numpy as np
 from fastapi import FastAPI, applications
 from fastapi.middleware.cors import CORSMiddleware
+from openpyxl.compat import deprecated
 from pydantic import BaseModel
 from starlette.staticfiles import StaticFiles
 
@@ -123,6 +124,11 @@ class AutoSamplingRollingInput(BaseModel):
     used: list[int] = []
     # 本车要采点数
     need: int
+
+
+class AutoSamplingRollingPointsInput(BaseModel):
+    # 采样小区格子坐标（由 /api/auto_sampling_rolling_regions 返回的 cells）
+    cells: list[list[int]]
     # 车长
     car_length: int
     # 车宽
@@ -131,8 +137,6 @@ class AutoSamplingRollingInput(BaseModel):
     car_lj: list[dict] = []
     # 可选区域
     car_kxqy: dict = {}
-    # 是否同时返回真实坐标（默认 false 只返回编号+格子）
-    with_points: bool = False
 
 
 @app.post("/api/coal_mix_opt_simple")
@@ -281,7 +285,7 @@ def _(auto_sampling_input: AutoSamplingInput):
         return {"code": -1, "data": {}, "err_msg": f"求解失败, {e}"}
 
 
-@app.get("/api/auto_sampling_regions", description="获取自动生成采样点的小区信息")
+@app.get("/api/auto_sampling_regions", deprecated=True, description="获取自动生成采样点的小区信息")
 def _():
     try:
         regions = get_automatic_sampling_regions()
@@ -312,31 +316,38 @@ def _(auto_sampling_input: AutoSamplingInputRegions):
         return {"code": -1, "data": {}, "err_msg": f"求解失败, {e}"}
 
 
-@app.post("/api/auto_sampling_rolling", description="跨车滚动采样：传 used + need，返回本车应采的编号与格子")
+@app.post("/api/auto_sampling_rolling_regions", description="跨车滚动采样：传 used + need，返回本车应采的编号与采样小区格子")
 def _(rolling_input: AutoSamplingRollingInput):
     s = rolling_input.model_dump()
     json.dump(s, open("./auto_sampling_rolling_input.json", "w"))
 
     used = rolling_input.used or []
     need = rolling_input.need
-    length = rolling_input.car_length
-    width = rolling_input.car_width
+    try:
+        nums, cells = get_automatic_sampling_regions_rolling(used=used, need=need)
+        return {"code": 0, "data": {"nums": nums, "cells": cells}, "err_msg": ""}
+    except Exception as e:
+        logger.error(f"{e}")
+        return {"code": -1, "data": {}, "err_msg": f"求解失败, {e}"}
+
+
+@app.post("/api/auto_sampling_rolling_points", description="根据采样小区和车辆信息生成真实采样点坐标")
+def _(rolling_points_input: AutoSamplingRollingPointsInput):
+    s = rolling_points_input.model_dump()
+    json.dump(s, open("./auto_sampling_rolling_input.json", "w"))
+
+    length = rolling_points_input.car_length
+    width = rolling_points_input.car_width
     ljs = []
-    for lj in rolling_input.car_lj:
+    for lj in rolling_points_input.car_lj:
         x0, y0 = lj["p0"]
         x1, y1 = lj["p1"]
         ljs.append([x0, y0, x1, y1])
-    kx = [*rolling_input.car_kxqy["p0"], *rolling_input.car_kxqy["p1"]] if rolling_input.car_kxqy else []
+    kx = [*rolling_points_input.car_kxqy["p0"], *rolling_points_input.car_kxqy["p1"]] if rolling_points_input.car_kxqy else []
     try:
-        nums, cells = get_automatic_sampling_regions_rolling(used=used, need=need)
-        data = {"nums": nums, "cells": cells}
-        # 可选：把格子转真实坐标
-        if rolling_input.with_points and length and width:
-            from src.auto_sampling import get_automatic_sampling_points_from_regions
-            real_points, _ = get_automatic_sampling_points_from_regions(
-                length, width, ljs, kx, cells)
-            data["points"] = real_points
-        return {"code": 0, "data": data, "err_msg": ""}
+        output = get_automatic_sampling_points_from_regions(
+            length, width, ljs, kx, rolling_points_input.cells)
+        return {"code": 0, "data": {"points": output[0], "image": output[1]}, "err_msg": ""}
     except Exception as e:
         logger.error(f"{e}")
         return {"code": -1, "data": {}, "err_msg": f"求解失败, {e}"}
