@@ -52,9 +52,9 @@ _NUMBERING = m._NUMBERING
 
 
 def region_of(num: int) -> int:
-    """编号 -> 大区（2=最右列4,5 / 1=列2,3 / 0=列0,1）。"""
+    """编号 -> 大区（列0,1=大区0 最右 / 列2,3=大区1 / 列4,5=大区2 最左）。"""
     c = _NUMBERING[num][1]
-    return 2 if c >= 4 else (1 if c >= 2 else 0)
+    return 0 if c <= 1 else (1 if c <= 3 else 2)
 
 
 def phase_of(num: int) -> str:
@@ -81,7 +81,8 @@ def sim_batch(need_seq):
     batch_order = None
     prev_last_region = None
     for i, need in enumerate(need_seq, 1):
-        nums, cells = roll(used, need)
+        used_regions = [list(_NUMBERING[n]) for n in used]
+        nums, cells = roll(used_regions, need)
         if batch_order is None:
             batch_order = list(m._BATCH_ORDER["default"])
         regs = [region_of(n) for n in nums]
@@ -90,7 +91,7 @@ def sim_batch(need_seq):
         wrapped = len(unused) < need
         link_ok = True
         if prev_last_region is not None:
-            link_ok = (prev_last_region - regs[0]) % 3 == 1
+            link_ok = (regs[0] - prev_last_region) % 3 == 1
         # 同车相邻判断：若发生换轮，nums = 旧批次收尾 + 新批次补足，
         # 这两段属于不同批次，各自内部判断相邻，跨段不判断。
         if wrapped:
@@ -140,11 +141,11 @@ def build_workbook(need_seq=None) -> Workbook:
     # ---- Sheet1: 编号-格子映射 ----
     ws = wb.active
     ws.title = "编号映射"
-    ws.cell(row=1, column=1, value="编号规则：列优先从右往左（编号从最右列开始，每列内行0→行2）").font = title_font
+    ws.cell(row=1, column=1, value="编号规则：列优先从右往左（列0=最右，编号从最右列开始，每列内行0→行2）").font = title_font
     ws.merge_cells(start_row=1, start_column=1, end_row=1, end_column=7)
 
-    ws.cell(row=3, column=1, value="网格视图（每格=编号）").font = Font(name="Arial", bold=True, size=12)
-    for c, h in enumerate(["", "列0", "列1", "列2", "列3", "列4", "列5"], 1):
+    ws.cell(row=3, column=1, value="网格视图（每格=编号，从左到右=列5→列0，列0在最右）").font = Font(name="Arial", bold=True, size=12)
+    for c, h in enumerate(["", "列5", "列4", "列3", "列2", "列1", "列0"], 1):
         cell = ws.cell(row=4, column=c, value=h)
         cell.font = hdr_font
         cell.fill = hdr_fill
@@ -152,7 +153,7 @@ def build_workbook(need_seq=None) -> Workbook:
         cell.alignment = Alignment(horizontal="center")
     for r in range(3):
         nums = []
-        for c in range(6):
+        for c in range(5, -1, -1):
             num = [n for n, cell in _NUMBERING.items() if cell == (r, c)][0]
             nums.append(num)
         for c, v in enumerate(["行%d" % r] + nums, 1):
@@ -162,8 +163,8 @@ def build_workbook(need_seq=None) -> Workbook:
             cell.alignment = Alignment(horizontal="center")
             if 2 <= c <= 7:
                 col_idx = c - 2
-                cell.fill = r2_fill if col_idx >= 4 else (r1_fill if col_idx >= 2 else r0_fill)
-    ws.cell(row=9, column=1, value="绿=大区2(列4,5) | 黄=大区1(列2,3) | 蓝=大区0(列0,1)").font = body_font
+                cell.fill = r0_fill if col_idx >= 4 else (r1_fill if col_idx >= 2 else r2_fill)
+    ws.cell(row=9, column=1, value="绿=大区0(列0,1最右) | 黄=大区1(列2,3) | 蓝=大区2(列4,5最左)").font = body_font
     ws.merge_cells(start_row=9, start_column=1, end_row=9, end_column=7)
 
     ws.cell(row=11, column=1, value="编号明细（列优先从右往左）").font = Font(name="Arial", bold=True, size=12)
@@ -197,7 +198,7 @@ def build_workbook(need_seq=None) -> Workbook:
         cell.border = border
         cell.alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
         ws2.column_dimensions[get_column_letter(c)].width = w
-    ws2.cell(row=1, column=1, value="15车滚动（大区全局2→1→0无缝连续；同车少相邻；无编号重复）").font = title_font
+    ws2.cell(row=1, column=1, value="15车滚动（大区全局0→1→2无缝连续；同车少相邻；无编号重复）").font = title_font
     ws2.merge_cells(start_row=1, start_column=1, end_row=1, end_column=10)
 
     adj_count = 0
@@ -256,7 +257,7 @@ def build_workbook(need_seq=None) -> Workbook:
             cell.font = body_font
             cell.border = border
             cell.alignment = Alignment(vertical="center", wrap_text=True)
-    ws3.cell(row=8, column=1, value="注：5个批次顺序互不相同（随机性）；每批次大区恒为[2,1,0]*6、前9同色后9另一色").font = body_font
+    ws3.cell(row=8, column=1, value="注：5个批次顺序互不相同（随机性）；每批次大区恒为[0,1,2]*6、前9同色后9另一色").font = body_font
     ws3.merge_cells(start_row=8, start_column=1, end_row=8, end_column=6)
     for col, w in zip("ABCDEF", [8, 44, 24, 8, 8, 8]):
         ws3.column_dimensions[col].width = w

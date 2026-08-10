@@ -235,14 +235,19 @@ def test_plan_regions_region_order_right_to_left():
     opt = CoalSamplingOptimizer(SamplingConfig(shuffle_regions=True, seed=42))
     points = opt.plan_regions()
     regions = [int(opt.region_mask[r, c]) for (r, c) in points]
-    expected = [2, 1, 0] * 6
-    assert regions == expected, f"大区序列应为右→左循环，实际 {regions}"
+    expected = [0, 1, 2] * 6
+    assert regions == expected, f"大区序列应为右→左循环(0→1→2)，实际 {regions}"
 
 
 def _region_of(num):
     from src.auto_sampling import _NUMBERING
     c = _NUMBERING[num][1]
-    return 2 if c >= 4 else (1 if c >= 2 else 0)
+    return 0 if c <= 1 else (1 if c <= 3 else 2)
+
+
+def _nums_to_regions(nums):
+    from src.auto_sampling import _NUMBERING
+    return [list(_NUMBERING[n]) for n in nums]
 
 
 def test_rolling_round1_crosses_regions():
@@ -255,23 +260,24 @@ def test_rolling_round1_crosses_regions():
     regions = [_region_of(n) for n in nums]
     for i in range(4):
         assert regions[i] != regions[i + 1], f"相邻点同一大区: {nums}"
-    # 第一点应来自最右大区（大区2），且跨大区（含大区0/1/2）
-    assert regions[0] == 2
+    # 第一点应来自最右大区（大区0），且跨大区（含大区0/1/2）
+    assert regions[0] == 0
     assert set(regions) == {0, 1, 2}
 
 
 def test_rolling_round2_no_overlap():
     from src.auto_sampling import get_automatic_sampling_regions_rolling
     r1, _ = get_automatic_sampling_regions_rolling(used=[], need=5)
-    r2, _ = get_automatic_sampling_regions_rolling(used=r1, need=6)
+    r2, _ = get_automatic_sampling_regions_rolling(used=_nums_to_regions(r1), need=6)
     assert len(set(r1) & set(r2)) == 0, "本轮不应与上轮重复"
 
 
 def test_rolling_round3_accumulates():
     from src.auto_sampling import get_automatic_sampling_regions_rolling
     r1, _ = get_automatic_sampling_regions_rolling(used=[], need=5)
-    r2, _ = get_automatic_sampling_regions_rolling(used=r1, need=6)
-    r3, _ = get_automatic_sampling_regions_rolling(used=sorted(set(r1) | set(r2)), need=5)
+    r2, _ = get_automatic_sampling_regions_rolling(used=_nums_to_regions(r1), need=6)
+    r3, _ = get_automatic_sampling_regions_rolling(
+        used=_nums_to_regions(sorted(set(r1) | set(r2))), need=5)
     acc = set(r1) | set(r2) | set(r3)
     assert len(acc) == 16, "三轮累计应覆盖 16 个不同编号"
 
@@ -283,13 +289,13 @@ def test_rolling_wrap_continues_region_rotation():
     get_automatic_sampling_regions_rolling(used=[], need=16)
     old_order = list(_m._BATCH_ORDER['default'])
     used = old_order[:16]
-    nums, _ = get_automatic_sampling_regions_rolling(used=used, need=6)
+    nums, _ = get_automatic_sampling_regions_rolling(used=_nums_to_regions(used), need=6)
     # 换轮：先取旧批次收尾（未用的2个），再生成新批次补足4个
     assert len(set(nums)) == len(nums), f"编号可重复(大区连续优先)，但长度应=6，实际 {nums}"
-    # 大区应严格递减连续（含换轮衔接）
+    # 大区应严格递增连续（含换轮衔接）
     regs = [_region_of(n) for n in nums]
     for i in range(len(regs) - 1):
-        assert (regs[i] - regs[i + 1]) % 3 == 1, f"大区应递减连续，实际 {regs}"
+        assert (regs[i + 1] - regs[i]) % 3 == 1, f"大区应递增连续，实际 {regs}"
     # 换轮生成新批次
     new_order = list(_m._BATCH_ORDER['default'])
     assert new_order != old_order, "换轮应生成新的随机批次顺序"
@@ -297,10 +303,10 @@ def test_rolling_wrap_continues_region_rotation():
     filled = nums[-4:]
     assert filled == new_order[:4], f"补足应为新批次前4个，实际 {filled}"
     # 前端下次传新批次前4个，应延续新批次
-    next_nums, _ = get_automatic_sampling_regions_rolling(used=filled, need=4)
+    next_nums, _ = get_automatic_sampling_regions_rolling(used=_nums_to_regions(filled), need=4)
     assert next_nums == new_order[4:8], f"应延续新批次，实际 {next_nums}"
     # 车4末尾 -> 车5开头 大区连续
-    assert (_region_of(nums[-1]) - _region_of(next_nums[0])) % 3 == 1
+    assert (_region_of(next_nums[0]) - _region_of(nums[-1])) % 3 == 1
 
 
 def test_rolling_wrap_old_tail_then_new_batch():
@@ -310,7 +316,7 @@ def test_rolling_wrap_old_tail_then_new_batch():
     old_order = list(_m._BATCH_ORDER['default'])
     used = old_order[:16]
     old_tail = old_order[16:18]  # 旧批次收尾（未用的2个）
-    nums, _ = get_automatic_sampling_regions_rolling(used=used, need=6)
+    nums, _ = get_automatic_sampling_regions_rolling(used=_nums_to_regions(used), need=6)
     # 旧批次收尾点应在前（按旧批次顺序）
     assert old_tail[0] in nums[:2] or old_tail[0] in nums, "旧批次收尾点应被采到"
     assert set(old_tail) <= set(nums), f"旧收尾 {old_tail} 应被采到，实际 {nums}"
@@ -334,7 +340,7 @@ def test_rolling_same_car_adjacency_low_rate():
     all_cars = 0
     for _ in range(50):
         for need in need_seq:
-            nums, _ = get_automatic_sampling_regions_rolling(used=used, need=need)
+            nums, _ = get_automatic_sampling_regions_rolling(used=_nums_to_regions(used), need=need)
             if any(is_adj(nums[a], nums[b]) for a in range(len(nums)) for b in range(a + 1, len(nums))):
                 adj_cars += 1
             all_cars += 1
@@ -351,12 +357,12 @@ def test_sampling_order_core_constraints():
     get_automatic_sampling_regions_rolling(used=[], need=1)
     _N = _m._NUMBERING
     order = list(_m._BATCH_ORDER['default'])
-    # 大区轮转 [2,1,0]*6
+    # 大区轮转 [0,1,2]*6
     def region(n):
         c = _N[n][1]
-        return 2 if c >= 4 else (1 if c >= 2 else 0)
+        return 0 if c <= 1 else (1 if c <= 3 else 2)
     regs = [region(n) for n in order]
-    assert regs == [2, 1, 0] * 6, f"大区应2->1->0轮转，实际 {regs}"
+    assert regs == [0, 1, 2] * 6, f"大区应0->1->2轮转，实际 {regs}"
     # 前9同色后9另一色
     def color(n):
         r, c = _N[n]
@@ -369,7 +375,8 @@ def test_sampling_order_core_constraints():
 
 def test_rolling_empty_need():
     from src.auto_sampling import get_automatic_sampling_regions_rolling
-    nums, cells = get_automatic_sampling_regions_rolling(used=[1, 2], need=0)
+    nums, cells = get_automatic_sampling_regions_rolling(
+        used=_nums_to_regions([1, 2]), need=0)
     assert nums == [] and cells == []
 
 
@@ -379,7 +386,7 @@ def test_rolling_used_none():
     assert len(nums) == 3
     assert len(set(nums)) == 3
     regions = [_region_of(n) for n in nums]
-    assert regions[0] == 2, "第一点应来自最右大区"
+    assert regions[0] == 0, "第一点应来自最右大区(大区0)"
 
 
 def test_rolling_cells_match_numbering():
@@ -395,7 +402,7 @@ def test_rolling_numbering_fixed_across_calls():
     get_automatic_sampling_regions_rolling(used=[], need=1)
     from src.auto_sampling import _NUMBERING
     snapshot = dict(_NUMBERING)
-    get_automatic_sampling_regions_rolling(used=[1], need=2)
+    get_automatic_sampling_regions_rolling(used=_nums_to_regions([1]), need=2)
     from src.auto_sampling import _NUMBERING
     assert _NUMBERING == snapshot, "编号映射应跨调用固定"
 
@@ -406,47 +413,47 @@ def test_rolling_numbering_column_first_right_to_left():
     get_automatic_sampling_regions_rolling(used=[], need=1)
     expected = {}
     n = 1
-    # 列优先从右往左：列 5..0，每列内行 0..2
-    for c in range(5, -1, -1):
+    # 列优先从右往左：列 0..5（列0=最右），每列内行 0..2
+    for c in range(6):
         for r in range(3):
             expected[n] = (r, c)
             n += 1
     assert _NUMBERING == expected, f"编号应按列优先从右往左映射，实际 {_NUMBERING}"
-    # 大区分组：1-6 最右大区(列4,5)，7-12 中间(列2,3)，13-18 最左(列0,1)
-    assert all(_NUMBERING[i][1] in (4, 5) for i in range(1, 7))
+    # 大区分组：1-6 最右大区(列0,1)，7-12 中间(列2,3)，13-18 最左(列4,5)
+    assert all(_NUMBERING[i][1] in (0, 1) for i in range(1, 7))
     assert all(_NUMBERING[i][1] in (2, 3) for i in range(7, 13))
-    assert all(_NUMBERING[i][1] in (0, 1) for i in range(13, 19))
+    assert all(_NUMBERING[i][1] in (4, 5) for i in range(13, 19))
 
 
 def test_rolling_ordering_follows_batch_order():
     from src.auto_sampling import get_automatic_sampling_regions_rolling
     import src.auto_sampling as _m
-    # 批次内：返回编号应严格按当前批次采样顺序（大区2->1->0轮转）
+    # 批次内：返回编号应严格按当前批次采样顺序（大区0->1->2轮转）
     r1, _ = get_automatic_sampling_regions_rolling(used=[], need=5)  # 开始新批次
     order = list(_m._BATCH_ORDER['default'])
     assert r1 == order[:5], f"首车返回应按批次顺序，实际 {r1}"
     # 跨车（used 非空）沿用同一批次顺序
-    r2, _ = get_automatic_sampling_regions_rolling(used=r1, need=5)
+    r2, _ = get_automatic_sampling_regions_rolling(used=_nums_to_regions(r1), need=5)
     assert r2 == order[5:10], f"次车返回应延续批次顺序，实际 {r2}"
 
 
 def test_rolling_region_sequence_continuous():
     from src.auto_sampling import get_automatic_sampling_regions_rolling
     from src.auto_sampling import _NUMBERING
-    # 滚动跨车：大区序列应持续 2->1->0 轮转
+    # 滚动跨车：大区序列应持续 0->1->2 轮转
     used = []
     seq_nums = []
     for need in [5, 6, 5, 6]:
-        nums, _ = get_automatic_sampling_regions_rolling(used=used, need=need)
+        nums, _ = get_automatic_sampling_regions_rolling(used=_nums_to_regions(used), need=need)
         seq_nums.extend(nums)
         used = sorted(set(used) | set(nums))
     regions = []
     for n in seq_nums:
         c = _NUMBERING[n][1]
-        regions.append(2 if c >= 4 else (1 if c >= 2 else 0))
-    # 前 18 点（换轮前）大区应严格 [2,1,0]*6
-    expected = [2, 1, 0] * 6
-    assert regions[:18] == expected, f"前18点大区应持续2->1->0轮转，实际 {regions[:18]}"
+        regions.append(0 if c <= 1 else (1 if c <= 3 else 2))
+    # 前 18 点（换轮前）大区应严格 [0,1,2]*6
+    expected = [0, 1, 2] * 6
+    assert regions[:18] == expected, f"前18点大区应持续0->1->2轮转，实际 {regions[:18]}"
 
 
 def test_rolling_same_color_first_9():

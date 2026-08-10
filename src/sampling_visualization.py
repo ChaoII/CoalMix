@@ -189,6 +189,7 @@ def render_sampling_animation(opt, real_points, regions=None, fps: int = 1, inte
     if len(real_points) != expected:
         raise ValueError(f"real_points 长度 {len(real_points)} 必须等于 {expected}")
 
+    rows, cols = opt.rows, opt.cols
     cell_width = 1.0
     cell_height = opt.width / opt.length if opt.length else 1.0
     total = len(real_points)

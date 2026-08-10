@@ -122,8 +122,8 @@ class AutoSamplingInputRegions(AutoSamplingInput):
 class AutoSamplingRollingInput(BaseModel):
     # 采样机标识（多台采样机各自独立滚动，互不干扰）
     sampler_id: str = "default"
-    # 当前批次已采编号列表（无需排序，服务端自动去重）
-    used: list[int] = []
+    # 当前批次已采采样小区的格子坐标列表 [[row, col], ...]（无需排序，服务端自动去重并转编号）
+    used: list[list[int]] = []
     # 本车要采点数
     need: int
 
